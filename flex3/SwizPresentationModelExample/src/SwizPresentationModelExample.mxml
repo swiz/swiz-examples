@@ -26,7 +26,7 @@
 		strict="true"
 		mediateBubbledEvents="true"
 		eventPackages="events"
-		viewPackages="views, someMasterViews"
+		viewPackages="views, someMasterViews, someBranchViews"
 		beanLoaders="{ [ Beans ] }" />
 	
 	<!-- Main view of the application -->

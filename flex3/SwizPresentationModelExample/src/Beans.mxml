@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swiz:BeanLoader xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:swiz="http://swiz.swizframework.org"
+	xmlns:presentation="models.presentation.*"
+	xmlns:models="models.*"
+	xmlns:controllers="controllers.*">
+	<mx:Script>
+		<![CDATA[
+			import models.presentation.EmployeeViewPresentationModel;
+			import models.presentation.MainPresentationModel;
+		]]>
+	</mx:Script>
+	
+	<!--
+		Instantiate and register our application model here so other parts of the app
+		can have its members (or the instance itself) autowired into their own local properties.
+	-->
+	<models:ApplicationModel id="appModel" />
+	
+	<!--
+		This controller will be responsible for modifying the application model.
+		We register it here with Swiz so that it can dynamically mediate events and be autowired.
+		If you want to Autowire values into an object that will not be added to the display
+		list, you need to register/instantiate it within a BeanLoader.
+	-->
+	<controllers:ApplicationController id="appController" />
+	
+	<!--
+		Instantiate and register the presentation model for our MainView component.
+		Note that this concrete implementation will be autowired into MainView's model property,
+		even though it is typed as IMainPresentationModel.
+		Swiz is smart enough to recognize that this component implements the interface and wire it into place.
+	-->
+	<presentation:MainPresentationModel id="mainPresoModel" />
+	
+	<!--
+		Instantiate and register the presentation model for our EmployeeView component.
+		We use the Prototype tag so that we can pass a constructor argument. In this case the argument
+		is the dispatcher property provided by BeanLoader, which will allow EmployeeViewPresentationModel
+		to dispatch bubbling events even though it does not live on the display list.
+		
+		You can pass multiple constructor arguments (up to 8) by passing an Array to constructorArguments.
+		You can also pass other beans defined in this file if you want. The singleton flag being set to true
+		ensures that only one instance of EmployeeViewPresentationModel will be created and will be shared among
+		all autowirings of this type. If singleton were set to false (the default), each autowiring would
+		receive a new, freshly generated and independent instance.
+	-->
+	<swiz:Prototype id="employeePresoModel"
+		classReference="{ EmployeeViewPresentationModel }"
+		constructorArguments="{ dispatcher }"
+		singleton="true" />
+	
+</swiz:BeanLoader>

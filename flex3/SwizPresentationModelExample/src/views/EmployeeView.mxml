@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalAlign="center">
+	
+	<mx:Script>
+		<![CDATA[
+			import models.presentation.IEmployeeViewPresentationModel;
+			
+			/**
+			 * Autowire by type while coding to interfaces again. w00t!
+			 * 
+			 * Notice how dumb/simple this view is. That is a good thing as it makes testing
+			 * it pointless. We will instead test our presentation model.
+			 */
+			[Autowire]
+			[Bindable]
+			public var model:IEmployeeViewPresentationModel;
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Object id="userChanges"
+		name="{ nameInput.text }"
+		location="{ locationInput.text }">
+		<mx:id>{ model.selectedEmployee.id }</mx:id>
+	</mx:Object>
+	
+	<mx:DataGrid id="dg" dataProvider="{ model.employees }" itemClick="{ model.setSelectedEmployee( dg.selectedItem ) }"
+		width="400">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Name" dataField="name" />
+			<mx:DataGridColumn headerText="Location" dataField="location" />
+		</mx:columns>
+	</mx:DataGrid>
+	
+	<mx:HRule width="100%" visible="{ model.isFormVisible }" />
+	
+	<mx:Form visible="{ model.isFormVisible }">
+		<mx:FormItem label="Name">
+			<mx:TextInput id="nameInput" text="{ model.selectedEmployee.name }" />
+		</mx:FormItem>
+		
+		<mx:FormItem label="Location">
+			<mx:TextInput id="locationInput" text="{ model.selectedEmployee.location }" />
+		</mx:FormItem>
+		
+		<mx:HBox>
+			<mx:Button label="Save" click="{ model.saveUser( userChanges ) }" />
+			<mx:Button label="Cancel" click="{ model.setSelectedEmployee( null ) }" />
+		</mx:HBox>
+	</mx:Form>
+	
+</mx:VBox>

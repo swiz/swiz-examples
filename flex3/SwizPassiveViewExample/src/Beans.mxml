@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swiz:BeanLoader xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:swiz="http://swiz.swizframework.org"
+	xmlns:models="models.*"
+	xmlns:mediators="mediators.*">
+	
+	<!--
+		Instantiate and register our application model here so other parts of the app
+		can have its members (or the instance itself) autowired into their own local properties.
+	-->
+	<models:ApplicationModel id="appModel" />
+	
+	<!--
+		Registering the view mediators here will allow Swiz to inject
+		their respective views when the views' injectionEvent fires.
+	-->
+	<mediators:MainViewMediator id="mainViewMediator" />
+	<mediators:EmployeeViewMediator id="employeeViewMediator" />
+	
+</swiz:BeanLoader>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalAlign="center">
+	
+	<mx:DataGrid id="dg" width="400">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Name" dataField="name" />
+			<mx:DataGridColumn headerText="Location" dataField="location" />
+		</mx:columns>
+	</mx:DataGrid>
+	
+	<mx:HRule id="divider" width="100%" visible="false" />
+	
+	<mx:Form id="employeeForm" visible="false">
+		<mx:FormItem label="Name">
+			<mx:TextInput id="nameInput" />
+		</mx:FormItem>
+		
+		<mx:FormItem label="Location">
+			<mx:TextInput id="locationInput" />
+		</mx:FormItem>
+		
+		<mx:HBox>
+			<mx:Button id="saveBtn" label="Save" />
+			<mx:Button id="cancelBtn" label="Cancel" />
+		</mx:HBox>
+	</mx:Form>
+	
+</mx:VBox>

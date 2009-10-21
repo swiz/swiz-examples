@@ -14,6 +14,9 @@ package models
 		[Bindable]
 		public var employees:ArrayCollection;
 		
+		[Bindable]
+		public var inventory:ArrayCollection;
+		
 		public function ApplicationModel()
 		{
 			employees = new ArrayCollection();

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalAlign="center">
+	
+	<mx:Script>
+		<![CDATA[
+			import models.presentation.InventoryViewPresentationModel;
+			
+			/**
+			 * Autowire by type while coding to interfaces again. w00t!
+			 * 
+			 * Notice how dumb/simple this view is. That is a good thing as it makes testing
+			 * it pointless. We will instead test our presentation model.
+			 */
+			[Autowire]
+			[Bindable]
+			public var model:InventoryViewPresentationModel;
+			
+		]]>
+	</mx:Script>
+	
+	<mx:DataGrid id="dg" dataProvider="{ model.inventory }" itemClick="{ model.setSelectedProduct( dg.selectedItem ) }"
+		width="400">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Name" dataField="name" />
+			<mx:DataGridColumn headerText="Quantity" dataField="qty" />
+			<mx:DataGridColumn headerText="Price" dataField="price" />
+		</mx:columns>
+	</mx:DataGrid>
+	
+	<mx:HRule width="100%" visible="{ model.isFormVisible }" />
+	
+	<mx:Form visible="{ model.isFormVisible }">
+		<mx:FormItem label="Name">
+			<mx:TextInput id="nameInput" text="{ model.selectedProduct.name }" editable="false" />
+		</mx:FormItem>
+		
+		<mx:FormItem label="Quantity">
+			<mx:TextInput id="qtyInput" text="{ model.selectedProduct.qty }" editable="false" />
+		</mx:FormItem>
+		
+		<mx:FormItem label="Price">
+			<mx:TextInput id="priceInput" text="{ model.selectedProduct.price }" editable="false" />
+		</mx:FormItem>
+	</mx:Form>
+	
+</mx:VBox>

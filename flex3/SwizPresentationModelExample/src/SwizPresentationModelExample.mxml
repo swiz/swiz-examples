@@ -24,10 +24,11 @@
 	-->
 	<swiz:SwizConfig
 		strict="true"
+		injectionEvent="preinitialize"
 		mediateBubbledEvents="true"
 		eventPackages="events"
 		viewPackages="views"
-		beanLoaders="{ [ Beans ] }" />
+		beanLoaders="{ [ Beans, ServiceBeans ] }" />
 	
 	<!-- Main view of the application -->
 	<views:MainView id="mainView" />

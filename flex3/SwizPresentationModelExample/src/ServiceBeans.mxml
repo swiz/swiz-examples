@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swiz:BeanLoader xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:swiz="http://swiz.swizframework.org" xmlns:business="business.*">
+	
+	<!--
+		These are our real service definitions, commented out until
+		the back end code is ready.
+	-->
+	
+	<!--
+	
+	<mx:RemoteObject id="inventoryService" destination="inventory" />
+	<mx:RemoteObject id="orderService" destination="orders" />
+	
+	-->
+	
+	<!--
+		These are our blank service definitions, that we'll use
+		as placeholders while mocking service results.
+	-->
+	
+	<mx:RemoteObject id="inventoryService" />
+	<business:InventoryDelegateMock id="inventoryMock" />
+	
+	<mx:RemoteObject id="orderService" />
+	
+</swiz:BeanLoader>

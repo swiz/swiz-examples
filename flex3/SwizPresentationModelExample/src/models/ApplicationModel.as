@@ -4,9 +4,8 @@ package models
 	
 	public class ApplicationModel
 	{
-		public static const SALES_VIEW:int = 0;
-		public static const EMPLOYEE_VIEW:int = 1;
-		public static const INVENTORY_VIEW:int = 2;
+		public static const EMPLOYEE_VIEW:int = 0;
+		public static const INVENTORY_VIEW:int = 1;
 		
 		[Bindable]
 		public var activeView:int = EMPLOYEE_VIEW;

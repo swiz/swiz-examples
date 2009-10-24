@@ -33,8 +33,8 @@ package controllers
 		[Mediate( event="show", view="InventoryView" )]
 		public function loadInventoryDataForView():void
 		{
-			trace( "loadInventoryDataForView()" );
-			executeServiceCall( delegate.fetchInventory(), fetchInventory_result );
+			if( appModel.inventory == null )
+				executeServiceCall( delegate.fetchInventory(), fetchInventory_result );
 		}
 		
 		protected function fetchInventory_result( event:ResultEvent ):void

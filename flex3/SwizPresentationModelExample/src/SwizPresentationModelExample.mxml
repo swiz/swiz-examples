@@ -33,10 +33,4 @@
 	<!-- Main view of the application -->
 	<views:MainView id="mainView" />
 	
-	<!--
-		Separate view component simply to show how changes initiated by one component can be
-		reflected in a disparate part of the application.
-	-->
-	<views:ModeMonitor />
-	
 </mx:Application>

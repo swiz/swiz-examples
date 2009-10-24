@@ -22,6 +22,9 @@ package models
 			employees.addItem( new Employee( 1, "Ben Clinkinbeard", "Taylor Mill, KY" ) );
 			employees.addItem( new Employee( 2, "Chris Scott", "Philadelphia, PA" ) );
 			employees.addItem( new Employee( 3, "Sönke Rohde", "São Paulo, Brazil" ) );
+			employees.addItem( new Employee( 4, "Ryan Campbell", "Kelowna, British Columbia" ) );
+			employees.addItem( new Employee( 5, "Darron Schall", "Farmkuntry, PA" ) );
+			employees.addItem( new Employee( 6, "Brian Kotek", "Somewhere, USA" ) );
 		}
 	}
 }

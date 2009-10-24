@@ -51,13 +51,7 @@
 		singleton="true" />
 	
 	
-	
-	
-	
 	<presentation:InventoryViewPresentationModel id="inventoryViewPresentationModel" />
 	<controllers:InventoryController id="inventoryController" />
-	
-	
-	
 	
 </swiz:BeanLoader>

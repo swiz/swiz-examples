@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" borderStyle="solid" borderColor="#000000"
+	paddingTop="15" paddingRight="15" paddingBottom="15" paddingLeft="15" width="800" horizontalGap="20">
+	
+	<mx:Script>
+		<![CDATA[
+			import controllers.Controller;
+			import mx.collections.ArrayCollection;
+			import models.Model;
+			
+			/**
+			 * Autowired by name for demo purposes.
+			 * Note the lack of an attribute name as tags now have default attributes.
+			 * Default attribute for Autowire is source, for Mediate it's event.
+			 */
+			[Autowire( "appModel" )]
+			[Bindable]
+			public var model:Model;
+			
+			/**
+			 * Autowired by type since there is exactly one Controller in the app.
+			 */
+			[Autowire]
+			public var controller:Controller;
+			
+			/**
+			 * Custom metadata processor!
+			 * Will assign a random number to the property it decorates.
+			 * See processors.RandomProcessor
+			 */
+			[Random]
+			[Bindable]
+			public var someRandomNumber:Number;
+			
+			/**
+			 * Custom metadata processor!
+			 * Will create a timer and update the property it decorates every second.
+			 * See processors.ClockProcessor
+			 */
+			[Clock]
+			[Bindable]
+			public var clockTime:String = "";
+			
+			/**
+			 * Remember personList actually maps to a property on Model that was decorated with [VirtualBean( name="personList" )].
+			 * Populates mx:List below via regular binding.
+			 */
+			[Autowire( "personList" )]
+			[Bindable]
+			public var myList:ArrayCollection;
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Metadata>
+		
+		/**
+		 * These are class-level metadata tags and work a lot like mx:Binding tags.
+		 * Keeps you from having to create a bindable public var just to bind a child to it.
+		 * Dot notation in source shows accessing a deeply nested property.
+		 */
+		[Autowire( source="appModel.subModel.subModelString", destination="subModelLabel.text" )]
+		
+		/**
+		 * Source and destination with dot notation.
+		 * twoWay="true" sets up two way binding so changing the destination property will update the source.
+		 */
+		[Autowire( source="appModel.inputString", destination="ti.text", twoWay="true" )]
+		
+	</mx:Metadata>
+	
+	<mx:VBox width="375">
+		<mx:Label text="{ model.modelString }" />
+		<mx:Button label="Change Label Above" click="dispatchEvent( new Event( 'testEvent', true, true ) )" />
+		
+		<mx:Label id="subModelLabel" />
+		
+		<mx:Label text="Current time is { clockTime }" />
+		
+		<mx:Label htmlText="processors.RandomProcessor generated &lt;b&gt;{ someRandomNumber }&lt;/b&gt;" />
+		
+	</mx:VBox>
+	
+	<mx:VBox width="300">
+		<mx:Label text="{ model.inputString }" />
+		<mx:TextInput id="ti" />
+	</mx:VBox>
+	
+	<mx:List dataProvider="{ myList }" width="50" height="70" />
+	
+</mx:HBox>

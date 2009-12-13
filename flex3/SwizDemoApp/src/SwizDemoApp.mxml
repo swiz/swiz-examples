@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:views="views.*"
+	layout="vertical">
+	
+	<!--
+	Each copy of SwizView contains its own independent instance of Swiz.
+	-->
+	<views:SwizView />
+	<views:SwizView />
+	<views:SwizView />
+	<views:SwizView />
+	<views:SwizView />
+	
+</mx:Application>

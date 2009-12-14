@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of SwizDemoAppAS3</title>
+	<nodes>
+		<node label="html-template">
+			<node label="history">
+				<node label="history.css" icon="cssIcon" url="source/html-template/history/history.css.html"/>
+				<node label="history.js" url="source/html-template/history/history.js.txt"/>
+				<node label="historyFrame.html" icon="htmlIcon" url="source/html-template/history/historyFrame.html"/>
+			</node>
+			<node label="AC_OETags.js" url="source/html-template/AC_OETags.js.txt"/>
+			<node label="index.template.html" icon="htmlIcon" url="source/html-template/index.template.html"/>
+			<node label="playerProductInstall.swf" icon="swfIcon" url="source/html-template/playerProductInstall.swf"/>
+		</node>
+		<node label="libs">
+			<node label="swiz-1.0.0-alpha.swc" url="source/libs/swiz-1.0.0-alpha.swc"/>
+			<node label="swizDemoAppAS3_assets.fla" icon="flaIcon" url="source/libs/swizDemoAppAS3_assets.fla"/>
+			<node label="swizDemoAppAS3_assets.swc" url="source/libs/swizDemoAppAS3_assets.swc"/>
+			<node label="swizDemoAppAS3_assets.swf" icon="swfIcon" url="source/libs/swizDemoAppAS3_assets.swf"/>
+		</node>
+		<node label="src" icon="classpathIcon" expanded="true">
+			<node label="controllers" icon="packageIcon" expanded="true">
+				<node label="Controller.as" icon="actionScriptIcon" url="source/controllers/Controller.as.html"/>
+			</node>
+			<node label="models" icon="packageIcon" expanded="true">
+				<node label="Model.as" icon="actionScriptIcon" url="source/models/Model.as.html"/>
+				<node label="SubModel.as" icon="actionScriptIcon" url="source/models/SubModel.as.html"/>
+			</node>
+			<node label="processors" icon="packageIcon" expanded="true">
+				<node label="ClockProcessor.as" icon="actionScriptIcon" url="source/processors/ClockProcessor.as.html"/>
+				<node label="RandomProcessor.as" icon="actionScriptIcon" url="source/processors/RandomProcessor.as.html"/>
+			</node>
+			<node label="views" icon="packageIcon" expanded="true">
+				<node label="MainView.as" icon="actionScriptIcon" url="source/views/MainView.as.html"/>
+				<node label="SwizView.as" icon="actionScriptIcon" url="source/views/SwizView.as.html"/>
+			</node>
+			<node selected="true" label="SwizDemoAppAS3.as" icon="mxmlAppIcon" url="source/SwizDemoAppAS3.as.html"/>
+		</node>
+	</nodes>
+</index>

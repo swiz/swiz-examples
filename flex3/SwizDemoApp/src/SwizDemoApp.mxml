@@ -2,7 +2,7 @@
 <mx:Application
 	xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:views="views.*"
-	layout="vertical">
+	layout="vertical" viewSourceURL="srcview/index.html">
 	
 	<!--
 	Each copy of SwizView contains its own independent instance of Swiz.

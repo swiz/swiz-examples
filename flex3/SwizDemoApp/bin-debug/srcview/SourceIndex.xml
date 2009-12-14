@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of SwizDemoApp</title>
+	<nodes>
+		<node label="libs">
+			<node label="swiz-1.0.0-alpha.swc" url="source/libs/swiz-1.0.0-alpha.swc"/>
+		</node>
+		<node label="src" icon="classpathIcon" expanded="true">
+			<node label="controllers" icon="packageIcon" expanded="true">
+				<node label="Controller.as" icon="actionScriptIcon" url="source/controllers/Controller.as.html"/>
+			</node>
+			<node label="models" icon="packageIcon" expanded="true">
+				<node label="Model.as" icon="actionScriptIcon" url="source/models/Model.as.html"/>
+				<node label="SubModel.as" icon="actionScriptIcon" url="source/models/SubModel.as.html"/>
+			</node>
+			<node label="processors" icon="packageIcon" expanded="true">
+				<node label="ClockProcessor.as" icon="actionScriptIcon" url="source/processors/ClockProcessor.as.html"/>
+				<node label="RandomProcessor.as" icon="actionScriptIcon" url="source/processors/RandomProcessor.as.html"/>
+			</node>
+			<node label="views" icon="packageIcon" expanded="true">
+				<node label="MainView.mxml" icon="mxmlIcon" url="source/views/MainView.mxml.html"/>
+				<node label="SwizView.mxml" icon="mxmlIcon" url="source/views/SwizView.mxml.html"/>
+			</node>
+			<node selected="true" label="SwizDemoApp.mxml" icon="mxmlAppIcon" url="source/SwizDemoApp.mxml.html"/>
+		</node>
+	</nodes>
+</index>

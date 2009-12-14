@@ -1,5 +1,7 @@
 package
 {
+	import com.adobe.viewsource.ViewSource;
+	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
@@ -14,6 +16,9 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
+			/**
+			 * Each copy of SwizView contains its own independent instance of Swiz.
+			 */
 			for( var i:int = 0; i < 5; i++ )
 			{
 				var sv:SwizView = new SwizView();
@@ -21,6 +26,8 @@ package
 				sv.y = i * 175 + 20;
 				addChild( sv );
 			}
+			
+			ViewSource.addMenuItem( this, "srcview/index.html" );
 		}
 	}
 }

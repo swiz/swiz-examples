@@ -18,14 +18,21 @@ package views
 	{
 		protected var _model:Model;
 		
+		/**
+		 * Autowired by name for demo purposes.
+		 * Note the lack of an attribute name as tags now have default attributes.
+		 * Default attribute for Autowire is source, for Mediate it's event.
+		 */
 		[Autowire( "appModel" )]
 		public function set model( value:Model ):void
 		{
 			_model = value;
-			_model.addEventListener( "modelStringChanged", handleModelStringChange );
 			
+			// create listeners since we don't have bindings
+			_model.addEventListener( "modelStringChanged", handleModelStringChange );
 			_model.addEventListener( "inputStringChanged", handleInputStringChange );
 			
+			// set initial values
 			label.text = _model.modelString;
 			inputLabel.text = ti.text = _model.inputString;
 		}
@@ -40,16 +47,26 @@ package views
 			inputLabel.text = _model.inputString;
 		}
 		
-		[Clock]
-		public function set clockTime( value:String ):void
-		{
-			clockLabel.text = "Current time is " + value;
-		}
-		
+		/**
+		 * Custom metadata processor!
+		 * Will assign a random number to the property it decorates.
+		 * See processors.RandomProcessor
+		 */
 		[Random]
 		public function set randomText( value:String ):void
 		{
 			randomLabel.htmlText = "processors.RandomProcessor generated <b>" + value + "</b>";
+		}
+		
+		/**
+		 * Custom metadata processor!
+		 * Will create a timer and update the property it decorates every second.
+		 * See processors.ClockProcessor
+		 */
+		[Clock]
+		public function set clockTime( value:String ):void
+		{
+			clockLabel.text = "Current time is " + value;
 		}
 		
 		/**

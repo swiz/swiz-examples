@@ -23,7 +23,18 @@
 			 */
 			[Autowire]
 			[Bindable]
-			public var model:IMainPresentationModel;
+			public function get model():IMainPresentationModel
+			{
+				return _model;
+			}
+			
+			public function set model( value:IMainPresentationModel ):void
+			{
+				_model = value;
+				trace( "MODEL SET" );
+			}
+			
+			protected var _model:IMainPresentationModel;
 			
 		]]>
 	</mx:Script>

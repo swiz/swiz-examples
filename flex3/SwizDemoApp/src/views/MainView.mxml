@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" borderStyle="solid" borderColor="#000000"
-	paddingTop="15" paddingRight="15" paddingBottom="15" paddingLeft="15" width="800" horizontalGap="20">
+	paddingTop="15" paddingRight="15" paddingBottom="15" paddingLeft="15" width="800" horizontalGap="20" xmlns:views="views.*">
 	
 	<mx:Script>
 		<![CDATA[

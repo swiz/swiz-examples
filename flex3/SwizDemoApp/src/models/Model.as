@@ -27,5 +27,10 @@ package models
 		 */
 		[VirtualBean( name="personList" )]
 		public var list:ArrayCollection = new ArrayCollection( [ "Larry", "Curly", "Moe" ] );
+		
+		public function Model()
+		{
+			
+		}
 	}
 }

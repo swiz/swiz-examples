@@ -8,6 +8,7 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import models.Model;
 			import processors.ClockProcessor;
 			import processors.RandomProcessor;
 		]]>
@@ -36,7 +37,9 @@
 			<swiz:Bean name="appModel">
 				<models:Model />
 			</swiz:Bean>
+			
 		</swiz:BeanProvider>
+		
 		<!--
 		Swiz's customProcessors property is where you assign custom metadata processors.
 		Support for custom metadata processors is probably the coolest feature in Swiz 1.0.0

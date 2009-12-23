@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/halo"
+			   xmlns:views="views.*"
+			   minWidth="1024" minHeight="768">
+	
+	<s:layout><s:VerticalLayout /></s:layout>
+	
+	<views:SwizView />
+	<views:SwizView />
+	<views:SwizView />
+	<views:SwizView />
+	<views:SwizView />
+	
+</s:Application>

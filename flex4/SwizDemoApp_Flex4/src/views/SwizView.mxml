@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/halo"
+		  xmlns:swiz="http://swiz.swizframework.org/"
+		  xmlns:controllers="controllers.*"
+		  xmlns:models="models.*"
+		  xmlns:processors="processors.*"
+		  xmlns:views="views.*"
+		  height="150">
+	
+	<fx:Script>
+		<![CDATA[
+			import processors.ClockProcessor;
+			import processors.RandomProcessor;
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		
+		<!--
+		An instance of Swiz can be defined directly in MXML like this.
+		SwizConfig is not yet implemented in this release but will be soon.
+		-->
+		<swiz:Swiz id="mySwiz">
+			<!--
+			You provide dependencies to Swiz using IBeanProviders.
+			Here we are defining a BeanProvider directly, which is basically just an Array.
+			Beans can be added and removed at runtime.
+			BeanLoader is not yet implemented in this release but will implement IBeanProvider once it is.
+			beanProviders is the default property for Swiz, so you can define them directly inside the Swiz tag.
+			-->
+			<swiz:BeanProvider>
+				<!--
+				The Controller bean will be available for autowiring by type only.
+				-->
+				<controllers:Controller />
+				<!--
+				The Model bean will be available for autowiring by name as well as type.
+				-->
+				<swiz:Bean name="appModel">
+					<models:Model />
+				</swiz:Bean>
+			</swiz:BeanProvider>
+			<!--
+			Swiz's customProcessors property is where you assign custom metadata processors.
+			Support for custom metadata processors is probably the coolest feature in Swiz 1.0.0
+			Definitely check out their source to see how easy they are to implement.
+			Swiz uses this exact mechanism to implement its built in metadata tags like Autowire, Mediate and VirtualBean.
+			-->
+			<swiz:customProcessors>
+				<processors:ClockProcessor />
+				<processors:RandomProcessor />
+			</swiz:customProcessors>
+		</swiz:Swiz>
+		
+	</fx:Declarations>
+	
+	<!--
+	A sample view used to show Swiz functionality.
+	-->
+	<views:MainView />
+	
+</s:VGroup>

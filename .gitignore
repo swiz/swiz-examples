@@ -1,6 +1,6 @@
 /.settings/*
 
-**/html-template
+**/html-template/
 **/bin*
 
 .actionScriptProperties

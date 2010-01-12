@@ -28,17 +28,17 @@ package processors
 		/**
 		 * Assign a random number to the decorated property.
 		 */
-		override public function addMetadata( bean:Bean, metadata:IMetadataTag ):void
+		override public function addMetadata( metadataTag:IMetadataTag, bean:Bean ):void
 		{
-			bean.source[ metadata.host.name ] = Math.round( Math.random() * 1000 );
+			bean.source[ metadataTag.host.name ] = Math.round( Math.random() * 1000 );
 		}
 		
 		/**
 		 * Remove random
 		 */
-		override public function removeMetadata( bean:Bean, metadata:IMetadataTag ):void
+		override public function removeMetadata( metadataTag:IMetadataTag, bean:Bean ):void
 		{
-			bean.source[ metadata.host.name ] = 0;
+			bean.source[ metadataTag.host.name ] = 0;
 		}
 	}
 }

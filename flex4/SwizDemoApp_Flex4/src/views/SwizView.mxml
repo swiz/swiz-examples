@@ -2,7 +2,7 @@
 <s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		  xmlns:s="library://ns.adobe.com/flex/spark" 
 		  xmlns:mx="library://ns.adobe.com/flex/halo"
-		  xmlns:swiz="http://swiz.swizframework.org/"
+		  xmlns:swiz="http://swiz.swizframework.org"
 		  xmlns:controllers="controllers.*"
 		  xmlns:models="models.*"
 		  xmlns:processors="processors.*"
@@ -11,6 +11,8 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import mx.logging.LogEventLevel;
+			
 			import processors.ClockProcessor;
 			import processors.RandomProcessor;
 		]]>
@@ -52,6 +54,10 @@
 				<processors:ClockProcessor />
 				<processors:RandomProcessor />
 			</swiz:customProcessors>
+			
+			<swiz:loggingTargets>
+				<s:TraceTarget fieldSeparator=" | " includeLevel="true" includeCategory="true" level="{ LogEventLevel.ALL }" />
+			</swiz:loggingTargets>
 		</swiz:Swiz>
 		
 	</fx:Declarations>

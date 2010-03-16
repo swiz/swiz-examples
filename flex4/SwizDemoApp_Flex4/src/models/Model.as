@@ -15,7 +15,7 @@ package models
 		public var inputString:String = "This is some input text. Change me.";
 		
 		/**
-		 * Child model to illustrate support for deep dot notation in [Autowire] tags.
+		 * Child model to illustrate support for deep dot notation in [Inject] tags.
 		 */
 		public var subModel:SubModel = new SubModel();
 		
@@ -23,9 +23,9 @@ package models
 		 * This is pretty cool.
 		 * The VirtualBean tag allows you to designate a property as a bean.
 		 * This syntax creates a named bean, but if the type were unique it could be autowired by type.
-		 * This is preferable to embedding property names in [Autowire] tags.
+		 * This is preferable to embedding property names in [Inject] tags.
 		 */
-		[VirtualBean( name="personList" )]
+		[Outject( name="personList" )]
 		public var list:ArrayCollection = new ArrayCollection( [ "Larry", "Curly", "Moe" ] );
 	}
 }

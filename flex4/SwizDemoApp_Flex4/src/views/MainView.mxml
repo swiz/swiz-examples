@@ -16,14 +16,14 @@
 			 * Note the lack of an attribute name as tags now have default attributes.
 			 * Default attribute for Autowire is source, for Mediate it's event.
 			 */
-			[Autowire( "appModel" )]
+			[Inject( "appModel" )]
 			[Bindable]
 			public var model:Model;
 			
 			/**
 			 * Autowired by type since there is exactly one Controller in the app.
 			 */
-			[Autowire]
+			[Inject]
 			public var controller:Controller;
 			
 			/**
@@ -48,7 +48,7 @@
 			 * Remember personList actually maps to a property on Model that was decorated with [VirtualBean( name="personList" )].
 			 * Populates mx:List below via regular binding.
 			 */
-			[Autowire( "personList" )]
+			[Inject( "personList" )]
 			[Bindable]
 			public var myList:ArrayCollection;
 			
@@ -62,13 +62,13 @@
 		* Keeps you from having to create a bindable public var just to bind a child to it.
 		* Dot notation in source shows accessing a deeply nested property.
 		*/
-		[Autowire( source="appModel.subModel.subModelString", destination="subModelLabel.text" )]
+		[Inject( source="appModel.subModel.subModelString", destination="subModelLabel.text" )]
 		
 		/**
 		* Source and destination with dot notation.
 		* twoWay="true" sets up two way binding so changing the destination property will update the source.
 		*/
-		[Autowire( source="appModel.inputString", destination="ti.text", twoWay="true" )]
+		[Inject( source="appModel.inputString", destination="ti.text", twoWay="true" )]
 		
 	</fx:Metadata>
 	

@@ -3,14 +3,27 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/halo"
 			   xmlns:views="views.*"
-			   minWidth="1024" minHeight="768">
+			   minWidth="1024" minHeight="768" preinitialize="init()">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.logging.targets.TraceTarget;
+			
+			import org.swizframework.utils.SwizLogger;
+			
+			/**
+			 * 
+			 */
+			public function init():void
+			{
+				
+			}
+			
+		]]>
+	</fx:Script>
 	
 	<s:layout><s:VerticalLayout /></s:layout>
 	
-	<views:SwizView />
-	<views:SwizView />
-	<views:SwizView />
-	<views:SwizView />
 	<views:SwizView />
 	
 </s:Application>

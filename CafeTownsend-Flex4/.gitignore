@@ -1,0 +1,17 @@
+/.settings/*
+
+/html-template/*
+/bin-debug/*
+
+.actionScriptProperties
+.flexProperties
+.flexLibProperties
+.fxpProperties
+.project
+.sourceMate
+.sourceMateMetadataSettings
+
+Icon
+Thumbs.db
+.DS_Store
+

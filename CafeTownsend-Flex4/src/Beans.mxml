@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swiz:BeanProvider xmlns:swiz="http://swiz.swizframework.org" xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:model="com.cafetownsend.model.*" xmlns:controller="com.cafetownsend.controller.*"
+				   xmlns:business="com.cafetownsend.business.*" xmlns:presentation="com.cafetownsend.presentation.*">
+
+	<fx:Script>
+		<![CDATA[
+			import com.cafetownsend.presentation.EmployeePresentationModel;
+			import com.cafetownsend.presentation.LoginPresentationModel;
+		]]>
+	</fx:Script>
+
+	<model:AppModel id="appModel" />
+	<controller:AppController />
+
+	<!-- Presentation models -->
+	<!-- Presentation models are generally injected into views and should be declared as Prototype
+		 to be instantiated lazy when the corresponding view is added to the display chain -->
+	<swiz:Prototype id="loginPModel" type="{LoginPresentationModel}" />
+	<swiz:Prototype type="{EmployeePresentationModel}" />
+
+	<model:EmployeeModel id="employeeModel" />
+	<controller:EmployeeController />
+
+	<!-- Service Helper -->
+	<swiz:ServiceRequestUtil />
+
+	<!-- Business Delegates -->
+	<business:UserDelegate />
+
+</swiz:BeanProvider>

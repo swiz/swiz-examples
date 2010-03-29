@@ -3,6 +3,9 @@ package com.cafetownsend.controller
 	import com.cafetownsend.business.IUserDelegate;
 	import com.cafetownsend.model.AppModel;
 	
+	import flash.events.Event;
+	import flash.events.IEventDispatcher;
+	
 	import mx.rpc.AsyncToken;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
@@ -20,6 +23,9 @@ package com.cafetownsend.controller
 		[Inject]
 		public var serviceRequestUtil:ServiceRequestUtil;
 		
+		[Dispatcher]
+		public var dispatcher:IEventDispatcher;
+		
 		public function AppController()
 		{
 		}
@@ -36,6 +42,7 @@ package com.cafetownsend.controller
 		{
 			model.loginPending = false;
 			model.currentState = AppModel.STATE_EMPLOYEE;
+			dispatcher.dispatchEvent(new Event("loginComplete"));
 		}
 		
 		protected function loginFaultHandler(event:FaultEvent):void

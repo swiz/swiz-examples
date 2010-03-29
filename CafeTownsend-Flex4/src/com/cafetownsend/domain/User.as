@@ -1,5 +1,6 @@
 package com.cafetownsend.domain
 {
+	[RemoteClass("com.cafetownsend.domain.User")]
 	public class User
 	{
 		public var id:Number;

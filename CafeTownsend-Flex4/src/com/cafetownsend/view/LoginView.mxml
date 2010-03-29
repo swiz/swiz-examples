@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx" title="Employee Login">
+	<s:layout>
+		<s:VerticalLayout paddingBottom="10" paddingLeft="10" />
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import com.cafetownsend.presentation.LoginPresentationModel;
+			
+			[Bindable]
+			[Inject]
+			public var model:LoginPresentationModel;
+		]]>
+	</fx:Script>
+	<mx:Form>
+		<mx:FormItem required="true" label="Username">
+			<s:TextInput id="username" />
+		</mx:FormItem>
+		<mx:FormItem required="true" label="Password" direction="horizontal">
+			<s:TextInput id="password" />
+			<s:Button label="Login" enabled="{!model.loginPending}" click="model.login(username.text, password.text)" />
+		</mx:FormItem>
+	</mx:Form>
+	<s:Label text="Username: Flex	Password: Swiz" />
+</s:Panel>

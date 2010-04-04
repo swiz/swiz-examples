@@ -84,7 +84,7 @@ package com.cafetownsend.presentation
 				var employee:Employee = new Employee();
 				employee.firstName = firstName;
 				employee.lastName = lastName;
-				employee.startDate = new Date();
+				employee.startDate = startDate;
 				employee.email = email;
 				dispatcher.dispatchEvent(new EmployeeEvent(EmployeeEvent.CREATE, employee));
 			}
@@ -95,7 +95,7 @@ package com.cafetownsend.presentation
 			var employee:Employee = selectedEmployee;
 			employee.firstName = firstName;
 			employee.lastName = lastName;
-			employee.startDate = new Date();
+			employee.startDate = startDate;
 			employee.email = email;
 			dispatcher.dispatchEvent(new EmployeeEvent(EmployeeEvent.UPDATE, employee));
 		}

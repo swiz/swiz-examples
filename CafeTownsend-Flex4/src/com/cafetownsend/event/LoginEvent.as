@@ -1,34 +1,31 @@
 package com.cafetownsend.event
 {
+	import com.cafetownsend.domain.User;
+	
 	import flash.events.Event;
 	
 	public class LoginEvent extends Event
 	{
 		public static const LOGIN:String = "LoginEvent.LOGIN";
+		public static const COMPLETE:String = "LoginEvent.COMPLETE";
+		public static const LOGOUT:String = "LoginEvent.LOGOUT";
 		
-		private var _username:String;
-		private var _password:String;
+		private var _user:User;
 		
-		public function get username():String
+		public function get user():User
 		{
-			return _username;
+			return _user;
 		}
 		
-		public function get password():String
-		{
-			return _password;
-		}
-		
-		public function LoginEvent(type:String, username:String, password:String, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function LoginEvent(type:String, user:User, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
-			_username = username;
-			_password = password;
+			_user = user;
 		}
 		
 		override public function clone():Event
 		{
-			return new LoginEvent(type, username, password, bubbles, cancelable);
+			return new LoginEvent(type, user, bubbles, cancelable);
 		}
 	}
 }

@@ -8,10 +8,14 @@ package com.cafetownsend.domain
 		[Bindable]
 		public var username:String;
 		
-		public function User(id:Number = NaN, username:String = null)
+		[Bindable]
+		public var password:String;
+		
+		public function User(id:Number = NaN, username:String = null, password:String = null)
 		{
 			this.id = id;
 			this.username = username;
+			this.password = password;
 		}
 	}
 }

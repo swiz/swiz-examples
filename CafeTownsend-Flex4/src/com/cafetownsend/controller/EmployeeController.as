@@ -1,6 +1,6 @@
 package com.cafetownsend.controller
 {
-	import com.cafetownsend.business.IEmployeeDelegate;
+	import com.cafetownsend.service.IEmployeeDelegate;
 	import com.cafetownsend.domain.Employee;
 	import com.cafetownsend.model.EmployeeModel;
 	
@@ -25,8 +25,8 @@ package com.cafetownsend.controller
 		{
 		}
 		
-		[Mediate(event="loginComplete")]
-		public function loginCompleteHandler():void
+		[Mediate(event="LoginEvent.COMPLETE")]
+		public function loadEmployees():void
 		{
 			var call:AsyncToken = delegate.loadEmployees();
 			serviceRequestUtil.executeServiceCall(call, loadEmployeeHandler);

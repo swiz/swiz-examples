@@ -3,17 +3,19 @@
 		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:view="com.cafetownsend.view.*"
 		 currentState="{model.currentState}">
 
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-	</fx:Declarations>
-
 	<fx:Script>
 		<![CDATA[
+			import com.cafetownsend.event.LoginEvent;
 			import com.cafetownsend.model.AppModel;
 			
 			[Bindable]
 			[Inject]
 			public var model:AppModel;
+			
+			protected function logoutClickHandler(event:MouseEvent):void
+			{
+				dispatchEvent(new LoginEvent(LoginEvent.LOGOUT, null, true));
+			}
 		]]>
 	</fx:Script>
 
@@ -24,6 +26,12 @@
 
 	<view:LoginView includeIn="login" horizontalCenter="0" verticalCenter="0" />
 
-	<view:EmployeeView includeIn="employee" horizontalCenter="0" verticalCenter="0" />
+	<s:VGroup includeIn="employee" horizontalCenter="0" verticalCenter="0">
+		<s:HGroup verticalAlign="middle" horizontalAlign="right" width="100%">
+			<s:Label text="Hello {model.user.username}" />
+			<s:Button label="Logout" click="logoutClickHandler(event)" />
+		</s:HGroup>
+		<view:EmployeeView />
+	</s:VGroup>
 
 </s:Group>

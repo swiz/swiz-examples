@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:mx="library://ns.adobe.com/flex/mx" title="Employee Login">
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" title="Employee Login"
+		 currentState="{model.currentState}">
 	<s:layout>
-		<s:VerticalLayout paddingBottom="10" paddingLeft="10" />
+		<s:VerticalLayout paddingTop="10" paddingBottom="10" paddingLeft="10" />
 	</s:layout>
 	<fx:Script>
 		<![CDATA[
@@ -10,16 +12,30 @@
 			[Bindable]
 			[Inject]
 			public var model:LoginPresentationModel;
+			
+			protected function login():void
+			{
+				model.login(username.text, password.text)
+			}
 		]]>
 	</fx:Script>
+
+	<s:states>
+		<s:State name="default" />
+		<s:State name="error" />
+	</s:states>
+
+	<s:Label includeIn="error" text="{model.loginError}" color="0xff0000" />
+
 	<mx:Form>
 		<mx:FormItem required="true" label="Username">
-			<s:TextInput id="username" />
+			<s:TextInput id="username" errorString="{model.usernameError}" enter="login()" />
 		</mx:FormItem>
 		<mx:FormItem required="true" label="Password" direction="horizontal">
-			<s:TextInput id="password" />
-			<s:Button label="Login" enabled="{!model.loginPending}" click="model.login(username.text, password.text)" />
+			<s:TextInput id="password" errorString="{model.passwordError}" displayAsPassword="true" enter="login()" />
+			<s:Button label="Login" enabled="{!model.loginPending}" click="login()" />
 		</mx:FormItem>
 	</mx:Form>
-	<s:Label text="Username: Flex	Password: Swiz" />
+
+	<s:Label text="Username: Flex Password: Swiz" />
 </s:Panel>

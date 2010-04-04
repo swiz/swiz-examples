@@ -1,13 +1,19 @@
 package com.cafetownsend.controller
 {
-	import com.cafetownsend.business.IUserDelegate;
+	import com.cafetownsend.domain.User;
+	import com.cafetownsend.event.LoginErrorEvent;
+	import com.cafetownsend.event.LoginEvent;
 	import com.cafetownsend.model.AppModel;
+	import com.cafetownsend.service.IUserDelegate;
+	
+	import flash.events.IEventDispatcher;
 	
 	import mx.rpc.AsyncToken;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	
-	import org.swizframework.utils.services.ServiceRequestUtil;
+	import org.swizframework.storage.SharedObjectBean;
+	import org.swizframework.utils.services.ServiceHelper;
 	
 	public class AppController
 	{
@@ -18,29 +24,58 @@ package com.cafetownsend.controller
 		public var userDelegate:IUserDelegate;
 		
 		[Inject]
-		public var serviceRequestUtil:ServiceRequestUtil;
+		public var serviceHelper:ServiceHelper;
+		
+		[Inject]
+		public var soBean:SharedObjectBean;
+		
+		[Dispatcher]
+		public var dispatcher:IEventDispatcher;
 		
 		public function AppController()
 		{
 		}
 		
-		[Mediate(event="LoginEvent.LOGIN", properties="username, password")]
-		public function login(username:String, password:String):void
-		{
-			model.loginPending = true;
-			var call:AsyncToken = userDelegate.login(username, password);
-			serviceRequestUtil.executeServiceCall(call, loginResultHandler, loginFaultHandler, [username]);
+		[PostConstruct]
+		public function init():void{
+			var lastUsername:String = soBean.getString("lastUsername");
+			if(lastUsername != null){
+				model.lastUsername = lastUsername;
+			}
 		}
 		
-		protected function loginResultHandler(event:ResultEvent, username:String):void
+		[Mediate(event="LoginEvent.LOGOUT")]
+		public function logout():void
 		{
+			model.user = null;
+			model.currentState = AppModel.STATE_LOGIN;
+		}
+		
+		[Mediate(event="LoginEvent.LOGIN", properties="user")]
+		public function login(user:User):void
+		{
+			model.loginPending = true;
+			var call:AsyncToken = userDelegate.login(user.username, user.password);
+			serviceHelper.executeServiceCall(call, loginResultHandler, loginFaultHandler);
+		}
+		
+		protected function loginResultHandler(event:ResultEvent):void
+		{
+			var user:User = event.result as User;
+			
+			model.lastUsername = user.username; 
+			soBean.setString("lastUsername", user.username);
+				
+			model.user = user;
 			model.loginPending = false;
 			model.currentState = AppModel.STATE_EMPLOYEE;
+			dispatcher.dispatchEvent(new LoginEvent(LoginEvent.COMPLETE, user));
 		}
 		
 		protected function loginFaultHandler(event:FaultEvent):void
 		{
 			model.loginPending = false;
+			dispatcher.dispatchEvent(new LoginErrorEvent(LoginErrorEvent.LOGIN_ERROR, event.fault));
 		}
 	}
 }

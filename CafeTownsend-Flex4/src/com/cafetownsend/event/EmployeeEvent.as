@@ -8,6 +8,7 @@ package com.cafetownsend.event
 	{
 		
 		public static const CREATE:String = "EmployeeEvent.CREATE";
+		public static const UPDATE:String = "EmployeeEvent.UPDATE";
 		public static const DELETE:String = "EmployeeEvent.DELETE";
 		
 		private var _employee:Employee;

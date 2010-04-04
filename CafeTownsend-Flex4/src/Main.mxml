@@ -8,6 +8,6 @@
 		<swiz:Swiz xmlns:swiz="http://swiz.swizframework.org" config="{config}" beanProviders="{[Beans]}" />
 	</fx:Declarations>
 
-	<view:AppView width="100%" height="100%" />
+	<view:AppView width="600" height="500" verticalCenter="0" horizontalCenter="0" />
 
 </s:Application>

@@ -1,14 +1,14 @@
 package com.cafetownsend.controller
 {
-	import com.cafetownsend.service.IEmployeeDelegate;
 	import com.cafetownsend.domain.Employee;
 	import com.cafetownsend.model.EmployeeModel;
+	import com.cafetownsend.service.IEmployeeDelegate;
 	
 	import mx.collections.IList;
 	import mx.rpc.AsyncToken;
 	import mx.rpc.events.ResultEvent;
 	
-	import org.swizframework.utils.services.ServiceRequestUtil;
+	import org.swizframework.utils.services.ServiceHelper;
 	
 	public class EmployeeController
 	{
@@ -19,7 +19,7 @@ package com.cafetownsend.controller
 		public var delegate:IEmployeeDelegate;
 		
 		[Inject]
-		public var serviceRequestUtil:ServiceRequestUtil;
+		public var serviceRequestUtil:ServiceHelper;
 		
 		public function EmployeeController()
 		{

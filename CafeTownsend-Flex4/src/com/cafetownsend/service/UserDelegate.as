@@ -5,15 +5,15 @@ package com.cafetownsend.service
 	import mx.rpc.AsyncToken;
 	import mx.rpc.Fault;
 	
-	import org.swizframework.utils.services.MockDelegateUtil;
+	import org.swizframework.utils.services.MockDelegateHelper;
 	
 	public class UserDelegate implements IUserDelegate
 	{
-		protected var util:MockDelegateUtil;
+		protected var util:MockDelegateHelper;
 		
 		public function UserDelegate()
 		{
-			util = new MockDelegateUtil(true);
+			util = new MockDelegateHelper(true);
 		}
 		
 		public function login(username:String, password:String):AsyncToken

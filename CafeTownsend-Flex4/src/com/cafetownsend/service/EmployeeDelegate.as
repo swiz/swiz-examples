@@ -6,16 +6,16 @@ package com.cafetownsend.service
 	import mx.collections.IList;
 	import mx.rpc.AsyncToken;
 	
-	import org.swizframework.utils.services.MockDelegateUtil;
+	import org.swizframework.utils.services.MockDelegateHelper;
 	
 	public class EmployeeDelegate implements IEmployeeDelegate
 	{
 		
-		protected var util:MockDelegateUtil;
+		protected var util:MockDelegateHelper;
 		
 		public function EmployeeDelegate()
 		{
-			util = new MockDelegateUtil(true);
+			util = new MockDelegateHelper(true);
 		}
 		
 		public function loadEmployees():AsyncToken

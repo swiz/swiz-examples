@@ -29,7 +29,7 @@
 	<storage:SharedObjectBean name="cafeTownsend" />
 	
 	<!-- Service Helper -->
-	<swiz:ServiceRequestUtil />
+	<swiz:ServiceHelper />
 
 	<!-- Service Delegates -->
 	<service:UserDelegate />

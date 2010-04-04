@@ -6,7 +6,6 @@ package com.cafetownsend.controller
 	import com.cafetownsend.model.AppModel;
 	import com.cafetownsend.service.IUserDelegate;
 	
-	import flash.events.Event;
 	import flash.events.IEventDispatcher;
 	
 	import mx.rpc.AsyncToken;
@@ -14,7 +13,7 @@ package com.cafetownsend.controller
 	import mx.rpc.events.ResultEvent;
 	
 	import org.swizframework.storage.SharedObjectBean;
-	import org.swizframework.utils.services.ServiceRequestUtil;
+	import org.swizframework.utils.services.ServiceHelper;
 	
 	public class AppController
 	{
@@ -25,7 +24,7 @@ package com.cafetownsend.controller
 		public var userDelegate:IUserDelegate;
 		
 		[Inject]
-		public var serviceRequestUtil:ServiceRequestUtil;
+		public var serviceHelper:ServiceHelper;
 		
 		[Inject]
 		public var soBean:SharedObjectBean;
@@ -57,7 +56,7 @@ package com.cafetownsend.controller
 		{
 			model.loginPending = true;
 			var call:AsyncToken = userDelegate.login(user.username, user.password);
-			serviceRequestUtil.executeServiceCall(call, loginResultHandler, loginFaultHandler);
+			serviceHelper.executeServiceCall(call, loginResultHandler, loginFaultHandler);
 		}
 		
 		protected function loginResultHandler(event:ResultEvent):void

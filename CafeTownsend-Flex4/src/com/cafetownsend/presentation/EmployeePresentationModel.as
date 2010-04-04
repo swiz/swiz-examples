@@ -6,6 +6,8 @@ package com.cafetownsend.presentation
 	import flash.events.IEventDispatcher;
 	
 	import mx.collections.IList;
+	import mx.events.ValidationResultEvent;
+	import mx.validators.EmailValidator;
 	
 	public class EmployeePresentationModel
 	{
@@ -28,6 +30,17 @@ package com.cafetownsend.presentation
 		
 		[Bindable]
 		public var selectedEmployeeIndex:int = -1;
+		
+		[Bindable]
+		public var firstNameError:String;
+		
+		[Bindable]
+		public var lastNameError:String;
+		
+		[Bindable]
+		public var emailError:String;
+		
+		protected var emailValidator:EmailValidator;
 		
 		public function EmployeePresentationModel()
 		{
@@ -56,12 +69,25 @@ package com.cafetownsend.presentation
 		
 		public function createEmployee(firstName:String, lastName:String, startDate:Date, email:String):void
 		{
-			var employee:Employee = new Employee();
-			employee.firstName = firstName;
-			employee.lastName = lastName;
-			employee.startDate = new Date();
-			employee.email = email;
-			dispatcher.dispatchEvent(new EmployeeEvent(EmployeeEvent.CREATE, employee));
+			firstNameError = firstName == "" ? "Please enter first name!" : null;
+			lastNameError = lastName == "" ? "Please enter last name!" : null;
+			
+			// create emailValidator if not created yet
+			emailValidator ||= new EmailValidator();
+			
+			var emailValidation:ValidationResultEvent = emailValidator.validate(email);
+			var validEmail:Boolean = emailValidation.results == null;
+			emailError = validEmail ? null : emailValidation.message;
+			
+			if( firstName != "" && lastName != "" && validEmail )
+			{
+				var employee:Employee = new Employee();
+				employee.firstName = firstName;
+				employee.lastName = lastName;
+				employee.startDate = new Date();
+				employee.email = email;
+				dispatcher.dispatchEvent(new EmployeeEvent(EmployeeEvent.CREATE, employee));
+			}
 		}
 		
 		public function updateEmployee(firstName:String, lastName:String, startDate:Date, email:String):void

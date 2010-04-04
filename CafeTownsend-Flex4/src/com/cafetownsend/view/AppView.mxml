@@ -24,14 +24,15 @@
 		<s:State name="employee" />
 	</s:states>
 
+	<s:Label text="Swiz CafeTownsend" fontSize="20" />
+
+	<s:HGroup excludeFrom="login" verticalAlign="middle" right="0">
+		<s:Label text="Hello {model.user.username}" />
+		<s:Button label="Logout" click="logoutClickHandler(event)" />
+	</s:HGroup>
+
 	<view:LoginView includeIn="login" horizontalCenter="0" verticalCenter="0" />
 
-	<s:VGroup includeIn="employee" horizontalCenter="0" verticalCenter="0">
-		<s:HGroup verticalAlign="middle" horizontalAlign="right" width="100%">
-			<s:Label text="Hello {model.user.username}" />
-			<s:Button label="Logout" click="logoutClickHandler(event)" />
-		</s:HGroup>
-		<view:EmployeeView />
-	</s:VGroup>
+	<view:EmployeeView includeIn="employee" top="40" />
 
 </s:Group>

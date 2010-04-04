@@ -11,6 +11,9 @@ package com.cafetownsend.model
 		public var currentState:String = STATE_LOGIN;
 		
 		[Bindable]
+		public var lastUsername:String;
+		
+		[Bindable]
 		public var loginPending:Boolean = false;
 		
 		[Bindable]

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <swiz:BeanProvider xmlns:swiz="http://swiz.swizframework.org" xmlns:fx="http://ns.adobe.com/mxml/2009"
 				   xmlns:model="com.cafetownsend.model.*" xmlns:controller="com.cafetownsend.controller.*"
-				   xmlns:service="com.cafetownsend.service.*">
+				   xmlns:service="com.cafetownsend.service.*" xmlns:storage="org.swizframework.storage.*">
 
 	<fx:Script>
 		<![CDATA[
@@ -25,6 +25,9 @@
 	<swiz:Prototype type="{LoginPresentationModel}" />
 	<swiz:Prototype type="{EmployeePresentationModel}" />
 
+	<!-- SharedObject Helper -->
+	<storage:SharedObjectBean name="cafeTownsend" />
+	
 	<!-- Service Helper -->
 	<swiz:ServiceRequestUtil />
 

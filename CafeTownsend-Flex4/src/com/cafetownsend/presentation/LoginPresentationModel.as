@@ -16,6 +16,13 @@ package com.cafetownsend.presentation
 		[Inject("appModel.loginPending")]
 		public var loginPending:Boolean;
 		
+		[Bindable]
+		[Inject("appModel.lastUsername")]
+		public var lastUsername:String;
+		
+		[Bindable]
+		public var password:String;
+		
 		[Dispatcher]
 		public var dispatcher:IEventDispatcher;
 		

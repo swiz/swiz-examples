@@ -29,10 +29,10 @@
 
 	<mx:Form>
 		<mx:FormItem required="true" label="Username">
-			<s:TextInput id="username" errorString="{model.usernameError}" enter="login()" />
+			<s:TextInput id="username" text="{model.lastUsername}" errorString="{model.usernameError}" enter="login()" />
 		</mx:FormItem>
 		<mx:FormItem required="true" label="Password" direction="horizontal">
-			<s:TextInput id="password" errorString="{model.passwordError}" displayAsPassword="true" enter="login()" />
+			<s:TextInput id="password" text="{model.password}" errorString="{model.passwordError}" displayAsPassword="true" enter="login()" />
 			<s:Button label="Login" enabled="{!model.loginPending}" click="login()" />
 		</mx:FormItem>
 	</mx:Form>

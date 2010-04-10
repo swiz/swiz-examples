@@ -72,10 +72,9 @@
 				width="200" height="25"
 				errorString="{ model.passwordError }"
 				displayAsPassword="true" 
-				text="Swiz" 
+				text="{ model.password }"
 				enter="login()"
 				/>
-<!--				text="{ model.password }" -->
 		</mx:FormItem>
 		
 		<mx:FormItem 

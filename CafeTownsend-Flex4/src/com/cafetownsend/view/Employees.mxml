@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:view="com.cafetownsend.view.*"
+	currentState="{ model.currentState }" 
+	>
+	
+	
+	<fx:Script>
+		<![CDATA[
+			import com.cafetownsend.model.Constants;
+			import com.cafetownsend.presentation.EmployeesPresentationModel;
+
+			[Inject]
+			[Bindable]
+			public var model: EmployeesPresentationModel;			
+			
+		]]>
+	</fx:Script>
+
+	
+	<s:states>
+		<s:State name="employeeList" />
+		<s:State name="employeeDetail" />
+	</s:states>
+	
+	
+	<s:transitions>
+		<s:Transition 
+			autoReverse="true"
+			fromState="employeeList" toState="employeeDetail"		
+			>
+			<s:Parallel>
+				<s:Fade
+					startDelay="{ Constants.EFFECT_DURATION }"
+					duration="{ Constants.EFFECT_DURATION }"
+					easer="{ Constants.EFFECT_EASE }"
+					target="{ employeeDetail }"
+					/>
+			</s:Parallel>
+		</s:Transition>
+		<s:Transition 
+			autoReverse="true"
+			fromState="employeeDetail" toState="employeeList"
+			>
+			<s:Parallel>
+				<s:Fade
+					startDelay="{ Constants.EFFECT_DURATION }"
+					duration="{ Constants.EFFECT_DURATION }"
+					easer="{ Constants.EFFECT_EASE }"
+					target="{ employeeList }"
+					/>
+			</s:Parallel>
+		</s:Transition>
+	</s:transitions>
+	
+
+	
+	<view:EmployeesNavigation
+		id="employeesNav"
+		width="405" height="50"
+		/>
+	
+	
+	<view:EmployeeList 
+		id="employeeList"
+		includeIn="employeeList"
+		width="100%" 
+		top="70" bottom="0"
+		/>
+	
+	
+	<view:EmployeeDetail 
+		id="employeeDetail"
+		includeIn="employeeDetail"
+		width="100%" height="100%"
+		top="70" bottom="0"
+		left="20" right="20"
+		/>
+	
+	
+</s:Group>

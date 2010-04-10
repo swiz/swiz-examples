@@ -1,41 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
-		 xmlns:mx="library://ns.adobe.com/flex/mx" title="Employee Login"
-		 currentState="{model.currentState}">
-	<s:layout>
-		<s:VerticalLayout paddingTop="10" paddingBottom="10" paddingLeft="10" />
-	</s:layout>
+<s:Group 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/mx" 
+	xmlns:mate="http://mate.asfusion.com/"
+	currentState="{ model.currentState }"
+	>
+	
 	<fx:Script>
 		<![CDATA[
 			import com.cafetownsend.presentation.LoginPresentationModel;
 			
 			[Bindable]
 			[Inject]
-			public var model:LoginPresentationModel;
+			public var model: LoginPresentationModel;
+			
 			
 			protected function login():void
 			{
-				model.login(username.text, password.text)
+				model.login( username.text, password.text )
 			}
+			
+			
 		]]>
 	</fx:Script>
-
+	
+	
+	
 	<s:states>
-		<s:State name="default" />
-		<s:State name="error" />
+		<s:State name="default" /> 
+		<s:State name="error" /> 
 	</s:states>
-
-	<s:Label includeIn="error" text="{model.loginError}" color="0xff0000" />
-
-	<mx:Form>
-		<mx:FormItem required="true" label="Username">
-			<s:TextInput id="username" text="{model.lastUsername}" errorString="{model.usernameError}" enter="login()" />
+	
+	
+	
+	<mx:Form
+		id="loginForm" 
+		width="100%"
+		verticalGap="15"
+		>
+		
+		<s:Label 
+			id="loginErrorTxt"
+			height="15" width="100%"
+			text=""
+			text.error="{ model.loginError }"
+			/>
+		
+		<mx:FormItem 
+			label="Username:" 
+			required="true"
+			height="25"
+			>
+			
+			<s:TextInput 
+				id="username"
+				width="200" height="25"
+				text="{ model.lastUsername }"
+				errorString="{model.usernameError}" 
+				enter="login()"
+				/>
 		</mx:FormItem>
-		<mx:FormItem required="true" label="Password" direction="horizontal">
-			<s:TextInput id="password" text="{model.password}" errorString="{model.passwordError}" displayAsPassword="true" enter="login()" />
-			<s:Button label="Login" enabled="{!model.loginPending}" click="login()" />
+		
+		<mx:FormItem 
+			label="Password:" 
+			required="true"
+			height="25"
+			>
+			<s:TextInput 
+				id="password" 
+				width="200" height="25"
+				errorString="{ model.passwordError }"
+				displayAsPassword="true" 
+				text="Swiz" 
+				enter="login()"
+				/>
+<!--				text="{ model.password }" -->
 		</mx:FormItem>
+		
+		<mx:FormItem 
+			>
+			<s:Button 
+				id="loginBtn"
+				width="120" height="40"
+				styleName="mainButton"
+				label="Login" 
+				enabled="{ !model.loginPending }"
+				click="login();"
+				/>
+		</mx:FormItem>
+		
+		<mx:FormItem
+			>
+			<s:Label 
+				fontSize="13"
+				text="( Username: Flex   Password: Swiz )" 
+				/>
+		</mx:FormItem>
+		
+		
 	</mx:Form>
-
-	<s:Label text="Username: Flex Password: Swiz" />
-</s:Panel>
+	
+</s:Group>

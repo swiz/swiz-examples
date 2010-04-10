@@ -1,38 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<swiz:BeanProvider xmlns:swiz="http://swiz.swizframework.org" xmlns:fx="http://ns.adobe.com/mxml/2009"
-				   xmlns:model="com.cafetownsend.model.*" xmlns:controller="com.cafetownsend.controller.*"
-				   xmlns:service="com.cafetownsend.service.*" xmlns:storage="org.swizframework.storage.*">
-
+<swiz:BeanProvider 
+	xmlns:swiz="http://swiz.swizframework.org" 
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:model="com.cafetownsend.model.*" 
+	xmlns:controller="com.cafetownsend.controller.*"
+	xmlns:service="com.cafetownsend.service.*" 
+	xmlns:storage="org.swizframework.storage.*" 
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	>
+	
 	<fx:Script>
 		<![CDATA[
+			import com.cafetownsend.presentation.EmployeeDetailPresentationModel;
+			import com.cafetownsend.presentation.EmployeeListPresentationModel;
 			import com.cafetownsend.presentation.EmployeePresentationModel;
+			import com.cafetownsend.presentation.EmployeesPresentationModel;
 			import com.cafetownsend.presentation.LoginPresentationModel;
+			import com.cafetownsend.presentation.MainViewPresentationModel;
 		]]>
 	</fx:Script>
-
+	
+	
+	<fx:Declarations>
+		
+		<mx:HTTPService
+			id="employeesService" 
+			url="assets/xml/Employees.xml" 
+			resultFormat="e4x" 
+			showBusyCursor="true"
+			/>
+		
+	</fx:Declarations>
+	
 	<!-- Application level model and controller.
-		 Handle login, hold the state and user of the application -->
+		Handle login, hold the state and user of the application -->
 	<model:AppModel id="appModel" />
 	<controller:AppController />
-
+	
 	<!-- Employee level model and controller. -->
 	<model:EmployeeModel id="employeeModel" />
 	<controller:EmployeeController />
 
+	<!-- Navigation level model and controller. -->
+	<model:NavigationModel id="navModel" />
+	<controller:NavigationController />
+
+	
 	<!-- Presentation models -->
 	<!-- Presentation models are generally injected into views and should be declared as Prototype
-		 to be instantiated lazy when the corresponding view is added to the display chain -->
+		to be instantiated lazy when the corresponding view is added to the display chain -->
+	<swiz:Prototype type="{ MainViewPresentationModel }" />
 	<swiz:Prototype type="{LoginPresentationModel}" />
 	<swiz:Prototype type="{EmployeePresentationModel}" />
-
+	<swiz:Prototype type="{ EmployeesPresentationModel }" />
+	<swiz:Prototype type="{ EmployeeListPresentationModel }" />
+	<swiz:Prototype type="{ EmployeeDetailPresentationModel }" />
+	
 	<!-- SharedObject Helper -->
 	<storage:SharedObjectBean name="cafeTownsend" />
 	
 	<!-- Service Helper -->
 	<swiz:ServiceHelper />
-
+	
 	<!-- Service Delegates -->
 	<service:UserDelegate />
 	<service:EmployeeDelegate />
-
+	
 </swiz:BeanProvider>

@@ -9,12 +9,18 @@ package com.cafetownsend.presentation
 	
 	public class LoginPresentationModel
 	{
+		[Dispatcher]
+		public var dispatcher:IEventDispatcher;
+		
 		private static const STATE_DEFAULT:String = "default";
 		private static const STATE_ERROR:String = "error";
 		
 		[Bindable]
-		[Inject("appModel.loginPending")]
-		public var loginPending:Boolean;
+		public var currentState:String = STATE_DEFAULT;
+		
+		
+		[Bindable]
+		public var loginPending:Boolean = false;
 		
 		[Bindable]
 		[Inject("appModel.lastUsername")]
@@ -22,12 +28,6 @@ package com.cafetownsend.presentation
 		
 		[Bindable]
 		public var password:String;
-		
-		[Dispatcher]
-		public var dispatcher:IEventDispatcher;
-		
-		[Bindable]
-		public var currentState:String = STATE_DEFAULT;
 		
 		[Bindable]
 		public var usernameError:String;
@@ -49,10 +49,13 @@ package com.cafetownsend.presentation
 			
 			currentState = STATE_DEFAULT;
 			
+			
 			if( !usernameError && !passwordError )
 			{
 				var user:User = new User(NaN, username, password);
 				dispatcher.dispatchEvent(new LoginEvent(LoginEvent.LOGIN, user));
+
+				loginPending = true;
 			}
 		}
 		
@@ -61,6 +64,14 @@ package com.cafetownsend.presentation
 		{
 			currentState = STATE_ERROR;
 			loginError = fault.faultString + ": " + fault.faultDetail;
+			
+			loginPending = false;
+		}
+
+		[Mediate(event="LoginEvent.COMPLETE")]
+		public function handleLoginComplete( event: LoginEvent ):void
+		{
+			loginPending = false;			
 		}
 	
 	}

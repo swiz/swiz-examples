@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SparkSkin 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:fb="http://ns.adobe.com/flashbuilder/2009" 
+	minWidth="110" minHeight="30" 
+	alpha.disabled="0.5"
+	currentStateChange="sparkskin1_currentStateChangeHandler(event)"
+	>
+	
+	<!-- host component -->
+	<fx:Metadata>		
+		<![CDATA[ 
+		[HostComponent("spark.components.Button")]
+		]]>
+	</fx:Metadata>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.StateChangeEvent;
+			
+			protected function sparkskin1_currentStateChangeHandler(event:StateChangeEvent):void
+			{			
+				bgColor.color = this.getStyle('backgroundColor') as int || 0xEEEEEE;
+				
+				bgBorder.weight = this.getStyle('borderWeight') as uint || 1;
+				bgBorder.color = this.getStyle('borderColor') as uint || 0;
+				
+				labelDisplay.setStyle('color', this.getStyle('color') || 0 );
+			}
+		]]>
+	</fx:Script>
+	
+	
+	<!-- states -->
+	<s:states>
+		<s:State name="up" />
+		<s:State name="over" />
+		<s:State name="down" />
+		<s:State name="disabled" />
+	</s:states>
+	
+	<!-- transitions -->    
+	<s:transitions>
+		<s:Transition
+			fromState="*" toState="*" 
+			autoReverse="true"
+			>
+			<s:AnimateColor 
+				targets="{ [ bgColor, bgBorder ] }" 
+				duration="250" 
+				/>
+		</s:Transition>
+	</s:transitions>
+	
+	
+	<!-- background -->
+	<s:Rect 
+		left="4" right="4" 
+		top="4" bottom="4"
+		>
+		<s:fill>
+			<s:SolidColor
+				id="bgColor"
+				/>
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke
+				id="bgBorder"
+				caps="square"
+				joints="miter"
+				/>
+		</s:stroke>
+		
+		<s:filters>
+			<s:DropShadowFilter 
+				alpha="0.45" 
+				alpha.down=".1"
+				angle="45" 
+				color="#000000" 
+				distance="0" 
+				quality="15"
+				/>	
+		</s:filters>
+	</s:Rect>
+	
+	
+	<!-- label -->
+	<s:Label 
+		id="labelDisplay"
+		textAlign="center"
+		verticalAlign="middle"
+		maxDisplayedLines="1"
+		horizontalCenter="0" verticalCenter="1"
+		left="10" right="10" top="5" bottom="5"
+		>
+	</s:Label>
+	
+</s:SparkSkin>

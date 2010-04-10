@@ -13,7 +13,6 @@
 		<![CDATA[
 			import com.cafetownsend.presentation.EmployeeDetailPresentationModel;
 			import com.cafetownsend.presentation.EmployeeListPresentationModel;
-			import com.cafetownsend.presentation.EmployeePresentationModel;
 			import com.cafetownsend.presentation.EmployeesPresentationModel;
 			import com.cafetownsend.presentation.LoginPresentationModel;
 			import com.cafetownsend.presentation.MainViewPresentationModel;
@@ -51,7 +50,6 @@
 		to be instantiated lazy when the corresponding view is added to the display chain -->
 	<swiz:Prototype type="{ MainViewPresentationModel }" />
 	<swiz:Prototype type="{LoginPresentationModel}" />
-	<swiz:Prototype type="{EmployeePresentationModel}" />
 	<swiz:Prototype type="{ EmployeesPresentationModel }" />
 	<swiz:Prototype type="{ EmployeeListPresentationModel }" />
 	<swiz:Prototype type="{ EmployeeDetailPresentationModel }" />

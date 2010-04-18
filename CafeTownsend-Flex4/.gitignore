@@ -10,6 +10,7 @@
 .project
 .sourceMate
 .sourceMateMetadataSettings
+.FlexUnitSettings
 
 Icon
 Thumbs.db

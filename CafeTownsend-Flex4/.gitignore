@@ -10,7 +10,11 @@
 .project
 .sourceMate
 .sourceMateMetadataSettings
+
+
 .FlexUnitSettings
+src/FlexUnitCompilerApplication.mxml
+src/FlexUnitApplication.mxml
 
 Icon
 Thumbs.db

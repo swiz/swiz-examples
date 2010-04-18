@@ -151,14 +151,14 @@ package com.cafetownsend.presentation
 		protected var stringValidator:StringValidator;
 		
 
-		private function validateEmployee( employee:Employee ):Boolean
+		public function validateEmployee( employee:Employee ):Boolean
 		{
 			// create stringValidator if not created yet
 			stringValidator ||= new StringValidator();
 			
 			var stringValidation: ValidationResultEvent = stringValidator.validate( employee.firstName );
 			var validFirstname:Boolean = stringValidation.results == null;
-			_firstnameError = ( validFirstname ) ? "" : "Please enter first name.";
+			_firstNameError = ( validFirstname ) ? "" : "Please enter first name.";
 
 			stringValidation = stringValidator.validate( employee.lastName );
 			var validLastname:Boolean = stringValidation.results == null;
@@ -180,7 +180,7 @@ package com.cafetownsend.presentation
 		
 		protected function clearValidationMessages():void 
 		{
-			_firstnameError
+			_firstNameError
 			= _lastNameError
 			= _emailError
 			= '';
@@ -190,12 +190,12 @@ package com.cafetownsend.presentation
 		
 		
 		
-		private var _firstnameError:String = "";
+		private var _firstNameError:String = "";
 		
 		[Bindable(Event="validationChanged")]
-		public function get firstnameError():String
+		public function get firstNameError():String
 		{
-			return _firstnameError;
+			return _firstNameError;
 		}
 		
 		

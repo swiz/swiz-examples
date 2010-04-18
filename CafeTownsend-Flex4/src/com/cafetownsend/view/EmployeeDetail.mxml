@@ -24,7 +24,7 @@
 		<s:TextInput 
 			id="firstName"
 			width="250" height="25"
-			errorString="{ model.firstnameError }"
+			errorString="{ model.firstNameError }"
 			text="{ model.tempEmployee.firstName }"
 			change="model.tempEmployee.firstName = firstName.text"
 			/>

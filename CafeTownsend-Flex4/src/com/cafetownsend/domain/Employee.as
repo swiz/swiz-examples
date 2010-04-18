@@ -55,7 +55,12 @@ package com.cafetownsend.domain
 		//
 		//--------------------------------------------------------------------------
 
-
+		/**
+		 * Copy all values of another employee
+		 * 
+		 * @param	employee	Instance of an employee, which values has to be copied
+		 * 
+		 */
 		public function copyFrom( employee: Employee ):void 
 		{
 			this.id = employee.id;
@@ -65,6 +70,12 @@ package com.cafetownsend.domain
 			this.startDate = new Date( Date.parse( employee.startDate ) );			
 		}
 		
+		
+		/**
+		 * Clone an employee
+		 * 
+		 * @return 	Employee	Cloned instance of Employee
+		 */
 		public function clone():Employee 
 		{
 			var employee: Employee = new Employee();

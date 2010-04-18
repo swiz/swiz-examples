@@ -7,7 +7,7 @@
 	
 	<fx:Script> 
 		<![CDATA[
-			import com.cafetownsend.components.EmployeesListItemRenderer;
+			import com.cafetownsend.component.EmployeesListItemRenderer;
 			import com.cafetownsend.domain.Employee;
 			import com.cafetownsend.presentation.EmployeeListPresentationModel;
 
@@ -27,7 +27,7 @@
 		change="model.selectEmployee( employees_li.selectedItem as Employee )" 
 		width="100%" height="100%"
 		borderVisible="false"
-		itemRenderer="com.cafetownsend.components.EmployeesListItemRenderer"
+		itemRenderer="com.cafetownsend.component.EmployeesListItemRenderer"
 		/>
 	
 </s:Group>

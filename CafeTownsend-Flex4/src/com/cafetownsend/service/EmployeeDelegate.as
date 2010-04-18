@@ -1,8 +1,8 @@
 package com.cafetownsend.service
 {
 	import com.cafetownsend.domain.Employee;
-	import com.cafetownsend.utils.EmployeeUtil;
-	import com.cafetownsend.utils.ErrorUtil;
+	import com.cafetownsend.util.EmployeeUtil;
+	import com.cafetownsend.util.ErrorUtil;
 	
 	import mx.collections.ArrayCollection;
 	import mx.collections.IList;

@@ -10,7 +10,7 @@
 
 	<fx:Script>
 		<![CDATA[
-			import com.cafetownsend.utils.ErrorUtil;
+			import com.cafetownsend.util.ErrorUtil;
 			
 		]]>
 	</fx:Script>

@@ -1,4 +1,4 @@
-package com.cafetownsend.utils
+package com.cafetownsend.util
 {
 	import com.cafetownsend.domain.Employee;
 	

@@ -7,8 +7,8 @@ package com.cafetownsend.controller
 	import com.cafetownsend.model.EmployeeModel;
 	import com.cafetownsend.model.NavigationModel;
 	import com.cafetownsend.service.IEmployeeDelegate;
-	import com.cafetownsend.utils.EmployeeUtil;
-	import com.cafetownsend.utils.ErrorUtil;
+	import com.cafetownsend.util.EmployeeUtil;
+	import com.cafetownsend.util.ErrorUtil;
 	
 	import flash.display.Sprite;
 	import flash.events.IEventDispatcher;

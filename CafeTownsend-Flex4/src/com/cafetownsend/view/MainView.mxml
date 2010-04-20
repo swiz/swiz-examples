@@ -56,11 +56,6 @@
 			
 			<s:Sequence
 				>				
-				<s:SetAction
-					target="{ employeesView }"
-					property="visible"
-					value="false"
-					/>
 				<s:Resize 
 					target="{ this }"
 					startDelay="200"
@@ -69,6 +64,9 @@
 					easer="{ Constants.EFFECT_EASE }"
 					/>
 				<s:Parallel>
+					<s:AddAction
+						target="{ employeesView }"
+						/>
 					<s:Move
 						target="{ bLogout }"
 						duration="{ Constants.EFFECT_DURATION }"
@@ -95,11 +93,6 @@
 			<s:Sequence
 				>
 				<s:Parallel>
-					<s:SetAction
-						target="{ loginView }"
-						property="visible"
-						value="false"
-						/>
 					<s:Fade
 						duration="{ Constants.EFFECT_DURATION }"
 						target="{ employeesView }"
@@ -120,9 +113,11 @@
 					duration="{ Constants.EFFECT_DURATION }"
 					easer="{ Constants.EFFECT_EASE }"
 					/>
+				<s:AddAction
+					target="{ loginView }"
+					/>
 				<s:Fade
 					duration="{ Constants.EFFECT_DURATION }"
-					effectStart="loginView.visible = true"
 					target="{ loginView }"
 					/>
 			</s:Sequence>

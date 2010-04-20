@@ -56,9 +56,9 @@
 			
 			<s:Sequence
 				>				
-				<mx:SetPropertyAction
+				<s:SetAction
 					target="{ employeesView }"
-					name="visible"
+					property="visible"
 					value="false"
 					/>
 				<s:Resize 
@@ -95,9 +95,9 @@
 			<s:Sequence
 				>
 				<s:Parallel>
-					<mx:SetPropertyAction
+					<s:SetAction
 						target="{ loginView }"
-						name="visible"
+						property="visible"
 						value="false"
 						/>
 					<s:Fade
@@ -226,11 +226,6 @@
 		</s:BitmapImage>
 		
 	</s:BorderContainer>
-	
-	<!--	<s:HGroup excludeFrom="login" verticalAlign="middle" right="0">
-	<s:Label text="Hello {model.user.username}" />
-	<s:Button label="Logout" click="logoutClickHandler(event)" />
-	</s:HGroup>-->
-	
+
 	
 </s:Group>

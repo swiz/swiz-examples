@@ -6,7 +6,8 @@
 	xmlns:controller="com.cafetownsend.controller.*"
 	xmlns:service="com.cafetownsend.service.*" 
 	xmlns:storage="org.swizframework.storage.*" 
-	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:mx="library://ns.adobe.com/flex/mx" 
+	xmlns:presentation="com.cafetownsend.presentation.*"
 	>
 	
 	<fx:Script>
@@ -14,8 +15,6 @@
 			import com.cafetownsend.presentation.EmployeeDetailPresentationModel;
 			import com.cafetownsend.presentation.EmployeeListPresentationModel;
 			import com.cafetownsend.presentation.EmployeesPresentationModel;
-			import com.cafetownsend.presentation.LoginPresentationModel;
-			import com.cafetownsend.presentation.MainViewPresentationModel;
 		]]>
 	</fx:Script>
 	
@@ -46,13 +45,38 @@
 
 	
 	<!-- Presentation models -->
+	<presentation:MainViewPresentationModel
+		/>
+	<presentation:LoginPresentationModel
+		/>
+	
 	<!-- Presentation models are generally injected into views and should be declared as Prototype
 		to be instantiated lazy when the corresponding view is added to the display chain -->
-	<swiz:Prototype type="{ MainViewPresentationModel }" />
-	<swiz:Prototype type="{LoginPresentationModel}" />
-	<swiz:Prototype type="{ EmployeesPresentationModel }" />
-	<swiz:Prototype type="{ EmployeeListPresentationModel }" />
-	<swiz:Prototype type="{ EmployeeDetailPresentationModel }" />
+	
+<!--	
+	TODO: Bug using Prototype?? -> Error: AmbiguousReferenceError. More than one bean was found with type:
+
+	<swiz:Prototype 
+		type="{ EmployeesPresentationModel }"
+		/>
+	
+	<swiz:Prototype 
+		type="{ EmployeeListPresentationModel }"
+		/>
+	<swiz:Prototype
+		type="{ EmployeeDetailPresentationModel }"
+		/>
+	-->
+	
+	<presentation:EmployeesPresentationModel
+		/>
+	
+	<presentation:EmployeeListPresentationModel
+		/>
+	
+	<presentation:EmployeeDetailPresentationModel
+		/>
+
 	
 	<!-- SharedObject Helper -->
 	<storage:SharedObjectBean name="cafeTownsend" />

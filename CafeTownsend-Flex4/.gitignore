@@ -2,6 +2,7 @@
 
 /html-template/*
 /bin-debug/*
+/bin-release/*
 
 .actionScriptProperties
 .flexProperties

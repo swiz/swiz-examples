@@ -1,30 +1,31 @@
 package com.cafetownsend.presentation.test
 {
 
-	
 	import com.cafetownsend.domain.Employee;
 	import com.cafetownsend.event.EmployeeEvent;
 	import com.cafetownsend.presentation.EmployeeDetailPresentationModel;
 	import com.cafetownsend.util.EmployeeFactory;
 	
-	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	
 	import flexunit.framework.Assert;
 	
-	import org.flexunit.assertThat;
-	import org.flexunit.asserts.assertEquals;
-	import org.flexunit.asserts.assertFalse;
-	import org.flexunit.asserts.assertNotNull;
-	import org.flexunit.asserts.assertTrue;
-	import org.flexunit.asserts.fail;
 	import org.flexunit.async.Async;
+	
+	
 	
 	public class EmployeeDetailPresentationModelTest
 	{		
 		protected var pm:EmployeeDetailPresentationModel;
 		
 		protected var employee:Employee;
+		
+		
+		//--------------------------------------------------------------------------
+		//
+		// setup
+		//
+		//--------------------------------------------------------------------------
 		
 		[Before]
 		public function setUp():void
@@ -126,7 +127,11 @@ package com.cafetownsend.presentation.test
 		[Test( async, description="Trigger TEMP_EMPLOYEE_CHANGED if a new employee is selected")]
 		public function triggerTempEmployeeChanged():void 
 		{
-			Async.proceedOnEvent( this, pm, EmployeeDetailPresentationModel.TEMP_EMPLOYEE_CHANGED, 200, dipatchingEventNeverOccurred );
+			Async.proceedOnEvent( 	this, 
+									pm, 
+									EmployeeDetailPresentationModel.TEMP_EMPLOYEE_CHANGED, 
+									200, 
+									dispatchingEventNeverOccurred );
 
 			// trigger TEMP_EMPLOYEE_CHANGED
 			pm.selectedEmployee = employee;
@@ -138,7 +143,11 @@ package com.cafetownsend.presentation.test
 		{
 			//
 			// check if VALIDATION_CHANGED will be fired
-			Async.proceedOnEvent( this, pm, EmployeeDetailPresentationModel.VALIDATION_CHANGED, 200, dipatchingEventNeverOccurred );
+			Async.proceedOnEvent( 	this, 
+									pm, 
+									EmployeeDetailPresentationModel.VALIDATION_CHANGED,
+									200, 
+									dispatchingEventNeverOccurred );
 			
 			//
 			// change created employee to an empty (invalid) employee
@@ -165,8 +174,11 @@ package com.cafetownsend.presentation.test
 		[Test( async, description="Dispatching EmployeeEvent.DELETE to delete an employee")]
 		public function dispatchDeleteEvent():void 
 		{
-			Async.proceedOnEvent( this, pm.dispatcher, EmployeeEvent.DELETE, 200, dipatchingEventNeverOccurred );
-
+			Async.proceedOnEvent( 	this, 
+									pm.dispatcher, 
+									EmployeeEvent.DELETE, 
+									200, 
+									dispatchingEventNeverOccurred );
 			pm.deleteEmployee();
 
 		}
@@ -174,7 +186,11 @@ package com.cafetownsend.presentation.test
 		[Test( async, description="Dispatching EmployeeEvent.CANCEL to delete an employee")]
 		public function dispatchCancelEvent():void 
 		{
-			Async.proceedOnEvent( this, pm.dispatcher, EmployeeEvent.CANCEL, 200, dipatchingEventNeverOccurred );
+			Async.proceedOnEvent( 	this, 
+									pm.dispatcher, 
+									EmployeeEvent.CANCEL, 
+									200, 
+									dispatchingEventNeverOccurred );
 
 			pm.cancelEmployeeEdits();
 
@@ -186,7 +202,11 @@ package com.cafetownsend.presentation.test
 			
 			pm.selectedEmployee = employee;
 			
-			Async.proceedOnEvent( this, pm.dispatcher, EmployeeEvent.UPDATE, 200, dipatchingEventNeverOccurred );
+			Async.proceedOnEvent( 	this, 
+									pm.dispatcher, 
+									EmployeeEvent.UPDATE, 
+									200, 
+									dispatchingEventNeverOccurred );
 
 			pm.updateEmployee();
 
@@ -198,7 +218,7 @@ package com.cafetownsend.presentation.test
 		//
 		//--------------------------------------------------------------------------
 		
-		protected function dipatchingEventNeverOccurred( passThroughData:Object ):void 
+		protected function dispatchingEventNeverOccurred( passThroughData:Object ):void 
 		{
 			Assert.fail( 'event is not dispatched');
 		}

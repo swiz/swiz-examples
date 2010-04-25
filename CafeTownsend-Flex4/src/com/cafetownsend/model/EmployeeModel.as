@@ -13,8 +13,5 @@ package com.cafetownsend.model
 		[Bindable]
 		public var selectedEmployee:Employee;
 		
-		public function EmployeeModel()
-		{
-		}
 	}
 }

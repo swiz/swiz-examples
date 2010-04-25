@@ -20,7 +20,13 @@ package
 		
 		//
 		// presentation models
-		public var pm:EmployeeDetailPresentationModelTest;
+		public var loginPresentationModelTest: LoginPresentationModelTest;
+		public var mainViewPresentationModelTest: MainViewPresentationModelTest;
+		
+		public var employeesPresentationModelTest: EmployeesPresentationModelTest;
+		public var employeeDetailPresentationModelTest: EmployeeDetailPresentationModelTest;
+		public var employeeListPresentationModelTest: EmployeeListPresentationModelTest;
+		
 		
 		
 	}

@@ -1,6 +1,5 @@
 package com.cafetownsend.model
 {
-	import com.cafetownsend.domain.Employee;
 	import com.cafetownsend.domain.User;
 	
 	public class AppModel

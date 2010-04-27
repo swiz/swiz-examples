@@ -5,6 +5,7 @@
 	xmlns:mx="library://ns.adobe.com/flex/mx" 
 	minWidth="450" minHeight="550" 
 	xmlns:view="com.cafetownsend.view.*"
+	viewSourceURL="http://github.com/swiz/swiz-examples/tree/master/CafeTownsend-Flex4/"
 	>
 
 	<fx:Script>

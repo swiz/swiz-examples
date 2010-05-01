@@ -51,11 +51,8 @@
 		/>
 	
 	<!-- Presentation models are generally injected into views and should be declared as Prototype
-		to be instantiated lazy when the corresponding view is added to the display chain -->
+		to be instantiated lazy when the corresponding view is added to the display chain -->	
 	
-<!--	
-	TODO: Bug using Prototype?? -> Error: AmbiguousReferenceError. More than one bean was found with type:
-
 	<swiz:Prototype 
 		type="{ EmployeesPresentationModel }"
 		/>
@@ -63,19 +60,10 @@
 	<swiz:Prototype 
 		type="{ EmployeeListPresentationModel }"
 		/>
+	
 	<swiz:Prototype
 		type="{ EmployeeDetailPresentationModel }"
-		/>
-	-->
-	
-	<presentation:EmployeesPresentationModel
-		/>
-	
-	<presentation:EmployeeListPresentationModel
-		/>
-	
-	<presentation:EmployeeDetailPresentationModel
-		/>
+		/>	
 
 	
 	<!-- SharedObject Helper -->

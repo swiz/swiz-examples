@@ -1,5 +1,6 @@
 package com.cafetownsend.presentation.test
 {
+	import com.cafetownsend.domain.User;
 	import com.cafetownsend.event.LoginEvent;
 	import com.cafetownsend.presentation.LoginPresentationModel;
 	
@@ -14,6 +15,7 @@ package com.cafetownsend.presentation.test
 	public class LoginPresentationModelTest
 	{		
 		protected var pm: LoginPresentationModel;
+
 		
 		//--------------------------------------------------------------------------
 		//
@@ -101,19 +103,42 @@ package com.cafetownsend.presentation.test
 		//
 		//--------------------------------------------------------------------------	
 		
-		
-		[Test( async, description="Dispatching LoginEvent.LOGIN to login")]
+		[Test( async, description="Dispatching LoginEvent.LOGIN to inform controller to try login")]
 		public function dispatchLoginEvent():void 
 		{
-			Async.proceedOnEvent( 	this, 
-									pm.dispatcher, 
-									LoginEvent.LOGIN, 
-									200, 
-									dispatchingEventNeverOccurred );
-			pm.login('Luke', 'Skywalker');
+
+			var passThroughData:Object = {};
+			passThroughData.username = "Luke Skywalker";
+			passThroughData.password = "secretPW123";
+
+			Async.handleEvent( this,
+								pm.dispatcher,
+								LoginEvent.LOGIN,
+								loginEventHandler,
+								200,
+								passThroughData,
+								handleEventNeverOccurred );
+			
+			pm.login( passThroughData.username, passThroughData.password);
+			
 			
 		}
 		
+		protected function loginEventHandler( event: LoginEvent, passThroughData:Object ):void 
+		{
+			//
+			// check event
+			Assert.assertNotNull( "LoginEvent", event );
+			
+			//
+			// check event data
+			var user:User = event.user;
+			
+			Assert.assertNotNull( "User", user );
+			Assert.assertEquals("username", passThroughData.username, user.username );
+			Assert.assertEquals("passwort", passThroughData.password, user.password );
+			
+		}
 		
 		//--------------------------------------------------------------------------
 		//
@@ -121,7 +146,8 @@ package com.cafetownsend.presentation.test
 		//
 		//--------------------------------------------------------------------------
 		
-		protected function dispatchingEventNeverOccurred( passThroughData:Object ):void 
+
+		protected function handleEventNeverOccurred( passThroughData:Object = null ):void 
 		{
 			Assert.fail( 'Event is not dispatched');
 		}

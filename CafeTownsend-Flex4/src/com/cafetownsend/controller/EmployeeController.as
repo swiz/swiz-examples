@@ -59,7 +59,7 @@ package com.cafetownsend.controller
 		protected function loadEmployeeHandler(event:ResultEvent):void
 		{
 			var call:AsyncToken = delegate.loadEmployees();
-			return serviceRequestUtil.executeServiceCall( call, loadEmployeesResultHandler );
+			serviceRequestUtil.executeServiceCall( call, loadEmployeesResultHandler );
 			
 		}
 		

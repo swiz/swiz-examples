@@ -35,7 +35,7 @@ package com.cafetownsend.presentation
 		private var _employees:ArrayCollection = null;
 		public static const EMPLOYEES_CHANGED:String = "employeesChanged";
 		
-		[Inject("employeeModel.employees")]
+		[Inject("employeeModel.employees", bind="true")]
 		[Bindable(Event="employeesChanged")]		
 		public function set employees( list:ArrayCollection ):void
 		{
@@ -61,7 +61,7 @@ package com.cafetownsend.presentation
 		public static const SELECTED_EMPLOYEE_CHANGED:String = "selectedEmployeeChanged";
 		
 		
-		[Inject("employeeModel.selectedEmployee")]
+		[Inject("employeeModel.selectedEmployee", bind="true")]
 		[Bindable(event="selectedEmployeeChanged")]
 		public function set selectedEmployee(value:Employee):void
 		{

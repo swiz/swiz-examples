@@ -13,7 +13,7 @@ package com.cafetownsend.presentation
 		
 		private var _currentState:String;		
 
-		[Inject("navModel.path")]
+		[Inject("navModel.path", bind="true")]
 		[Bindable(event="currentStateChanged")]
 		public function set currentState( value: String ):void
 		{

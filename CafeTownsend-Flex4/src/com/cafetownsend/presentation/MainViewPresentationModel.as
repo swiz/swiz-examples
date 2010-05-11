@@ -12,7 +12,7 @@ package com.cafetownsend.presentation
 		[Dispatcher]
 		public var dispatcher:IEventDispatcher;
 		
-		[Inject("appModel.user")]
+		[Inject("appModel.user", bind="true")]
 		[Bindable]
 		public var user: User;
 		
@@ -27,7 +27,7 @@ package com.cafetownsend.presentation
 		
 		private var _currentState:String;
 		
-		[Inject("navModel.path")]
+		[Inject("navModel.path", bind="true")]
 		[Bindable(event="currentStateChanged")]
 		public function get currentState():String
 		{

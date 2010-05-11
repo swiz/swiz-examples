@@ -25,7 +25,7 @@ package com.cafetownsend.presentation
 		public var loginPending:Boolean = false;
 		
 		[Bindable]
-		[Inject("appModel.lastUsername")]
+		[Inject("appModel.lastUsername", bind="true")]
 		public var lastUsername:String;
 		
 		[Bindable]

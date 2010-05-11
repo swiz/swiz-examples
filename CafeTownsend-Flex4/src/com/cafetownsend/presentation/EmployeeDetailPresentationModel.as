@@ -34,7 +34,7 @@ package com.cafetownsend.presentation
 		
 		
 		[Bindable]
-		[Inject("employeeModel.selectedEmployee")]
+		[Inject("employeeModel.selectedEmployee", bind="true")]
 		public function get selectedEmployee( ):Employee
 		{
 			return _selectedEmployee;

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark"		   
+	xmlns:mx="library://ns.adobe.com/flex/mx" 
+	minWidth="450" minHeight="550" 
+	xmlns:view="com.cafetownsend.view.*"
+	viewSourceURL="http://github.com/swiz/swiz-examples/tree/master/CafeTownsend-Flex4/"
+	>
+
+	<fx:Script>
+		<![CDATA[
+			import com.cafetownsend.util.ErrorUtil;
+	
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		
+		<swiz:SwizConfig 
+			id="config" 
+			xmlns:swiz="http://swiz.swizframework.org" 
+			viewPackages="com.cafetownsend.view.*" 
+			eventPackages="com.cafetownsend.event.*" 
+			defaultFaultHandler="ErrorUtil.showError"
+			/>
+		
+		<swiz:Swiz 
+			xmlns:swiz="http://swiz.swizframework.org" 
+			config="{config}" 
+			beanProviders="{[Beans]}" 
+			/>
+		
+	</fx:Declarations>
+
+	<fx:Style 
+		source="/assets/css/styles.css" 
+		/>
+
+	<s:layout>
+		<s:VerticalLayout 
+			horizontalAlign="center" 
+			verticalAlign="middle"
+			/>
+	</s:layout>
+	
+
+	<view:MainView
+		/>
+
+</s:Application>

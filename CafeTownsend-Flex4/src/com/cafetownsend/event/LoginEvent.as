@@ -7,8 +7,8 @@ package com.cafetownsend.event
 	public class LoginEvent extends Event
 	{
 		public static const LOGIN:String = "LoginEvent.LOGIN";
-		public static const COMPLETE:String = "LoginEvent.COMPLETE";
 		public static const LOGOUT:String = "LoginEvent.LOGOUT";
+		public static const COMPLETE:String = "LoginEvent.COMPLETE";
 		
 		private var _user:User;
 		
@@ -17,7 +17,7 @@ package com.cafetownsend.event
 			return _user;
 		}
 		
-		public function LoginEvent(type:String, user:User, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function LoginEvent(type:String, user:User = null, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
 			_user = user;

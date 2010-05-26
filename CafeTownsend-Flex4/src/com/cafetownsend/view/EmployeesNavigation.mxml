@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:view="com.cafetownsend.view.*"
+	currentState="{ model.currentState }"
+	>
+	
+	
+	<fx:Script>
+		<![CDATA[
+			import com.cafetownsend.model.Constants;
+			import com.cafetownsend.presentation.EmployeesPresentationModel;
+			
+			import mx.events.FlexEvent;
+			
+			[Inject]
+			[Bindable]
+			public var model: EmployeesPresentationModel;
+			
+			public static const HEIGHT:int = 60;
+
+		]]>
+	</fx:Script>
+	
+	
+	<fx:Declarations>
+		
+		<s:DropShadowFilter 
+				id="shadow"
+				alpha="0.40" 
+				angle="90" 
+				color="0" 
+				distance="3" 
+				quality="50"
+				/>
+		
+	</fx:Declarations>
+	
+	
+	<!-- States -->
+	
+	<s:states>
+		<s:State name="employeeList" />
+		<s:State name="employeeDetail" />
+	</s:states>
+	
+	
+	<!-- Transitions -->	
+	
+	<s:transitions>
+		<s:Transition 
+			autoReverse="true"
+			fromState="*" toState="*"		
+			>
+			<s:Move
+				targets="{ [ employeeListNav, employeeDetailNav ] }"
+				easer="{ Constants.EFFECT_EASE }"		
+				duration="{ Constants.EFFECT_DURATION }"
+				/>
+			
+		</s:Transition>
+		
+	</s:transitions>
+	
+	<!-- navigations -->
+	
+	<view:EmployeeListNavigation
+		id="employeeListNav"
+		y.employeeList="0"
+		y.employeeDetail="{ -HEIGHT}"
+		width="100%" height="{ HEIGHT }"
+		filters="{ shadow }"
+		/>
+	
+	
+	<view:EmployeeDetailNavigation
+		id="employeeDetailNav"
+		y.employeeList="{ -HEIGHT}"
+		y.employeeDetail="0"
+		width="100%" height="{ HEIGHT }"
+		filters="{ shadow }"
+
+		/>
+	
+</s:Group>

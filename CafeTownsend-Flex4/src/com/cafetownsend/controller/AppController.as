@@ -1,9 +1,12 @@
 package com.cafetownsend.controller
 {
 	import com.cafetownsend.domain.User;
+	import com.cafetownsend.event.EmployeeEvent;
 	import com.cafetownsend.event.LoginErrorEvent;
 	import com.cafetownsend.event.LoginEvent;
+	import com.cafetownsend.event.NavigationEvent;
 	import com.cafetownsend.model.AppModel;
+	import com.cafetownsend.model.NavigationModel;
 	import com.cafetownsend.service.IUserDelegate;
 	
 	import flash.events.IEventDispatcher;
@@ -44,17 +47,25 @@ package com.cafetownsend.controller
 			}
 		}
 		
+		
+		//--------------------------------------------------------------------------
+		//
+		// login / logout handling
+		//
+		//--------------------------------------------------------------------------
+		
+		
 		[Mediate(event="LoginEvent.LOGOUT")]
 		public function logout():void
 		{
 			model.user = null;
-			model.currentState = AppModel.STATE_LOGIN;
+			
+			dispatcher.dispatchEvent( new NavigationEvent( NavigationEvent.UPDATE_PATH, NavigationModel.PATH_LOGGED_OUT ) );
 		}
 		
 		[Mediate(event="LoginEvent.LOGIN", properties="user")]
 		public function login(user:User):void
 		{
-			model.loginPending = true;
 			var call:AsyncToken = userDelegate.login(user.username, user.password);
 			serviceHelper.executeServiceCall(call, loginResultHandler, loginFaultHandler);
 		}
@@ -67,14 +78,12 @@ package com.cafetownsend.controller
 			soBean.setString("lastUsername", user.username);
 				
 			model.user = user;
-			model.loginPending = false;
-			model.currentState = AppModel.STATE_EMPLOYEE;
-			dispatcher.dispatchEvent(new LoginEvent(LoginEvent.COMPLETE, user));
+			
+			dispatcher.dispatchEvent( new LoginEvent( LoginEvent.COMPLETE ) );
 		}
 		
 		protected function loginFaultHandler(event:FaultEvent):void
 		{
-			model.loginPending = false;
 			dispatcher.dispatchEvent(new LoginErrorEvent(LoginErrorEvent.LOGIN_ERROR, event.fault));
 		}
 	}

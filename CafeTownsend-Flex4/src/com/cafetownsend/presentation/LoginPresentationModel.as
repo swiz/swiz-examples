@@ -5,29 +5,31 @@ package com.cafetownsend.presentation
 	
 	import flash.events.IEventDispatcher;
 	
+	import mx.events.ValidationResultEvent;
 	import mx.rpc.Fault;
+	import mx.validators.StringValidator;
 	
 	public class LoginPresentationModel
 	{
-		private static const STATE_DEFAULT:String = "default";
-		private static const STATE_ERROR:String = "error";
+		[Dispatcher]
+		public var dispatcher:IEventDispatcher;
+		
+		public static const STATE_DEFAULT:String = "default";
+		public static const STATE_ERROR:String = "error";
 		
 		[Bindable]
-		[Inject("appModel.loginPending")]
-		public var loginPending:Boolean;
+		public var currentState:String = STATE_DEFAULT;
+		
 		
 		[Bindable]
-		[Inject("appModel.lastUsername")]
+		public var loginPending:Boolean = false;
+		
+		[Bindable]
+		[Inject("appModel.lastUsername", bind="true")]
 		public var lastUsername:String;
 		
 		[Bindable]
 		public var password:String;
-		
-		[Dispatcher]
-		public var dispatcher:IEventDispatcher;
-		
-		[Bindable]
-		public var currentState:String = STATE_DEFAULT;
 		
 		[Bindable]
 		public var usernameError:String;
@@ -44,23 +46,53 @@ package com.cafetownsend.presentation
 		
 		public function login(username:String, password:String):void
 		{
-			usernameError = username == "" ? "Please enter your username!" : null;
-			passwordError = password == "" ? "Please enter your password!" : null;
+			currentState = STATE_DEFAULT;		
 			
-			currentState = STATE_DEFAULT;
-			
-			if( !usernameError && !passwordError )
+			if( validLoginData(username, password) )
 			{
 				var user:User = new User(NaN, username, password);
 				dispatcher.dispatchEvent(new LoginEvent(LoginEvent.LOGIN, user));
+
+				loginPending = true;
 			}
 		}
+		
+		protected var stringValidator:StringValidator;
+		
+		public function validLoginData(username: String, password: String):Boolean 
+		{
+			var valid: Boolean = false;
+			
+			// create stringValidator if not created yet
+			stringValidator ||= new StringValidator();
+			
+			var stringValidation: ValidationResultEvent = stringValidator.validate( username );
+			var validUserName:Boolean = stringValidation.results == null;
+			usernameError = ( validUserName ) ? "" : "Please enter your username!";
+
+			stringValidation = stringValidator.validate( password );
+			var validPassword:Boolean = stringValidation.results == null;
+			passwordError = ( validPassword ) ? "" : "Please enter your password!";
+			
+			return validUserName && validPassword;
+		}
+
+		
 		
 		[Mediate(event="LoginErrorEvent.LOGIN_ERROR", properties="fault")]
 		public function handleLoginError(fault:Fault):void
 		{
 			currentState = STATE_ERROR;
+			
 			loginError = fault.faultString + ": " + fault.faultDetail;
+			
+			loginPending = false;
+		}
+
+		[Mediate(event="LoginEvent.COMPLETE")]
+		public function handleLoginComplete( event: LoginEvent ):void
+		{
+			loginPending = false;			
 		}
 	
 	}

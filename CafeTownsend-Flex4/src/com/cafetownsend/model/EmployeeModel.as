@@ -1,5 +1,7 @@
 package com.cafetownsend.model
 {
+	import com.cafetownsend.domain.Employee;
+	
 	import mx.collections.IList;
 	
 	public class EmployeeModel
@@ -8,8 +10,8 @@ package com.cafetownsend.model
 		[Bindable]
 		public var employees:IList;
 		
-		public function EmployeeModel()
-		{
-		}
+		[Bindable]
+		public var selectedEmployee:Employee;
+		
 	}
 }

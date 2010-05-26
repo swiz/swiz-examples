@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form 
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	verticalGap="10"
+	>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.cafetownsend.presentation.EmployeeDetailPresentationModel;
+
+
+
+			[Inject]
+			[Bindable]
+			public var model:EmployeeDetailPresentationModel;
+		
+		]]>
+	</fx:Script>
+
+	
+	<mx:FormItem label="First Name:"  required="true">
+		<s:TextInput 
+			id="firstName"
+			width="250" height="25"
+			errorString="{ model.firstNameError }"
+			text="{ model.tempEmployee.firstName }"
+			change="model.tempEmployee.firstName = firstName.text"
+			/>
+	</mx:FormItem>
+	
+	<mx:FormItem label="Last Name:"  required="true">
+		<s:TextInput 
+			id="lastName" 
+			width="250" height="25"
+			errorString="{ model.lastNameError }"
+			text="{model.tempEmployee.lastName}" 
+			change="model.tempEmployee.lastName = lastName.text"
+			/>
+	</mx:FormItem>
+	
+	<mx:FormItem label="Start Date:">
+		<mx:DateField 
+			id="startDate" 
+			width="100" height="25"
+			selectedDate="{ model.tempEmployee.startDate }"
+			change="model.tempEmployee.startDate = startDate.selectedDate"
+			/>
+	</mx:FormItem>
+	
+	<mx:FormItem label="Email:"  required="true">
+		<s:TextInput 
+			id="email"
+			width="250" height="25"
+			errorString="{ model.emailError }"
+			text="{ model.tempEmployee.email }"
+			change="model.tempEmployee.email = email.text"
+			/>
+	</mx:FormItem>
+	
+	<mx:FormItem 
+		direction="horizontal"
+		paddingTop="10"
+		>
+		<s:Button 
+			label="Submit" 
+			styleName="navButton"
+			click="model.updateEmployee()" 
+			id="submit" />
+		
+		<s:Button 
+			label="Delete" 
+			styleName="navButton"
+			click="model.deleteEmployee()"
+			enabled="{ model.selectedEmployeeCanBeDeleted }"
+			/>
+	</mx:FormItem>
+</mx:Form>
+

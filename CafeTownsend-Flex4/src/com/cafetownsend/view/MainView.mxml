@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx" 
+	xmlns:view="com.cafetownsend.view.*"
+	width="455" height="{ HEIGHT_MIN }"
+	currentState="{ model.currentState }"
+	>
+	
+	<fx:Script>
+		<![CDATA[
+
+			import com.cafetownsend.model.AppModel;
+			import com.cafetownsend.model.Constants;
+			import com.cafetownsend.presentation.MainViewPresentationModel;
+			
+			
+			protected static const PADDING:int = 15;
+			protected static const HEIGHT_MIN:int = 420;
+			protected static const HEIGHT_MAX:int = 520;
+			
+			
+			[Bindable]
+			[Inject]
+			public var model:MainViewPresentationModel;
+			
+		]]>
+	</fx:Script>
+	
+	<!-- states -->
+	<s:states>
+		<s:State name="loggedOut" />
+		<s:State name="loggedIn" />
+	</s:states>
+	
+	
+	<!-- Transitions -->
+	
+	<s:transitions>
+		<s:Transition 
+			autoReverse="true"
+			fromState="*" toState="loggedOut"		
+			>
+			<s:Fade
+				duration="{ Constants.EFFECT_DURATION }"
+				startDelay="{ Constants.EFFECT_DURATION }"
+				target="{ loginView }"
+				/>
+		</s:Transition>
+		
+		<s:Transition 
+			autoReverse="true"
+			fromState="loggedOut" toState="loggedIn"		
+			>
+			
+			<s:Sequence
+				>				
+				<s:Resize 
+					target="{ this }"
+					startDelay="200"
+					heightTo="{ HEIGHT_MAX }"
+					duration="{ Constants.EFFECT_DURATION }"
+					easer="{ Constants.EFFECT_EASE }"
+					/>
+				<s:Parallel>
+					<s:AddAction
+						target="{ employeesView }"
+						/>
+					<s:Move
+						target="{ bLogout }"
+						duration="{ Constants.EFFECT_DURATION }"
+						easer="{ Constants.EFFECT_EASE }"
+						/>					
+					<s:Fade
+						duration="{ Constants.EFFECT_DURATION }"
+						effectStart="employeesView.visible = true"
+						target="{ employeesView }"
+						/>
+				</s:Parallel>
+					<s:Fade
+						duration="{ Constants.EFFECT_DURATION }"
+						target="{ userName }"
+						/>
+			</s:Sequence>
+			
+			
+		</s:Transition>
+		<s:Transition 
+			autoReverse="true"
+			fromState="loggedIn" toState="loggedOut"
+			>
+			<s:Sequence
+				>
+				<s:Parallel>
+					<s:Fade
+						duration="{ Constants.EFFECT_DURATION }"
+						target="{ employeesView }"
+						/>
+					<s:Move
+						target="{ bLogout }"
+						duration="{ Constants.EFFECT_DURATION }"
+						easer="{ Constants.EFFECT_EASE }"
+						/>	
+					<s:Fade
+						duration="{ Constants.EFFECT_DURATION }"
+						target="{ userName }"
+						/>
+				</s:Parallel>
+				<s:Resize
+					target="{ this }"
+					heightTo="{ HEIGHT_MIN }"
+					duration="{ Constants.EFFECT_DURATION }"
+					easer="{ Constants.EFFECT_EASE }"
+					/>
+				<s:AddAction
+					target="{ loginView }"
+					/>
+				<s:Fade
+					duration="{ Constants.EFFECT_DURATION }"
+					target="{ loginView }"
+					/>
+			</s:Sequence>
+		</s:Transition>
+	</s:transitions>
+	
+	
+	<!-- logout button  -->
+	
+	<s:Button
+		id="bLogout"
+		styleName="mainButton"
+		label="logout"
+		right="{ PADDING + 2 }"
+		width="120" height="45"
+		y.loggedOut="60"
+		y.loggedIn="3"
+		click="model.logout()"
+		/>
+
+	<!-- user name -->
+	<s:Label
+		id="userName"
+		color="0x333333"
+		text="{ 'Hello ' + model.user.username + '!' }"
+		left="{ PADDING + 10 }"
+		y="20"
+		alpha.loggedOut="0"
+		alpha.loggedIn="1"
+		/>
+	
+	<!-- Content Containter -->
+	
+	<s:BorderContainer 
+		id="contentContainer"
+		top="40" bottom="{ PADDING }"
+		left="{ PADDING }" right="{ PADDING }"
+		backgroundColor="0xFFFFFF"
+		>
+		
+		<s:borderStroke>		
+			<s:SolidColorStroke
+				weight="10"
+				color="#9C0000"
+				caps="square"
+				joints="miter"
+				/>		
+		</s:borderStroke>
+		
+		<s:filters>
+			<s:DropShadowFilter 
+				alpha="0.55" 
+				angle="45" 
+				color="#000000" 
+				distance="0" 
+				quality="20"
+				/>
+			
+		</s:filters>
+		
+		
+		<!-- View Containter -->
+		
+		<s:Group 
+			id="viewContainer"
+			width="100%"
+			top="125" bottom="10"
+			>
+			
+			<view:LoginView 
+				id="loginView"
+				includeIn="loggedOut"
+				width="100%" height="100%"
+				/>
+			
+			<view:Employees
+				id="employeesView"
+				includeIn="loggedIn"
+				width="100%" height="100%"
+				/>
+			
+		</s:Group>
+		
+		
+		<!-- Header (on top) -->
+		
+		<s:BitmapImage 
+			source="@Embed('assets/images/header.png')"
+			width="405" height="128"
+			>
+			<s:filters>
+				<s:DropShadowFilter 
+					id="shadow"
+					alpha="0.40" 
+					angle="90" 
+					color="0" 
+					distance="3" 
+					quality="50"
+					/>
+			</s:filters>
+		</s:BitmapImage>
+		
+	</s:BorderContainer>
+
+	
+</s:Group>

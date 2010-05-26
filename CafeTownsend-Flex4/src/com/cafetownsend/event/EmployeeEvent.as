@@ -7,9 +7,15 @@ package com.cafetownsend.event
 	public class EmployeeEvent extends Event
 	{
 		
+		public static const LOAD:String = "EmployeeEvent.LOAD";
+
+		public static const SELECT:String = "EmployeeEvent.SELECT";
+		
 		public static const CREATE:String = "EmployeeEvent.CREATE";
 		public static const UPDATE:String = "EmployeeEvent.UPDATE";
 		public static const DELETE:String = "EmployeeEvent.DELETE";
+
+		public static const CANCEL:String = "EmployeeEvent.CANCEL";
 		
 		private var _employee:Employee;
 		
@@ -18,7 +24,7 @@ package com.cafetownsend.event
 			return _employee;
 		}
 		
-		public function EmployeeEvent(type:String, employee:Employee, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function EmployeeEvent(type:String, employee:Employee = null, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
 			_employee = employee;

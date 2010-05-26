@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<employees>
+
+	<employee>
+		<emp_id>1</emp_id>
+		<firstname>Sue</firstname>
+		<lastname>Hove</lastname>
+		<email>shove@cafetownsend.com</email>
+		<startdate>01/07/2006</startdate>
+	</employee>
+
+	<employee>
+		<emp_id>2</emp_id>
+		<firstname>Matt</firstname>
+		<lastname>Boles</lastname>
+		<email>mboles@cafetownsend.com</email>
+		<startdate>02/17/2006</startdate>
+	</employee>
+
+	<employee>
+		<emp_id>3</emp_id>
+		<firstname>Mike</firstname>
+		<lastname>Kollen</lastname>
+		<email>mkollen@cafetownsend.com</email>
+		<startdate>03/01/2006</startdate>
+	</employee>
+
+	<employee>
+		<emp_id>4</emp_id>
+		<firstname>Jennifer</firstname>
+		<lastname>Jaegel</lastname>
+		<email>jjaegel@cafetownsend.com</email>
+		<startdate>04/01/2006</startdate>
+	</employee>
+
+</employees>

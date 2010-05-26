@@ -1,0 +1,135 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+
+global
+{
+	font-family: 'Arial';
+	color: 0;	
+	font-size: 15;
+	font-weight: normal;
+}
+
+
+
+s|Label{
+	
+	color: 0;	
+	font-size: 15;
+}
+
+s|Application {
+	backgroundColor: #FFF;
+}
+
+
+mx|Alert {
+	font-weight:normal;
+	backgroundColor: #FFFFFF;
+	color: #654030;
+}
+
+mx|FormItem,
+mx|Label
+{ 
+	color: 0;
+}
+
+
+s|List { 
+	roll-over-color: #9C0000;
+	selection-color: #9C0000;
+	textSelectedColor: #FFFFFF;
+	textRollOverColor: #FFFFFF;
+}
+
+s|TextInput {
+	color: 0;
+	borderColor: 0;
+	font-weight: normal;
+}
+
+
+.mainButton
+{
+	skinClass: ClassReference('com.cafetownsend.skin.MainButtonSkin');
+	color: #FFFFFF;
+	background-color: #9C0000;
+	border-weight: 3;
+	border-color: #FFFFFF;
+}
+
+
+.mainButton:over,
+.mainButton:down
+{
+	
+	color: #9C0000;
+	background-color: #FFFFFF;
+	border-color: #9C0000;
+}
+
+.logoutButton
+{
+	skinClass: ClassReference('com.cafetownsend.skin.MainButtonSkin');
+	color: #FFFFFF;
+	background-color: #9C0000;
+	border-weight: 3;
+	border-color: #FFFFFF;
+}
+
+
+.logoutButton:over,
+.logoutButton:down
+{
+	
+	background-color: #9C0000;
+	border-color: #FFFFFF;
+}
+
+
+.navButton
+{
+	skinClass: ClassReference('com.cafetownsend.skin.NavButtonSkin');
+	color: #9C0000;
+	border-color: #9C0000;
+}
+
+
+.navButton:over,
+.navButton:down,
+{
+	border-color: #000000;
+	color: #000000;
+}
+
+.employeesItemRenderer
+{	
+	font-size: 17;
+	color: #9C0000;
+}
+
+
+
+.employeesItemRenderer:selected,
+.employeesItemRenderer:hovered
+{	
+	color: #FFFFFF;
+}
+
+
+
+.navContainer {
+	backgroundColor: #CAEDFF;
+	border-visible: false;
+}
+
+
+#loginErrorTxt
+{
+	text-align: center;
+	color: #C20000;
+	font-size: 13;
+	font-weight: normal;	
+}

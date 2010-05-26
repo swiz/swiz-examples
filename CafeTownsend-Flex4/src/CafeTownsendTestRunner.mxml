@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/mx" 
+	xmlns:runner="org.flexunit.runner.*"
+	xmlns:adobe="http://www.adobe.com/2009/flexUnitUIRunner"
+	creationComplete="application1_creationCompleteHandler(event)"
+	>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import org.flexunit.listeners.UIListener;
+			import org.flexunit.runner.FlexUnitCore;
+			
+			private var core:FlexUnitCore;
+
+			
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				core = new FlexUnitCore();
+				core.addListener( new UIListener( uiListener ) );
+				core.run( CafeTownsendTestSuite );
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<adobe:TestRunnerBase
+		id="uiListener"
+		width="100%" height="100%"
+		/>
+	
+</s:Application>

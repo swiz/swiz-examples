@@ -55,14 +55,18 @@
 	
 	<swiz:Prototype 
 		type="{ EmployeesPresentationModel }"
+		singleton="true"
 		/>
 	
 	<swiz:Prototype 
 		type="{ EmployeeListPresentationModel }"
+		singleton="true"
+		
 		/>
 	
 	<swiz:Prototype
 		type="{ EmployeeDetailPresentationModel }"
+		singleton="true"
 		/>	
 
 	

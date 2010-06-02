@@ -4,16 +4,15 @@ package com.cafetownsend.presentation
 	import com.cafetownsend.domain.Employee;
 	import com.cafetownsend.event.EmployeeEvent;
 	
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
 	
 	import mx.events.ValidationResultEvent;
+	import mx.logging.ILogger;
+	import mx.logging.Log;
 	import mx.validators.EmailValidator;
 	import mx.validators.StringValidator;
-	
-	import spark.components.Application;
 	
 	public class EmployeeDetailPresentationModel extends EventDispatcher
 	{
@@ -21,6 +20,8 @@ package com.cafetownsend.presentation
 		
 		[Dispatcher]
 		public var dispatcher:IEventDispatcher;
+		
+		private static const LOG: ILogger = Log.getLogger("EmployeeDetailPresentationModel");
 
 		
 		//--------------------------------------------------------------------------
@@ -42,6 +43,8 @@ package com.cafetownsend.presentation
 
 		public function set selectedEmployee( employee:Employee ):void
 		{
+			LOG.info("employee " + employee );
+			
 			if( employee != null )
 			{
 				_selectedEmployee = employee;
@@ -214,6 +217,27 @@ package com.cafetownsend.presentation
 		public function get emailError():String
 		{
 			return _emailError;
+		}
+		
+		
+		//--------------------------------------------------------------------------
+		//
+		// init / tear down
+		//
+		//--------------------------------------------------------------------------
+		
+		
+		
+		[PreDestroy]
+		public function tearDown():void 
+		{
+			LOG.info("tearDown " );
+		}
+		
+		[PostConstruct]
+		public function init():void 
+		{
+			LOG.info("init " );
 		}
 	}
 }

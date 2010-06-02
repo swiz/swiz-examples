@@ -1,13 +1,16 @@
 package com.cafetownsend.presentation
 {
-
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	
+	import mx.logging.ILogger;
+	import mx.logging.Log;
 
 	public class EmployeesPresentationModel extends EventDispatcher
 	{
 
+		private static const LOG: ILogger = Log.getLogger("EmployeesPresentationModel");		
 
 		public static const CURRENT_STATE_CHANGED:String = "currentStateChanged";
 		

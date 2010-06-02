@@ -10,12 +10,17 @@
 			import com.cafetownsend.component.EmployeesListItemRenderer;
 			import com.cafetownsend.domain.Employee;
 			import com.cafetownsend.presentation.EmployeeListPresentationModel;
+			
+			import mx.logging.ILogger;
+			import mx.logging.Log;
 
+			private static const LOG: ILogger = Log.getLogger("EmployeeList");
+			
 			[Inject]
 			[Bindable]
 			public var model:EmployeeListPresentationModel;
 
-			
+
 		]]>
 	</fx:Script>
 	

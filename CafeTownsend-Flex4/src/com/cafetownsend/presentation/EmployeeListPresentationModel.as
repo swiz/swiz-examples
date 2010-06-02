@@ -6,19 +6,19 @@ package com.cafetownsend.presentation
 	import com.cafetownsend.event.NavigationEvent;
 	import com.cafetownsend.model.NavigationModel;
 	
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
 	
 	import mx.collections.ArrayCollection;
-	import mx.controls.Alert;
-	import mx.core.FlexGlobals;
-	import mx.events.CloseEvent;
+	import mx.logging.ILogger;
+	import mx.logging.Log;
 	
 	
 	public class EmployeeListPresentationModel extends EventDispatcher
 	{
+		
+		private static const LOG: ILogger = Log.getLogger("EmployeeListPresentationModel");
 		
 		
 		[Dispatcher]

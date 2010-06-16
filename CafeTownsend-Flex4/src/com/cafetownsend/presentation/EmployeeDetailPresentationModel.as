@@ -22,7 +22,6 @@ package com.cafetownsend.presentation
 		public var dispatcher:IEventDispatcher;
 		
 		private static const LOG: ILogger = Log.getLogger("EmployeeDetailPresentationModel");
-
 		
 		//--------------------------------------------------------------------------
 		//
@@ -43,8 +42,6 @@ package com.cafetownsend.presentation
 
 		public function set selectedEmployee( employee:Employee ):void
 		{
-			LOG.info("employee " + employee );
-			
 			if( employee != null )
 			{
 				_selectedEmployee = employee;
@@ -218,26 +215,6 @@ package com.cafetownsend.presentation
 		{
 			return _emailError;
 		}
-		
-		
-		//--------------------------------------------------------------------------
-		//
-		// init / tear down
-		//
-		//--------------------------------------------------------------------------
-		
-		
-		
-		[PreDestroy]
-		public function tearDown():void 
-		{
-			LOG.info("tearDown " );
-		}
-		
-		[PostConstruct]
-		public function init():void 
-		{
-			LOG.info("init " );
-		}
+
 	}
 }

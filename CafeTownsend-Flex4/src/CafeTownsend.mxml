@@ -35,11 +35,6 @@
 		<tb:ThunderBoltTarget
 			id="thunderboltTarget"
 			xmlns:tb="org.osflash.thunderbolt.*"
-			filters="[	
-						'EmployeeDetail',
-						'EmployeeDetailNavigation',
-						'EmployeeDetailPresentationModel'
-					]"		
 			/>
 		
 	</fx:Declarations>

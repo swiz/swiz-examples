@@ -4,8 +4,6 @@
 	xmlns:s="library://ns.adobe.com/flex/spark"
 	xmlns:mx="library://ns.adobe.com/flex/mx"
 	verticalGap="10"
-	addedToStage="group1_addedToStageHandler(event)"
-	removedFromStage="group1_removedFromStageHandler(event)"
 	>
 	
 	<fx:Script>
@@ -17,38 +15,18 @@
 			import mx.logging.Log;
 			
 			import org.swizframework.events.BeanEvent;
-
+			
 			private static const LOG: ILogger = Log.getLogger("EmployeeDetail");
-
-
+			
+			
 			[Inject]
 			[Bindable]
-			public var model:EmployeeDetailPresentationModel;
-		
-
-			protected function group1_addedToStageHandler(event:Event):void
-			{
-				LOG.info("addedToStage ");
-			}
+			public var model:EmployeeDetailPresentationModel;			
 			
 			
-			protected function group1_removedFromStageHandler(event:Event):void
-			{
-				LOG.info("removeFromStage ");
-			}
-			
-			[PreDestroy]
-			public function cleanUpPresenter():void
-			{
-				LOG.info("cleanUpPresenter ");
-				dispatchEvent( new BeanEvent( BeanEvent.TEAR_DOWN_BEAN, model ) );		
-			} 
-
-
-
 		]]>
 	</fx:Script>
-
+	
 	
 	<mx:FormItem label="First Name:"  required="true">
 		<s:TextInput 

@@ -3,9 +3,8 @@
 	xmlns:fx="http://ns.adobe.com/mxml/2009" 
 	xmlns:s="library://ns.adobe.com/flex/spark" 
 	styleName="navContainer"
-	addedToStage="group1_addedToStageHandler(event)"
-	removedFromStage="group1_removedFromStageHandler(event)"	
 	>
+
 	
 	<fx:Script>
 		<![CDATA[
@@ -17,40 +16,10 @@
 			import org.swizframework.events.BeanEvent;
 			
 			private static const LOG: ILogger = Log.getLogger("EmployeeDetailNavigation");
-
-			private var _model:EmployeeDetailPresentationModel;
 			
 			[Inject]
 			[Bindable]
-			public function get model():EmployeeDetailPresentationModel
-			{
-				return _model;
-			}
-
-			public function set model(value:EmployeeDetailPresentationModel):void
-			{
-				LOG.info("value " + value );
-				_model = value;
-			}
-
-			protected function group1_addedToStageHandler(event:Event):void
-			{
-				LOG.info("addedToStage ");
-			}
-			
-			
-			protected function group1_removedFromStageHandler(event:Event):void
-			{
-				LOG.info("removeFromStage ");
-			}
-			
-			[PreDestroy]
-			public function cleanUpPresenter():void
-			{
-				LOG.info("cleanUpPresenter ");
-				dispatchEvent( new BeanEvent( BeanEvent.TEAR_DOWN_BEAN, model ) );		
-			} 
-			
+			public var model:EmployeeDetailPresentationModel;
 			
 		]]>
 	</fx:Script>

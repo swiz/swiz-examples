@@ -1,0 +1,13 @@
+<swiz:BeanProvider 
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:swiz="http://swiz.swizframework.org"
+	xmlns:service="org.swizframework.quickswiz.service.*" 
+	xmlns:controller="org.swizframework.quickswiz.controller.*">
+	
+	<service:UserService id="userService"/>
+	<controller:UserController id="userController"/>
+	
+	<!-- We'll use the Swiz ServiceHelper to help simulate a server-side call. -->
+	<swiz:ServiceHelper id="serviceHelper" />
+
+</swiz:BeanProvider>

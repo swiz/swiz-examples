@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fxpProperties abbreviated="false" authoringTool="Flex Builder" compiles="true" parentProject="6a69c552-ba12-471f-bd1a-6d7e88c70076" projectUUID="6a69c552-ba12-471f-bd1a-6d7e88c70076" sdkVersion="4.0.0" uuid="d5b00b87-7ec3-4d2e-9249-96deba0eb427" version="4">
+  <projects/>
+  <src/>
+  <swc>
+    <linked location="sdkPlaceHolder" path="sdkPlaceHolder" position="0" uuid="d5b00b87-7ec3-4d2e-9249-96deba0eb427"/>
+    <linked location="C:/Developer/flex/projects/swiz_quickstart/libs" path="/libs" position="1" uuid="d5b00b87-7ec3-4d2e-9249-96deba0eb427"/>
+  </swc>
+  <misc/>
+  <theme/>
+</fxpProperties>

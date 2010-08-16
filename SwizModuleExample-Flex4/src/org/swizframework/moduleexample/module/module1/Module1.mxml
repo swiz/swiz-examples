@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" 
+		   xmlns:swiz="http://swiz.swizframework.org"
+		   xmlns:config="org.swizframework.moduleexample.module.module1.config.*"
+		   width="100%" height="100%">
+	
+	<fx:Script>
+		<![CDATA[
+			import org.swizframework.moduleexample.event.TestEvent;
+			import org.swizframework.moduleexample.model.ModuleLogCollection;
+			import org.swizframework.moduleexample.module.module1.controller.Module1Controller;
+			import org.swizframework.moduleexample.module.module1.event.Module1Event;
+			import org.swizframework.moduleexample.module.module2.event.Module2Event;
+			
+			[Bindable]
+			[Inject( source="moduleLog.module1Log", bind="true" )]
+			public var module1Log : ModuleLogCollection;
+			
+			[Bindable]
+			[Inject]
+			public var moduleBean : Module1Controller;
+			
+			[Mediate( event="TestEvent.GLOBAL_TEST_EVENT" )]
+			public function handleRootEvent( event : TestEvent ) : void
+			{
+				module1Log.addLogMessage( 'Mediating TestEvent.GLOBAL_TEST_EVENT in Module1.' );
+			}
+			
+			[Mediate( event="Module2Event.MODULE_2_EVENT" )]
+			public function handleModule2Event( event : Module2Event ) : void
+			{
+				module1Log.addLogMessage( 'Mediating Module2Event.MODULE_2_EVENT in Module1.' );
+			}
+			
+			[Mediate( event="TestEvent.TEST_EVENT_FOR_MODULE_1" )]
+			public function handleRootEventForModule1( event : TestEvent ) : void
+			{
+				module1Log.addLogMessage( 'Mediating TestEvent.TEST_EVENT_FOR_MODULE_1 in Module1.' );
+				module1Log.addLogMessage( 'Dispatching Module1Event.MODULE_1_EVENT from Module1.' );
+				dispatchEvent( new Module1Event( Module1Event.MODULE_1_EVENT ) );
+			}
+			
+			[PostConstruct]
+			public function setUpList() : void
+			{
+				module1Log.addLogMessage( 'This is Module1.' );
+				if( module1Log )
+				{	
+					module1Log.addLogMessage( 'Module1 had a root bean injected: ModuleLog.module1Log' );
+				}
+				if( moduleBean )
+				{
+					module1Log.addLogMessage( 'Module1 had a Module1 bean injected: Module1Controller' );
+				}	
+			}
+				
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<swiz:Swiz id="mySwiz">
+			<swiz:config>
+				<swiz:SwizConfig id="mySwizConfig"
+								 eventPackages="org.swizframework.moduleexample.event.*,org.swizframework.moduleexample.module.module1.event.*,org.swizframework.moduleexample.module.module2.event.*"
+								 viewPackages="org.swizframework.moduleexample.module.module1.*" />
+			</swiz:config>
+			<swiz:beanProviders>
+				<config:Beans/>
+			</swiz:beanProviders>
+		</swiz:Swiz>
+	</fx:Declarations>
+	
+	<s:List id="resultsList" dataProvider="{module1Log}" width="100%" height="100%" />
+		
+</mx:Module>

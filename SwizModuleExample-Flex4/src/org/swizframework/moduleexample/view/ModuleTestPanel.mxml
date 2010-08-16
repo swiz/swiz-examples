@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:util="org.swizframework.moduleexample.util.*"
+		 width="75%" height="75%" 
+		 title="Examples of Swiz Support for Modules (check button tooltips for more details)"
+		 creationComplete="showOverviewPopUp()">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.core.IVisualElement;
+			
+			import org.swizframework.moduleexample.event.TestEvent;
+			import org.swizframework.moduleexample.model.ModuleLogCollection;
+			import org.swizframework.moduleexample.module.module1.event.Module1Event;
+			import org.swizframework.moduleexample.module.module2.event.Module2Event;
+			
+			[Bindable]
+			[Inject( source="moduleLog.module1Log", bind="true" )]
+			public var module1Log : ModuleLogCollection;
+			
+			[Bindable]
+			[Inject( source="moduleLog.module2Log", bind="true" )]
+			public var module2Log : ModuleLogCollection;
+			
+			[Bindable]
+			private var isModule1Loaded : Boolean = false;
+			
+			[Bindable]
+			private var isModule2Loaded : Boolean = false;
+			
+			private function onModule1CreationComplete() : void
+			{
+				module1Container.addElement( IVisualElement( module1Loader.child ) );
+				isModule1Loaded = true;
+				module1Log.addLogMessage( 'Dispatching Root Event in immediate response to creating Module1.' );
+				dispatchEvent( new TestEvent( TestEvent.GLOBAL_TEST_EVENT ) );
+			}
+			
+			private function sendModule1Event() : void
+			{
+				module1Log.addLogMessage( 'Dispatching Root Event to only Module1.' );
+				dispatchEvent( new TestEvent( TestEvent.TEST_EVENT_FOR_MODULE_1 ) );
+			}
+			
+			[Mediate( event="Module1Event.MODULE_1_EVENT" )]
+			public function module1EventMediator( event : Module1Event ) : void
+			{
+				module1Log.addLogMessage( 'Root mediated Module1Event.MODULE_1_EVENT' );
+			}
+			
+			private function onModule2CreationComplete() : void
+			{
+				module2Container.addElement( IVisualElement( module2Loader.child ) );
+				isModule2Loaded = true;
+				module2Log.addLogMessage( 'Dispatching Root Event in immediate response to creating Module2.' );
+				dispatchEvent( new TestEvent( TestEvent.GLOBAL_TEST_EVENT ) );
+			}
+			
+			[Mediate( event="Module2Event.MODULE_2_EVENT" )]
+			public function module2EventMediator( event : Module2Event ) : void
+			{
+				module2Log.addLogMessage( 'Root mediated Module2Event.MODULE_2_EVENT' );
+			}
+			
+			private function sendModule2Event() : void
+			{
+				module2Log.addLogMessage( 'Dispatching Root Event to only Module2.' );
+				dispatchEvent( new TestEvent( TestEvent.TEST_EVENT_FOR_MODULE_2 ) );
+			}
+			
+			private function sendRootEvent() : void
+			{
+				if( isModule1Loaded )
+				{
+					module1Log.addLogMessage( 'Dispatching event from Root.' );
+				}
+				if( isModule2Loaded )
+				{
+					module2Log.addLogMessage( 'Dispatching event from Root.' );
+				}
+				dispatchEvent( new TestEvent( TestEvent.GLOBAL_TEST_EVENT ) );
+			}
+			
+			public function showOverviewPopUp() : void
+			{
+				ModuleExamplesOverviewPopUp.createPopUp( this );
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<!-- 
+	ModuleEvent.READY is dispatched when the byte stream is loaded, but BEFORE the module's components are actually created.
+	This is an example of a custom ModuleLoader that checks for full creation of a loaded module.  
+	-->
+	<util:CreationAwareModuleLoader id="module1Loader" onModuleCreationComplete="onModule1CreationComplete()" />
+	<util:CreationAwareModuleLoader id="module2Loader" onModuleCreationComplete="onModule2CreationComplete()" />
+	
+	<s:VGroup id="createGroup" width="100%" height="100%" gap="25" 
+			  paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10">
+	
+		<s:HGroup>
+			<s:Button id="createModule1Button" label="Create Module 1" enabled="{!isModule1Loaded}"
+					  toolTip="This will create Module1 and after module creation will automatically dispatch an event from the root that all modules can mediate."
+					  click="module1Loader.url='org/swizframework/moduleexample/module/module1/Module1.swf'" />
+			<s:Button id="createModule2Button" label="Create Module 2" enabled="{!isModule2Loaded}" 
+					  toolTip="This will create Module2 and after module creation will automatically dispatch an event from the root that all modules can mediate."
+					  click="module2Loader.url='org/swizframework/moduleexample/module/module2/Module2.swf'" />
+		</s:HGroup>
+		
+		<s:HGroup>
+			<s:Button id="eventFromRoot" label="Dispatch event from Root" enabled="{isModule1Loaded || isModule2Loaded}" click="sendRootEvent()"
+					  toolTip="This will dispatch an event from the root that is mediated in all loaded modules. This demonstrates global event mediation."/>
+			<s:Button id="eventFromModule1Button" label="Dispatch an event from Module1" enabled="{isModule1Loaded}" click="sendModule1Event()"
+					  toolTip="This will dispatch an event from the root to Module1, triggering Module1 to dispatch an event that the root and Module2 will mediate. This demonstrates how a parent Swiz instance can mediate events from a module, and how modules can mediate events from other modules."/>
+			<s:Button id="eventFromModule2Button" label="Dispatch an event from Module2" enabled="{isModule2Loaded}" click="sendModule2Event()"
+					  toolTip="This will dispatch an event from the root to Module2, triggering Module2 to dispatch an event that the root and Module1 will mediate. This demonstrates how a parent Swiz instance can mediate events from a module, and how modules can mediate events from other modules."/>
+		</s:HGroup>
+		
+		<s:HGroup verticalAlign="middle" horizontalAlign="center" gap="25" width="100%" height="100%">
+			<s:BorderContainer id="module1Container"
+							   backgroundColor="0xD1E2E3"
+							   width="100%"
+							   height="100%"
+							   borderWeight="1"
+							   borderStyle="solid" />
+			
+			<s:BorderContainer id="module2Container"
+							   backgroundColor="0xD1E2E3"
+							   width="100%"
+							   height="100%"
+							   borderWeight="1"
+							   borderStyle="solid" />
+		</s:HGroup>	
+	</s:VGroup>
+	
+	
+</s:Panel>

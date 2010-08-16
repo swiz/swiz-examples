@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   xmlns:swiz="http://swiz.swizframework.org"
+			   xmlns:view="org.swizframework.moduleexample.view.*"
+			   xmlns:config="org.swizframework.moduleexample.config.*">
+	
+	<fx:Declarations>
+		<swiz:Swiz id="mySwiz">
+			<swiz:config>
+				<swiz:SwizConfig id="mySwizConfig"
+								 eventPackages="org.swizframework.moduleexample.event.*,org.swizframework.moduleexample.module.module1.event.*,org.swizframework.moduleexample.module.module2.event.*"
+								 viewPackages="org.swizframework.moduleexample.view.*" />
+			</swiz:config>
+			<swiz:beanProviders>
+				<config:Beans/>
+			</swiz:beanProviders>
+		</swiz:Swiz>
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle"
+							paddingLeft="5" paddingRight="5" paddingTop="5" paddingBottom="5"/>
+	</s:layout>
+		
+	<view:ModuleTestPanel id="moduleTestPanel" />
+	
+</s:Application>

@@ -34,11 +34,9 @@ package org.swizframework.moduleexample.util
 				child.removeEventListener( FlexEvent.CREATION_COMPLETE, onCreationComplete, false );
 				
 				/* 
-					It appears that in Flex 4.1, the addedToStage event fires BEFORE creationComplete.
-					That means we COULD dispatch the onModuleCreationComplete right now if
-					the 4.1 SDK is being used. However, to try and ensure backwards compatibility,
-					we will wait for the updateComplete event to be certain that all children have
-					been added to the stage.
+					We will wait for the updateComplete event to be certain that all 
+					children have been added to the stage, since addedToStage generally
+					fires after creationComplete.
 				*/
 				child.addEventListener( FlexEvent.UPDATE_COMPLETE, onUpdateComplete, false, -100, true );
 			}

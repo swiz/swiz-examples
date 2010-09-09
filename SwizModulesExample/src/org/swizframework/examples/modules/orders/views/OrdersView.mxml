@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+	
+	<fx:Script>
+		<![CDATA[
+			import org.swizframework.examples.modules.orders.events.OrdersEvent;
+			import org.swizframework.examples.modules.orders.model.presentation.OrdersViewPresentationModel;
+			
+			[Bindable]
+			[Inject]
+			public var model:OrdersViewPresentationModel;
+			
+			[Dispatcher]
+			public var dispatcher:IEventDispatcher;
+			
+			[PostConstruct]
+			public function fetchOrdersOnStartUp():void
+			{
+				dispatcher.dispatchEvent( new OrdersEvent( OrdersEvent.FETCH_ORDERS ) );
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	
+	<mx:DataGrid dataProvider="{ model.orders }"
+				 width="100%" height="100%">
+		<mx:columns>
+			<mx:DataGridColumn headerText="Order ID" dataField="orderId" />
+			<mx:DataGridColumn headerText="Customer ID" dataField="customerId" />
+			<mx:DataGridColumn headerText="Order Qty" dataField="orderQty" />
+			<mx:DataGridColumn headerText="Order Price" dataField="orderPrice" />
+		</mx:columns>
+	</mx:DataGrid>
+
+</s:Group>

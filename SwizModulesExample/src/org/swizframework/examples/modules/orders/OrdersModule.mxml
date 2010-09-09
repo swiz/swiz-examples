@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" 
+		   xmlns:swiz="http://swiz.swizframework.org" 
+		   xmlns:config="org.swizframework.examples.modules.orders.config.*"
+		   xmlns:views="org.swizframework.examples.modules.orders.views.*"
+		   layout="absolute" width="100%" height="100%">
+	
+	<fx:Declarations>
+		<swiz:Swiz>
+			<swiz:config>
+				<swiz:SwizConfig
+					eventPackages="org.swizframework.examples.modules.orders.events"
+					viewPackages="org.swizframework.examples.modules.orders.views.*" />
+			</swiz:config>
+			
+			<swiz:beanProviders>
+				<config:OrdersServiceBeans />
+				<!--config:OrdersDelegateBeans /-->
+				<config:OrdersMockDelegateBeans />
+				<config:OrdersModelBeans />
+				<config:OrdersControllerBeans />
+			</swiz:beanProviders>
+		</swiz:Swiz>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import org.swizframework.examples.modules.orders.events.OrdersEvent;
+			
+			
+			
+		]]>
+	</fx:Script>
+	
+	<views:OrdersView />
+	
+</mx:Module>

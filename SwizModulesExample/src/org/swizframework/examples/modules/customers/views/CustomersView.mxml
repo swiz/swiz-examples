@@ -6,6 +6,7 @@
 	<fx:Script>
 		<![CDATA[
 			import org.swizframework.examples.modules.customers.events.CustomersEvent;
+			import org.swizframework.examples.modules.customers.model.domain.Customer;
 			import org.swizframework.examples.modules.customers.model.presentation.CustomersViewPresentationModel;
 			
 			[Dispatcher]
@@ -28,8 +29,10 @@
 		<s:VerticalLayout />
 	</s:layout>
 	
-	<mx:DataGrid dataProvider="{ model.customers }"
-				 width="100%" height="100%">
+	<mx:DataGrid id="dg"
+		dataProvider="{ model.customers }" 
+		itemClick="model.setSelectedCustomer( dg.selectedItem as Customer )"
+		width="100%" height="100%">
 		<mx:columns>
 			<mx:DataGridColumn headerText="ID" dataField="customerId" />
 			<mx:DataGridColumn headerText="Name" dataField="customerName" />

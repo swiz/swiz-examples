@@ -5,6 +5,7 @@ package org.swizframework.examples.modules.customers.model.presentation
 	import mx.collections.ArrayCollection;
 	
 	import org.swizframework.examples.modules.customers.model.CustomersModel;
+	import org.swizframework.examples.modules.customers.model.domain.Customer;
 
 	public class CustomersViewPresentationModel
 	{
@@ -21,6 +22,11 @@ package org.swizframework.examples.modules.customers.model.presentation
 		public function getLoadedCustomers():void
 		{
 			customers = customersModel.customers;
+		}
+		
+		public function setSelectedCustomer( customer:Customer ):void
+		{
+			customersModel.setSelectedCustomer( customer );
 		}
 	}
 }

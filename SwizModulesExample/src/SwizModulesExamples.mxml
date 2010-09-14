@@ -13,9 +13,10 @@
 	</fx:Declarations>
 	
 	<s:layout>
-		<s:HorizontalLayout />
+		<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle" />
 	</s:layout>
 	
-	<mx:ModuleLoader url="org/swizframework/examples/modules/orders/OrdersModule.swf" width="50%" height="100%" />
+	<mx:ModuleLoader url="org/swizframework/examples/modules/customers/CustomersModule.swf" width="40%" height="50%" />
+	<mx:ModuleLoader url="org/swizframework/examples/modules/orders/OrdersModule.swf" width="40%" height="50%" />
 	
 </s:Application>

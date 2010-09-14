@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swiz:BeanProvider xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:swiz="http://swiz.swizframework.org"
+				   xmlns:business="org.swizframework.examples.modules.customers.business.*">
+	
+	<business:CustomersDelegate />
+	
+</swiz:BeanProvider>

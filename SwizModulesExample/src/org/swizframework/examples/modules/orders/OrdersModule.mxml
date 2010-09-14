@@ -25,15 +25,6 @@
 		</swiz:Swiz>
 	</fx:Declarations>
 	
-	<fx:Script>
-		<![CDATA[
-			import org.swizframework.examples.modules.orders.events.OrdersEvent;
-			
-			
-			
-		]]>
-	</fx:Script>
-	
 	<views:OrdersView />
 	
 </mx:Module>

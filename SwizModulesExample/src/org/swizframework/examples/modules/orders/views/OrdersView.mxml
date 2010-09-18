@@ -5,21 +5,11 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import org.swizframework.examples.modules.orders.events.OrdersEvent;
 			import org.swizframework.examples.modules.orders.model.presentation.OrdersViewPresentationModel;
 			
 			[Bindable]
 			[Inject]
 			public var model:OrdersViewPresentationModel;
-			
-			[Dispatcher]
-			public var dispatcher:IEventDispatcher;
-			
-			[PostConstruct]
-			public function fetchOrdersOnStartUp():void
-			{
-				dispatcher.dispatchEvent( new OrdersEvent( OrdersEvent.FETCH_ORDERS ) );
-			}
 			
 		]]>
 	</fx:Script>

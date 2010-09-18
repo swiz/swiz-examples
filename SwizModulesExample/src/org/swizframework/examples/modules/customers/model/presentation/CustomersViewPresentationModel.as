@@ -4,6 +4,7 @@ package org.swizframework.examples.modules.customers.model.presentation
 	
 	import mx.collections.ArrayCollection;
 	
+	import org.swizframework.examples.modules.customers.events.CustomersEvent;
 	import org.swizframework.examples.modules.customers.model.CustomersModel;
 	import org.swizframework.examples.modules.customers.model.domain.Customer;
 
@@ -14,6 +15,12 @@ package org.swizframework.examples.modules.customers.model.presentation
 		
 		[Inject]
 		public var customersModel:CustomersModel;
+		
+		[PostConstruct]
+		public function fetchCustomersOnStartUp():void
+		{
+			dispatcher.dispatchEvent( new CustomersEvent( CustomersEvent.FETCH_CUSTOMERS ) );
+		}
 		
 		[Bindable]
 		public var customers:ArrayCollection;

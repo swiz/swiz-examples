@@ -5,22 +5,12 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import org.swizframework.examples.modules.customers.events.CustomersEvent;
 			import org.swizframework.examples.modules.customers.model.domain.Customer;
 			import org.swizframework.examples.modules.customers.model.presentation.CustomersViewPresentationModel;
-			
-			[Dispatcher]
-			public var dispatcher:IEventDispatcher;
 			
 			[Bindable]
 			[Inject]
 			public var model:CustomersViewPresentationModel;
-			
-			[PostConstruct]
-			public function fetchCustomersOnStartUp():void
-			{
-				dispatcher.dispatchEvent( new CustomersEvent( CustomersEvent.FETCH_CUSTOMERS ) );
-			}
 			
 		]]>
 	</fx:Script>

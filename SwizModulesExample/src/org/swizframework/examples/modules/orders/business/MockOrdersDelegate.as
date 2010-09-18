@@ -39,7 +39,7 @@ package org.swizframework.examples.modules.orders.business
 			orders.addItem( new Order( "007", "EEE", 325, 12.67 ) );
 			orders.addItem( new Order( "008", "CCC", 500, 84.05 ) );
 			orders.addItem( new Order( "009", "CCC", 100, 89.24 ) );
-			orders.addItem( new Order( "010", "AAA", 475, 62.76 ) );
+			orders.addItem( new Order( "010", "DDD", 475, 62.76 ) );
 			
 			return orders;
 		}

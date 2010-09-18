@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <swiz:BeanProvider xmlns:fx="http://ns.adobe.com/mxml/2009"
 				   xmlns:swiz="http://swiz.swizframework.org"
-				   xmlns:model="org.swizframework.examples.modules.orders.model.*"
-				   xmlns:presentation="org.swizframework.examples.modules.orders.model.presentation.*">
+				   xmlns:model="org.swizframework.examples.modules.orders.model.*">
+	
+	<fx:Script>
+		<![CDATA[
+			import org.swizframework.examples.modules.orders.model.presentation.OrdersViewPresentationModel;
+		]]>
+	</fx:Script>
 	
 	<model:OrdersModel id="ordersModel" />
 	
-	<presentation:OrdersViewPresentationModel />
+	<swiz:Prototype type="{ OrdersViewPresentationModel }" />
 	
 </swiz:BeanProvider>

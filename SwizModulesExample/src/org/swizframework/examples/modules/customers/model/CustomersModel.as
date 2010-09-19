@@ -29,10 +29,12 @@ package org.swizframework.examples.modules.customers.model
 		{
 			_selectedCustomer = customer;
 			
-			dispatchEvent( new Event( "selectedCustomerChanged" ) );
+			if( _selectedCustomer )
+				dispatcher.dispatchEvent( new OrdersEvent( OrdersEvent.FETCH_ORDERS, _selectedCustomer.customerId ) );
+			else
+				dispatcher.dispatchEvent( new OrdersEvent( OrdersEvent.FETCH_ORDERS ) );
 			
-			//dispatcher.dispatchEvent( new CustomersEvent( CustomersEvent.SELECTED_CUSTOMER_CHANGED, _selectedCustomer ) );
-			dispatcher.dispatchEvent( new OrdersEvent( OrdersEvent.FETCH_ORDERS, _selectedCustomer.customerId ) );
+			dispatchEvent( new Event( "selectedCustomerChanged" ) );
 		}
 	}
 }

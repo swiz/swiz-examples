@@ -1,5 +1,7 @@
 package org.swizframework.examples.modules.customers.model.presentation
 {
+	import flash.events.Event;
+	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
 	
 	import mx.collections.ArrayCollection;
@@ -8,7 +10,7 @@ package org.swizframework.examples.modules.customers.model.presentation
 	import org.swizframework.examples.modules.customers.model.CustomersModel;
 	import org.swizframework.examples.modules.customers.model.domain.Customer;
 
-	public class CustomersViewPresentationModel
+	public class CustomersViewPresentationModel extends EventDispatcher
 	{
 		[Dispatcher]
 		public var dispatcher:IEventDispatcher;
@@ -25,15 +27,33 @@ package org.swizframework.examples.modules.customers.model.presentation
 		[Bindable]
 		public var customers:ArrayCollection;
 		
+		[Bindable( "selectedCustomerChanged" )]
+		public function get clearSelectionEnabled():Boolean
+		{
+			return customersModel.selectedCustomer != null;
+		}
+		
 		[Mediate( "CustomersEvent.CUSTOMERS_LOADED" )]
 		public function getLoadedCustomers():void
 		{
 			customers = customersModel.customers;
 		}
 		
-		public function setSelectedCustomer( customer:Customer ):void
+		public function setSelectedCustomer( customer:Object ):void
 		{
-			customersModel.setSelectedCustomer( customer );
+			if( !( customer is Customer ) )
+				return;
+			
+			customersModel.setSelectedCustomer( customer as Customer );
+			
+			dispatchEvent( new Event( "selectedCustomerChanged" ) );
+		}
+		
+		public function clearSelectedCustomer():void
+		{
+			customersModel.setSelectedCustomer( null );
+			
+			dispatchEvent( new Event( "selectedCustomerChanged" ) );
 		}
 	}
 }

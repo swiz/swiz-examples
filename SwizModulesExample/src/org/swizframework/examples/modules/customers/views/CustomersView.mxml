@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
 	
 	<fx:Script>
 		<![CDATA[
-			import org.swizframework.examples.modules.customers.model.domain.Customer;
 			import org.swizframework.examples.modules.customers.model.presentation.CustomersViewPresentationModel;
 			
 			[Bindable]
@@ -15,13 +14,9 @@
 		]]>
 	</fx:Script>
 	
-	<s:layout>
-		<s:VerticalLayout />
-	</s:layout>
-	
 	<mx:DataGrid id="dg"
 		dataProvider="{ model.customers }" 
-		itemClick="model.setSelectedCustomer( dg.selectedItem as Customer )"
+		itemClick="model.setSelectedCustomer( dg.selectedItem )"
 		width="100%" height="100%">
 		<mx:columns>
 			<mx:DataGridColumn headerText="ID" dataField="customerId" />
@@ -29,5 +24,7 @@
 			<mx:DataGridColumn headerText="Location" dataField="customerLocation" />
 		</mx:columns>
 	</mx:DataGrid>
+	
+	<s:Button label="Clear Customer Selection" click="model.clearSelectedCustomer(); dg.selectedIndex = -1;" enabled="{ model.clearSelectionEnabled }" />
 
-</s:Group>
+</s:VGroup>

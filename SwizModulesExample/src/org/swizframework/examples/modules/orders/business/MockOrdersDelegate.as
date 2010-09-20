@@ -17,15 +17,6 @@ package org.swizframework.examples.modules.orders.business
 			return mdh.createMockResult( getFakeOrders(), 250 );
 		}
 		
-		public function getOrdersForCustomer( customerId:String ):AsyncToken
-		{
-			var orders:ArrayCollection = getFakeOrders();
-			orders.filterFunction = function( item:Object ):Boolean{ return Order( item ).customerId == customerId; };
-			orders.refresh();
-			
-			return mdh.createMockResult( orders, 250 );
-		}
-		
 		private function getFakeOrders():ArrayCollection
 		{
 			var orders:ArrayCollection = new ArrayCollection();

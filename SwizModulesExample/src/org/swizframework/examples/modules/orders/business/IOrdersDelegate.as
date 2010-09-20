@@ -5,6 +5,5 @@ package org.swizframework.examples.modules.orders.business
 	public interface IOrdersDelegate
 	{
 		function getOrders():AsyncToken;
-		function getOrdersForCustomer( customerId:String ):AsyncToken;
 	}
 }

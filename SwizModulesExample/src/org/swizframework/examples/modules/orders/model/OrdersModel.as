@@ -6,8 +6,5 @@ package org.swizframework.examples.modules.orders.model
 	{
 		[Bindable]
 		public var orders:ArrayCollection;
-		
-		[Bindable]
-		public var selectedCustomerId:String;
 	}
 }

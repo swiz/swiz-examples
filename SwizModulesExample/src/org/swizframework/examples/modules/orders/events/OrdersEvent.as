@@ -7,18 +7,14 @@ package org.swizframework.examples.modules.orders.events
 		public static const FETCH_ORDERS:String = "fetchOrders";
 		public static const ORDERS_UPDATED:String = "ordersUpdated";
 		
-		public var customerId:String;
-		
-		public function OrdersEvent( type:String, customerId:String = null )
+		public function OrdersEvent( type:String )
 		{
 			super( type );
-			
-			this.customerId = customerId;
 		}
 		
 		override public function clone():Event
 		{
-			return new OrdersEvent( type, customerId );
+			return new OrdersEvent( type );
 		}
 	}
 }

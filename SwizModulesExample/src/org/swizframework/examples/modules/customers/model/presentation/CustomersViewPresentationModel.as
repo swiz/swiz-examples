@@ -6,7 +6,7 @@ package org.swizframework.examples.modules.customers.model.presentation
 	
 	import mx.collections.ArrayCollection;
 	
-	import org.swizframework.examples.modules.customers.events.CustomersEvent;
+	import org.swizframework.examples.events.CustomersEvent;
 	import org.swizframework.examples.modules.customers.model.CustomersModel;
 	import org.swizframework.examples.modules.customers.model.domain.Customer;
 
@@ -30,7 +30,8 @@ package org.swizframework.examples.modules.customers.model.presentation
 		[Bindable( "selectedCustomerChanged" )]
 		public function get clearSelectionEnabled():Boolean
 		{
-			return customersModel.selectedCustomer != null;
+			//return customersModel.selectedCustomer != null;
+			return true;
 		}
 		
 		[Mediate( "CustomersEvent.CUSTOMERS_LOADED" )]
@@ -41,19 +42,14 @@ package org.swizframework.examples.modules.customers.model.presentation
 		
 		public function setSelectedCustomer( customer:Object ):void
 		{
-			if( !( customer is Customer ) )
-				return;
-			
-			customersModel.setSelectedCustomer( customer as Customer );
+			dispatcher.dispatchEvent( new CustomersEvent( CustomersEvent.CUSTOMER_SELECTED, customer as Customer ) );
 			
 			dispatchEvent( new Event( "selectedCustomerChanged" ) );
 		}
 		
 		public function clearSelectedCustomer():void
 		{
-			customersModel.setSelectedCustomer( null );
-			
-			dispatchEvent( new Event( "selectedCustomerChanged" ) );
+			setSelectedCustomer( null );
 		}
 	}
 }

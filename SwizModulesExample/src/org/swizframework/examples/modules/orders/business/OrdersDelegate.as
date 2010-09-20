@@ -12,10 +12,5 @@ package org.swizframework.examples.modules.orders.business
 		{
 			return ordersService.getOrders();
 		}
-		
-		public function getOrdersForCustomer( customerId:String ):AsyncToken
-		{
-			return ordersService.getOrdersForCustomer( customerId );
-		}
 	}
 }

@@ -25,6 +25,8 @@
 		</mx:columns>
 	</mx:DataGrid>
 	
-	<s:Button label="Clear Customer Selection" click="model.clearSelectedCustomer(); dg.selectedIndex = -1;" enabled="{ model.clearSelectionEnabled }" />
+	<s:Button label="Clear Customer Selection" 
+			  click="model.clearSelectedCustomer(); dg.selectedIndex = -1;" 
+			  enabled="{ model.clearSelectionEnabled }" />
 
 </s:VGroup>

@@ -5,7 +5,7 @@ package org.swizframework.examples.modules.customers.control
 	import mx.collections.ArrayCollection;
 	
 	import org.swizframework.examples.modules.customers.business.ICustomersDelegate;
-	import org.swizframework.examples.modules.customers.events.CustomersEvent;
+	import org.swizframework.examples.events.CustomersEvent;
 	import org.swizframework.examples.modules.customers.model.CustomersModel;
 	import org.swizframework.utils.services.ServiceHelper;
 

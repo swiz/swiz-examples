@@ -11,7 +11,6 @@
 		<swiz:Swiz>
 			<swiz:config>
 				<swiz:SwizConfig
-					eventPackages="org.swizframework.examples.modules.customers.events"
 					viewPackages="org.swizframework.examples.modules.customers.views.*" />
 			</swiz:config>
 			

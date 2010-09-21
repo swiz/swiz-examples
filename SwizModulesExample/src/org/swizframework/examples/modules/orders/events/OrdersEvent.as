@@ -5,16 +5,11 @@ package org.swizframework.examples.modules.orders.events
 	public class OrdersEvent extends Event
 	{
 		public static const FETCH_ORDERS:String = "fetchOrders";
-		public static const ORDERS_UPDATED:String = "ordersUpdated";
+		public static const ORDER_LIST_UPDATED:String = "orderListUpdated";
 		
 		public function OrdersEvent( type:String )
 		{
 			super( type );
-		}
-		
-		override public function clone():Event
-		{
-			return new OrdersEvent( type );
 		}
 	}
 }

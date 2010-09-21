@@ -13,8 +13,8 @@ package org.swizframework.examples.modules.orders.control
 
 	public class OrdersController
 	{
-		[Dispatcher]
-		public var dispatcher:IEventDispatcher;
+		[Dispatcher( "local" )]
+		public var localDispatcher:IEventDispatcher;
 		
 		[Inject]
 		public var delegate:IOrdersDelegate;
@@ -28,7 +28,7 @@ package org.swizframework.examples.modules.orders.control
 		[Inject]
 		public var appModel:ApplicationModel;
 		
-		[Mediate( "OrdersEvent.FETCH_ORDERS" )]
+		[Mediate( "OrdersEvent.FETCH_ORDERS", scope="local" )]
 		public function getOrders():void
 		{
 			serviceHelper.executeServiceCall( delegate.getOrders(), getOrders_result, getOrders_fault );
@@ -38,7 +38,7 @@ package org.swizframework.examples.modules.orders.control
 		{
 			ordersModel.orders = data.result as ArrayCollection;
 			
-			dispatcher.dispatchEvent( new OrdersEvent( OrdersEvent.ORDERS_UPDATED ) );
+			localDispatcher.dispatchEvent( new OrdersEvent( OrdersEvent.ORDER_LIST_UPDATED ) );
 		}
 		
 		protected function getOrders_fault( info:Object ):void
@@ -51,6 +51,8 @@ package org.swizframework.examples.modules.orders.control
 		{
 			ordersModel.orders.filterFunction = ( appModel.selectedCustomer ) ? filterBySelectedCustomer : null;
 			ordersModel.orders.refresh();
+			
+			localDispatcher.dispatchEvent( new OrdersEvent( OrdersEvent.ORDER_LIST_UPDATED ) );
 		}
 		
 		private function filterBySelectedCustomer( item:Object ):Boolean

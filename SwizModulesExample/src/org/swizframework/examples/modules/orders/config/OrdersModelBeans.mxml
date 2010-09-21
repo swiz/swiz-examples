@@ -5,6 +5,7 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import org.swizframework.examples.modules.orders.model.presentation.OrderStatsViewPresentationModel;
 			import org.swizframework.examples.modules.orders.model.presentation.OrdersViewPresentationModel;
 		]]>
 	</fx:Script>
@@ -12,5 +13,6 @@
 	<model:OrdersModel id="ordersModel" />
 	
 	<swiz:Prototype type="{ OrdersViewPresentationModel }" />
+	<swiz:Prototype type="{ OrderStatsViewPresentationModel }" />
 	
 </swiz:BeanProvider>

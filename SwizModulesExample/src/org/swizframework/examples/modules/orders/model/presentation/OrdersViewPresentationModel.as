@@ -8,8 +8,8 @@ package org.swizframework.examples.modules.orders.model.presentation
 
 	public class OrdersViewPresentationModel
 	{
-		[Dispatcher]
-		public var dispatcher:IEventDispatcher;
+		[Dispatcher( scope="local" )]
+		public var localDispatcher:IEventDispatcher;
 		
 		[Bindable]
 		[Inject( "ordersModel.orders", bind="true" )]
@@ -18,7 +18,7 @@ package org.swizframework.examples.modules.orders.model.presentation
 		[PostConstruct]
 		public function fetchOrdersOnStartUp():void
 		{
-			dispatcher.dispatchEvent( new OrdersEvent( OrdersEvent.FETCH_ORDERS ) );
+			localDispatcher.dispatchEvent( new OrdersEvent( OrdersEvent.FETCH_ORDERS ) );
 		}
 	}
 }

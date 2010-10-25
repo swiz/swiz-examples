@@ -27,7 +27,7 @@ package org.swizframework.quickswiz.controller
 			currentUser = new User();
 		}
 		
-		[Mediate( event="UserEvent.SAVE_USER_REQUESTED", properties="user" )]
+		[EventHandler( event="UserEvent.SAVE_USER_REQUESTED", properties="user" )]
 		/**
 		 * Perform a server request to save the user
 		 */ 

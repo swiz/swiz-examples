@@ -50,8 +50,10 @@ package com.cafetownsend.presentation
 			
 			if( validLoginData(username, password) )
 			{
-				var user:User = new User(NaN, username, password);
-				dispatcher.dispatchEvent(new LoginEvent(LoginEvent.LOGIN, user));
+				var loginEvent: LoginEvent = new LoginEvent( LoginEvent.LOGIN );
+				loginEvent.user = new User(NaN, username, password);
+				
+				dispatcher.dispatchEvent( loginEvent );
 
 				loginPending = true;
 			}
@@ -79,7 +81,7 @@ package com.cafetownsend.presentation
 
 		
 		
-		[Mediate(event="LoginErrorEvent.LOGIN_ERROR", properties="fault")]
+		[EventHandler(event="LoginEvent.LOGIN_ERROR", properties="loginFault")]
 		public function handleLoginError(fault:Fault):void
 		{
 			currentState = STATE_ERROR;
@@ -89,7 +91,7 @@ package com.cafetownsend.presentation
 			loginPending = false;
 		}
 
-		[Mediate(event="LoginEvent.COMPLETE")]
+		[EventHandler(event="LoginEvent.COMPLETE")]
 		public function handleLoginComplete( event: LoginEvent ):void
 		{
 			loginPending = false;			

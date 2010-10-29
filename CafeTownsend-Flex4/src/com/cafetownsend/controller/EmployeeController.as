@@ -3,7 +3,6 @@ package com.cafetownsend.controller
 	import com.cafetownsend.domain.Employee;
 	import com.cafetownsend.event.EmployeeEvent;
 	import com.cafetownsend.event.NavigationEvent;
-	import com.cafetownsend.model.AppModel;
 	import com.cafetownsend.model.EmployeeModel;
 	import com.cafetownsend.model.NavigationModel;
 	import com.cafetownsend.service.IEmployeeDelegate;
@@ -19,7 +18,6 @@ package com.cafetownsend.controller
 	import mx.core.FlexGlobals;
 	import mx.events.CloseEvent;
 	import mx.rpc.AsyncToken;
-	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	
 	import org.swizframework.utils.services.ServiceHelper;
@@ -49,7 +47,7 @@ package com.cafetownsend.controller
 		//
 		//--------------------------------------------------------------------------
 		
-		[Mediate(event="LoginEvent.COMPLETE")]
+		[EventHandler(event="LoginEvent.COMPLETE")]
 		public function loadEmployees():void
 		{
 			var call:AsyncToken = delegate.loadEmployees();
@@ -91,7 +89,7 @@ package com.cafetownsend.controller
 		//--------------------------------------------------------------------------
 		
 		
-		[Mediate(event="EmployeeEvent.CREATE")]
+		[EventHandler(event="EmployeeEvent.CREATE")]
 		public function createEmployee():void
 		{
 			var employee: Employee = new Employee();
@@ -109,7 +107,7 @@ package com.cafetownsend.controller
 		//--------------------------------------------------------------------------
 		
 
-		[Mediate(event="EmployeeEvent.UPDATE",properties="employee")]
+		[EventHandler(event="EmployeeEvent.UPDATE",properties="employee")]
 		public function updateEmployee( employee: Employee ):void
 		{
 			var call:AsyncToken = delegate.updateEmployee( employee );
@@ -166,7 +164,7 @@ package com.cafetownsend.controller
 		//--------------------------------------------------------------------------
 		
 		
-		[Mediate(event="EmployeeEvent.DELETE")]
+		[EventHandler(event="EmployeeEvent.DELETE")]
 		public function deleteEmployee( ) : void 
 		{
 			var employee: Employee = model.selectedEmployee;
@@ -244,7 +242,7 @@ package com.cafetownsend.controller
 		//
 		//--------------------------------------------------------------------------
 		
-		[Mediate(event="EmployeeEvent.SELECT", properties="employee")]
+		[EventHandler(event="EmployeeEvent.SELECT", properties="employee")]
 		public function selectEmployee(employee:Employee):void
 		{
 			model.selectedEmployee = employee;
@@ -257,7 +255,7 @@ package com.cafetownsend.controller
 		//
 		//--------------------------------------------------------------------------
 		
-		[Mediate(event="EmployeeEvent.CANCEL")]
+		[EventHandler(event="EmployeeEvent.CANCEL")]
 		public function cancelEditingEmployee( event:EmployeeEvent ):void
 		{
 			model.selectedEmployee = null;

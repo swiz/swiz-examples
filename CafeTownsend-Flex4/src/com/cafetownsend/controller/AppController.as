@@ -1,8 +1,6 @@
 package com.cafetownsend.controller
 {
 	import com.cafetownsend.domain.User;
-	import com.cafetownsend.event.EmployeeEvent;
-	import com.cafetownsend.event.LoginErrorEvent;
 	import com.cafetownsend.event.LoginEvent;
 	import com.cafetownsend.event.NavigationEvent;
 	import com.cafetownsend.model.AppModel;
@@ -40,11 +38,12 @@ package com.cafetownsend.controller
 		}
 		
 		[PostConstruct]
-		public function init():void{
+		public function init():void
+		{
 			var lastUsername:String = soBean.getString("lastUsername");
-			if(lastUsername != null){
+
+			if(lastUsername != null)
 				model.lastUsername = lastUsername;
-			}
 		}
 		
 		
@@ -55,7 +54,7 @@ package com.cafetownsend.controller
 		//--------------------------------------------------------------------------
 		
 		
-		[Mediate(event="LoginEvent.LOGOUT")]
+		[EventHandler(event="LoginEvent.LOGOUT")]
 		public function logout():void
 		{
 			model.user = null;
@@ -63,7 +62,7 @@ package com.cafetownsend.controller
 			dispatcher.dispatchEvent( new NavigationEvent( NavigationEvent.UPDATE_PATH, NavigationModel.PATH_LOGGED_OUT ) );
 		}
 		
-		[Mediate(event="LoginEvent.LOGIN", properties="user")]
+		[EventHandler(event="LoginEvent.LOGIN", properties="user")]
 		public function login(user:User):void
 		{
 			var call:AsyncToken = userDelegate.login(user.username, user.password);
@@ -84,7 +83,11 @@ package com.cafetownsend.controller
 		
 		protected function loginFaultHandler(event:FaultEvent):void
 		{
-			dispatcher.dispatchEvent(new LoginErrorEvent(LoginErrorEvent.LOGIN_ERROR, event.fault));
+			var loginEvent: LoginEvent = new LoginEvent( LoginEvent.LOGIN_ERROR );
+			loginEvent.loginFault = event.fault;
+			
+			dispatcher.dispatchEvent( loginEvent );
+			
 		}
 	}
 }

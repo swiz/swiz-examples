@@ -12,8 +12,8 @@ package com.cafetownsend.presentation
 		[Dispatcher]
 		public var dispatcher:IEventDispatcher;
 		
-		[Inject("appModel.user", bind="true")]
 		[Bindable]
+		[Inject("appModel.user", bind="true")]
 		public var user: User;
 		
 		//--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ package com.cafetownsend.presentation
 		
 		public function logout() : void 
 		{
-			dispatcher.dispatchEvent( new LoginEvent( LoginEvent.LOGOUT, null, true ) );
+			dispatcher.dispatchEvent( new LoginEvent( LoginEvent.LOGOUT ) );
 		}
 		
 

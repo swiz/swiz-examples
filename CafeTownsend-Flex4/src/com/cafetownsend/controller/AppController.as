@@ -9,6 +9,8 @@ package com.cafetownsend.controller
 	
 	import flash.events.IEventDispatcher;
 	
+	import mx.logging.ILogger;
+	import mx.logging.Log;
 	import mx.rpc.AsyncToken;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
@@ -18,6 +20,10 @@ package com.cafetownsend.controller
 	
 	public class AppController
 	{
+		//
+		// logger
+		protected static const LOG: ILogger = Log.getLogger("AppController");
+		
 		[Inject]
 		public var model:AppModel;
 		
@@ -44,6 +50,7 @@ package com.cafetownsend.controller
 
 			if(lastUsername != null)
 				model.lastUsername = lastUsername;
+			
 		}
 		
 		
@@ -78,12 +85,12 @@ package com.cafetownsend.controller
 				
 			model.user = user;
 			
-			dispatcher.dispatchEvent( new LoginEvent( LoginEvent.COMPLETE ) );
+			dispatcher.dispatchEvent( new LoginEvent( LoginEvent.COMPLETE, true ) );
 		}
 		
 		protected function loginFaultHandler(event:FaultEvent):void
 		{
-			var loginEvent: LoginEvent = new LoginEvent( LoginEvent.LOGIN_ERROR );
+			var loginEvent: LoginEvent = new LoginEvent( LoginEvent.LOGIN_ERROR, true );
 			loginEvent.loginFault = event.fault;
 			
 			dispatcher.dispatchEvent( loginEvent );

@@ -6,11 +6,17 @@ package com.cafetownsend.presentation
 	import flash.events.IEventDispatcher;
 	
 	import mx.events.ValidationResultEvent;
+	import mx.logging.ILogger;
+	import mx.logging.Log;
 	import mx.rpc.Fault;
 	import mx.validators.StringValidator;
 	
 	public class LoginPresentationModel
 	{
+		//
+		// logger
+		protected static const LOG: ILogger = Log.getLogger("LoginPresentationModel");
+		
 		[Dispatcher]
 		public var dispatcher:IEventDispatcher;
 		
@@ -91,7 +97,7 @@ package com.cafetownsend.presentation
 			loginPending = false;
 		}
 
-		[EventHandler(event="LoginEvent.COMPLETE")]
+		[EventHandler(event="LoginEvent.COMPLETE", priority="2")]
 		public function handleLoginComplete( event: LoginEvent ):void
 		{
 			loginPending = false;			

@@ -18,6 +18,7 @@ package com.cafetownsend.controller
 	import mx.core.FlexGlobals;
 	import mx.events.CloseEvent;
 	import mx.rpc.AsyncToken;
+	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	
 	import org.swizframework.utils.services.ServiceHelper;
@@ -47,18 +48,11 @@ package com.cafetownsend.controller
 		//
 		//--------------------------------------------------------------------------
 		
-		[EventHandler(event="LoginEvent.COMPLETE")]
+		[EventHandler(event="LoginEvent.COMPLETE", priority="1")]
 		public function loadEmployees():void
 		{
 			var call:AsyncToken = delegate.loadEmployees();
-			serviceRequestUtil.executeServiceCall(call, loadEmployeeHandler);
-		}
-		
-		protected function loadEmployeeHandler(event:ResultEvent):void
-		{
-			var call:AsyncToken = delegate.loadEmployees();
-			serviceRequestUtil.executeServiceCall( call, loadEmployeesResultHandler );
-			
+			serviceRequestUtil.executeServiceCall(call, loadEmployeesResultHandler, loadEmployeesFaultHandler );
 		}
 		
 		
@@ -81,6 +75,14 @@ package com.cafetownsend.controller
 			model.employees = new ArrayCollection( employees );
 			
 		}
+		
+		protected function loadEmployeesFaultHandler(event: FaultEvent ):void 
+		{
+			ErrorUtil.showError( event.toString() );
+			
+		}
+		
+		
 
 		//--------------------------------------------------------------------------
 		//

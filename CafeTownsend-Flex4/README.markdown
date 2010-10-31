@@ -5,7 +5,7 @@
 
 ![Screen 2](http://github.com/swiz/swiz-examples/raw/537a644ea6bc3728690e687ee61ccb0a13f4e4db/CafeTownsend-Flex4/wiki/s02.png)
 
-![Screen 2](http://github.com/swiz/swiz-examples/raw/537a644ea6bc3728690e687ee61ccb0a13f4e4db/CafeTownsend-Flex4/wiki/s02.png)
+![Screen 2](http://github.com/swiz/swiz-examples/raw/537a644ea6bc3728690e687ee61ccb0a13f4e4db/CafeTownsend-Flex4/wiki/s03.png)
 
 
 ##Live example

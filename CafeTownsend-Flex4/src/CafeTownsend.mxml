@@ -18,6 +18,7 @@
 	xmlns:s="library://ns.adobe.com/flex/spark"		   
 	xmlns:mx="library://ns.adobe.com/flex/mx" 
 	minWidth="450" minHeight="550" 
+	viewSourceURL="http://github.com/swiz/swiz-examples/tree/master/CafeTownsend-Flex4/"
 	>
 	
 	<fx:Script>

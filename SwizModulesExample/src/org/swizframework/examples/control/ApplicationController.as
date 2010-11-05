@@ -9,7 +9,7 @@ package org.swizframework.examples.control
 		[Inject]
 		public var appModel:ApplicationModel;
 		
-		[Mediate( "CustomersEvent.CUSTOMER_SELECTED" )]
+		[EventHandler( "CustomersEvent.CUSTOMER_SELECTED" )]
 		public function handleCustomerSelection( event:CustomersEvent ):void
 		{
 			appModel.setSelectedCustomer( event.customer );

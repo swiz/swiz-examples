@@ -17,7 +17,7 @@ package org.swizframework.examples.modules.orders.model.presentation
 		[Bindable]
 		public var totalCostOfOrders:Number;
 		
-		[Mediate( "OrdersEvent.ORDER_LIST_UPDATED", scope="local" )]
+		[EventHandler( "OrdersEvent.ORDER_LIST_UPDATED", scope="local" )]
 		public function handleOrderListUpdate():void
 		{
 			isCalculateButtonEnabled = true;

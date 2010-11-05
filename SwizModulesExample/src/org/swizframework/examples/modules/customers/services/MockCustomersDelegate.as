@@ -1,7 +1,6 @@
-package org.swizframework.examples.modules.customers.business
+package org.swizframework.examples.modules.customers.services
 {
 	import mx.collections.ArrayCollection;
-	import mx.collections.ListCollectionView;
 	import mx.rpc.AsyncToken;
 	
 	import org.swizframework.examples.modules.customers.model.domain.Customer;
@@ -21,11 +20,11 @@ package org.swizframework.examples.modules.customers.business
 		{
 			var customers:ArrayCollection = new ArrayCollection();
 			
-			customers.addItem( new Customer( "AAA", "Awesome Tech, Inc.", "Anywhere, U.S.A." ) );
-			customers.addItem( new Customer( "BBB", "Biz Builders", "Westfield, MA" ) );
-			customers.addItem( new Customer( "CCC", "Core Players LLC", "Golden, CO" ) );
-			customers.addItem( new Customer( "DDD", "Dominant Design", "Grand Rapids, MI" ) );
-			customers.addItem( new Customer( "EEE", "Eminent Engagements", "San Francisco, CA" ) );
+			customers.addItem( new Customer( "AAA", "Awesome Tech, Inc.", 	"Anywhere, U.S.A." ) );
+			customers.addItem( new Customer( "BBB", "Biz Builders", 		"Westfield, MA" ) );
+			customers.addItem( new Customer( "CCC", "Core Players LLC", 	"Golden, CO" ) );
+			customers.addItem( new Customer( "DDD", "Dominant Design", 		"Grand Rapids, MI" ) );
+			customers.addItem( new Customer( "EEE", "Eminent Engagements", 	"San Francisco, CA" ) );
 			
 			return customers;
 		}

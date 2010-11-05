@@ -4,7 +4,7 @@ package org.swizframework.examples.modules.customers.model.presentation
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
 	
-	import mx.collections.ArrayCollection;
+	import mx.collections.IList;
 	
 	import org.swizframework.examples.events.CustomersEvent;
 	import org.swizframework.examples.modules.customers.model.CustomersModel;
@@ -12,11 +12,19 @@ package org.swizframework.examples.modules.customers.model.presentation
 
 	public class CustomersViewPresentationModel extends EventDispatcher
 	{
+		// ========================================
+		// system properties
+		// ========================================
+		
 		[Dispatcher]
 		public var dispatcher:IEventDispatcher;
 		
 		[Inject]
 		public var customersModel:CustomersModel;
+		
+		// ========================================
+		// system methods
+		// ========================================
 		
 		[PostConstruct]
 		public function fetchCustomersOnStartUp():void
@@ -24,20 +32,28 @@ package org.swizframework.examples.modules.customers.model.presentation
 			dispatcher.dispatchEvent( new CustomersEvent( CustomersEvent.FETCH_CUSTOMERS ) );
 		}
 		
+		[EventHandler( "CustomersEvent.CUSTOMERS_LOADED" )]
+		public function getLoadedCustomers():void
+		{
+			customers = customersModel.customers;
+		}
+		
+		// ========================================
+		// view support properties
+		// ========================================
+		
 		[Bindable]
-		public var customers:ArrayCollection;
+		public var customers:IList;
+		
+		// ========================================
+		// view support methods
+		// ========================================
 		
 		[Bindable( "selectedCustomerChanged" )]
 		public function get clearSelectionEnabled():Boolean
 		{
 			//return customersModel.selectedCustomer != null;
 			return true;
-		}
-		
-		[Mediate( "CustomersEvent.CUSTOMERS_LOADED" )]
-		public function getLoadedCustomers():void
-		{
-			customers = customersModel.customers;
 		}
 		
 		public function setSelectedCustomer( customer:Object ):void

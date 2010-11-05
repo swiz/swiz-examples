@@ -1,4 +1,4 @@
-package org.swizframework.examples.modules.customers.business
+package org.swizframework.examples.modules.customers.services
 {
 	import mx.rpc.AsyncToken;
 

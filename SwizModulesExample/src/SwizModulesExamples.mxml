@@ -9,6 +9,10 @@
 			   xmlns:config="org.swizframework.examples.config.*"
 			   minWidth="955" minHeight="600">
 	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" />
+	</s:layout>
+	
 	<fx:Declarations>
 		<swiz:Swiz>
 			<swiz:config>
@@ -21,10 +25,6 @@
 			</swiz:beanProviders>
 		</swiz:Swiz>
 	</fx:Declarations>
-	
-	<s:layout>
-		<s:VerticalLayout horizontalAlign="center" />
-	</s:layout>
 	
 	<views:StatusView />
 	

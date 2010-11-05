@@ -4,10 +4,10 @@ package org.swizframework.examples.modules.customers.control
 	
 	import mx.collections.ArrayCollection;
 	
-	import org.swizframework.examples.modules.customers.business.ICustomersDelegate;
 	import org.swizframework.examples.events.CustomersEvent;
 	import org.swizframework.examples.modules.customers.model.CustomersModel;
-	import org.swizframework.utils.services.ServiceHelper;
+	import org.swizframework.examples.modules.customers.services.ICustomersDelegate;
+	import org.swizframework.utils.services.IServiceHelper;
 
 	public class CustomersController
 	{
@@ -18,12 +18,12 @@ package org.swizframework.examples.modules.customers.control
 		public var delegate:ICustomersDelegate;
 		
 		[Inject]
-		public var serviceHelper:ServiceHelper;
+		public var serviceHelper:IServiceHelper;
 		
 		[Inject]
 		public var customersModel:CustomersModel;
 		
-		[Mediate( "CustomersEvent.FETCH_CUSTOMERS" )]
+		[EventHandler( "CustomersEvent.FETCH_CUSTOMERS" )]
 		public function getCustomers():void
 		{
 			serviceHelper.executeServiceCall( delegate.getCustomers(), getCustomers_result, getCustomers_fault );
@@ -31,9 +31,7 @@ package org.swizframework.examples.modules.customers.control
 		
 		protected function getCustomers_result( data:Object ):void
 		{
-			customersModel.customers = data.result as ArrayCollection;
-			
-			dispatcher.dispatchEvent( new CustomersEvent( CustomersEvent.CUSTOMERS_LOADED ) );
+			customersModel.setCustomers( data.result as ArrayCollection );
 		}
 		
 		protected function getCustomers_fault( info:Object ):void

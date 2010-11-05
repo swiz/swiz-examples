@@ -1,4 +1,4 @@
-package org.swizframework.examples.modules.orders.business
+package org.swizframework.examples.modules.orders.services
 {
 	import mx.collections.ArrayCollection;
 	import mx.collections.ListCollectionView;

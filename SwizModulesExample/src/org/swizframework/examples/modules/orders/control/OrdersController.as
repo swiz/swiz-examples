@@ -5,7 +5,7 @@ package org.swizframework.examples.modules.orders.control
 	import mx.collections.ArrayCollection;
 	
 	import org.swizframework.examples.model.ApplicationModel;
-	import org.swizframework.examples.modules.orders.business.IOrdersDelegate;
+	import org.swizframework.examples.modules.orders.services.IOrdersDelegate;
 	import org.swizframework.examples.modules.orders.events.OrdersEvent;
 	import org.swizframework.examples.modules.orders.model.OrdersModel;
 	import org.swizframework.examples.modules.orders.model.domain.Order;
@@ -28,7 +28,7 @@ package org.swizframework.examples.modules.orders.control
 		[Inject]
 		public var appModel:ApplicationModel;
 		
-		[Mediate( "OrdersEvent.FETCH_ORDERS", scope="local" )]
+		[EventHandler( "OrdersEvent.FETCH_ORDERS", scope="local" )]
 		public function getOrders():void
 		{
 			serviceHelper.executeServiceCall( delegate.getOrders(), getOrders_result, getOrders_fault );
@@ -36,9 +36,7 @@ package org.swizframework.examples.modules.orders.control
 		
 		protected function getOrders_result( data:Object ):void
 		{
-			ordersModel.orders = data.result as ArrayCollection;
-			
-			localDispatcher.dispatchEvent( new OrdersEvent( OrdersEvent.ORDER_LIST_UPDATED ) );
+			ordersModel.setOrders( data.result as ArrayCollection );
 		}
 		
 		protected function getOrders_fault( info:Object ):void
@@ -46,7 +44,7 @@ package org.swizframework.examples.modules.orders.control
 			// handle fault
 		}
 		
-		[Mediate( "ApplicationEvent.CURRENT_CUSTOMER_CHANGED" )]
+		[EventHandler( "ApplicationEvent.CURRENT_CUSTOMER_CHANGED" )]
 		public function filterOrders():void
 		{
 			ordersModel.orders.filterFunction = ( appModel.selectedCustomer ) ? filterBySelectedCustomer : null;

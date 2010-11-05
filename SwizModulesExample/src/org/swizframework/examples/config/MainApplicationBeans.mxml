@@ -5,7 +5,4 @@
 	<model:ApplicationModel id="appModel" />
 	<control:ApplicationController />
 	
-	<swiz:ServiceHelper />
-	<swiz:MockDelegateHelper />
-	
 </swiz:BeanProvider>

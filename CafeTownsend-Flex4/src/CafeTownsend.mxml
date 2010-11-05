@@ -1,42 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 
+	
+	Cafe Townsend example using Swiz framework
+	
+	Code: 			http://github.com/swiz/swiz-examples/tree/master/CafeTownsend-Flex4/
+	Live example: 	http://www.websector.de/blog/2010/04/25/swiz-cafe-townsend-example-incl-flexunit-tests/
+
+	@Author: Sönke Rohde // http://soenkerohde.com 
+	@author: Jens Krause // http://www.websector.de
+
+	Latest update: 10/29/10
+
+ -->
+
 <s:Application 
 	xmlns:fx="http://ns.adobe.com/mxml/2009" 
 	xmlns:s="library://ns.adobe.com/flex/spark"		   
 	xmlns:mx="library://ns.adobe.com/flex/mx" 
 	minWidth="450" minHeight="550" 
-	xmlns:view="com.cafetownsend.view.*"
 	viewSourceURL="http://github.com/swiz/swiz-examples/tree/master/CafeTownsend-Flex4/"
 	>
-
+	
 	<fx:Script>
 		<![CDATA[
 			import com.cafetownsend.util.ErrorUtil;
-	
+			
 		]]>
 	</fx:Script>
 	
 	<fx:Declarations>
 		
-		<swiz:SwizConfig 
-			id="config" 
-			xmlns:swiz="http://swiz.swizframework.org" 
-			viewPackages="com.cafetownsend.view.*" 
-			eventPackages="com.cafetownsend.event.*" 
-			defaultFaultHandler="ErrorUtil.showError"
+		<local:CafeTownsendContext
+			xmlns:local="*"
 			/>
 		
-		<swiz:Swiz 
-			xmlns:swiz="http://swiz.swizframework.org" 
-			config="{config}" 
-			beanProviders="{[Beans]}" 
+		<!-- Logger -->
+		<tb:ThunderBoltTarget
+			id="thunderboltTarget"
+			xmlns:tb="org.osflash.thunderbolt.*"
 			/>
 		
 	</fx:Declarations>
-
+	
 	<fx:Style 
 		source="/assets/css/styles.css" 
 		/>
-
+	
 	<s:layout>
 		<s:VerticalLayout 
 			horizontalAlign="center" 
@@ -44,8 +53,8 @@
 			/>
 	</s:layout>
 	
-
 	<view:MainView
+		xmlns:view="com.cafetownsend.view.*"
 		/>
-
+	
 </s:Application>

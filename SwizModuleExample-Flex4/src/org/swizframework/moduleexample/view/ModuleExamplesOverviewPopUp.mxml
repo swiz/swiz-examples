@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="600" height="400"
+		 title="Information About the Swiz Module Examples"
+		 close="PopUpManager.removePopUp( this )" mouseDownOutside="PopUpManager.removePopUp( this )">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			
+			public static function createPopUp( target : DisplayObject ) : void
+			{
+				var popUp : ModuleExamplesOverviewPopUp = new ModuleExamplesOverviewPopUp();
+				PopUpManager.addPopUp( popUp, target, true );
+				PopUpManager.centerPopUp( popUp );
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:TextArea width="100%" height="100%" paragraphSpaceAfter="5" fontSize="14" paddingBottom="15" paddingLeft="15" paddingRight="15" paddingTop="15">
+		<s:content>
+			<s:p>This example shows how Modules can be used within Swiz:</s:p>
+			<s:p> </s:p>
+			<s:p>\u2022 Loading a Module</s:p>
+			<s:p>\u2022 Detecting full creation of a Module (not just the ModuleEvent.READY event)</s:p>
+			<s:p>\u2022 Dispatching events from a root Swiz instance that are mediated by all Modules</s:p>
+			<s:p>\u2022 Dispatching events from a root Swiz instance to a specific Module</s:p>
+			<s:p>\u2022 Dispatching events from a Module that are mediated in the root Swiz instance</s:p>
+			<s:p>\u2022 Dispatching events from a Module that are mediated by other Modules.</s:p>
+		</s:content>
+	</s:TextArea>
+	
+</s:TitleWindow>

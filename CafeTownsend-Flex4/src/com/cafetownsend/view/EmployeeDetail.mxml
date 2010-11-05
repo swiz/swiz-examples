@@ -9,16 +9,23 @@
 	<fx:Script>
 		<![CDATA[
 			import com.cafetownsend.presentation.EmployeeDetailPresentationModel;
-
-
-
+			
+			import mx.events.FlexEvent;
+			import mx.logging.ILogger;
+			import mx.logging.Log;
+			
+			import org.swizframework.events.BeanEvent;
+			
+			private static const LOG: ILogger = Log.getLogger("EmployeeDetail");
+			
+			
 			[Inject]
 			[Bindable]
-			public var model:EmployeeDetailPresentationModel;
-		
+			public var model:EmployeeDetailPresentationModel;			
+			
+			
 		]]>
 	</fx:Script>
-
 	
 	<mx:FormItem label="First Name:"  required="true">
 		<s:TextInput 

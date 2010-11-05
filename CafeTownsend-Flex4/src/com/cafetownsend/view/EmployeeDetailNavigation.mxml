@@ -4,15 +4,22 @@
 	xmlns:s="library://ns.adobe.com/flex/spark" 
 	styleName="navContainer"
 	>
+
 	
 	<fx:Script>
 		<![CDATA[
 			import com.cafetownsend.presentation.EmployeeDetailPresentationModel;
-
+			
+			import mx.logging.ILogger;
+			import mx.logging.Log;
+			
+			import org.swizframework.events.BeanEvent;
+			
+			private static const LOG: ILogger = Log.getLogger("EmployeeDetailNavigation");
+			
 			[Inject]
 			[Bindable]
 			public var model:EmployeeDetailPresentationModel;
-			
 			
 		]]>
 	</fx:Script>

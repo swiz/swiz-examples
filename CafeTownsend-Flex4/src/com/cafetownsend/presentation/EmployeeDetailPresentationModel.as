@@ -4,16 +4,15 @@ package com.cafetownsend.presentation
 	import com.cafetownsend.domain.Employee;
 	import com.cafetownsend.event.EmployeeEvent;
 	
-	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
 	
 	import mx.events.ValidationResultEvent;
+	import mx.logging.ILogger;
+	import mx.logging.Log;
 	import mx.validators.EmailValidator;
 	import mx.validators.StringValidator;
-	
-	import spark.components.Application;
 	
 	public class EmployeeDetailPresentationModel extends EventDispatcher
 	{
@@ -21,7 +20,8 @@ package com.cafetownsend.presentation
 		
 		[Dispatcher]
 		public var dispatcher:IEventDispatcher;
-
+		
+		private static const LOG: ILogger = Log.getLogger("EmployeeDetailPresentationModel");
 		
 		//--------------------------------------------------------------------------
 		//
@@ -215,5 +215,6 @@ package com.cafetownsend.presentation
 		{
 			return _emailError;
 		}
+
 	}
 }

@@ -4,28 +4,35 @@ package com.cafetownsend.event
 	
 	import flash.events.Event;
 	
+	import mx.rpc.Fault;
+	
 	public class LoginEvent extends Event
 	{
+
 		public static const LOGIN:String = "LoginEvent.LOGIN";
+		public static const LOGIN_ERROR:String = "LoginEvent.LOGIN_ERROR";
+		
 		public static const LOGOUT:String = "LoginEvent.LOGOUT";
+		
 		public static const COMPLETE:String = "LoginEvent.COMPLETE";
 		
-		private var _user:User;
 		
-		public function get user():User
-		{
-			return _user;
-		}
+		public var user:User;
+		public var loginFault:Fault;
 		
-		public function LoginEvent(type:String, user:User = null, bubbles:Boolean=false, cancelable:Boolean=false)
+		
+		public function LoginEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			super(type, bubbles, cancelable);
-			_user = user;
 		}
 		
 		override public function clone():Event
 		{
-			return new LoginEvent(type, user, bubbles, cancelable);
+			var event: LoginEvent = new LoginEvent( type, bubbles, cancelable );
+			event.user = this.user;
+			event.loginFault = this.loginFault;
+			
+			return event;
 		}
 	}
 }

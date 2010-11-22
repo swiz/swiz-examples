@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<swiz:BeanProvider 
-	xmlns:swiz="http://swiz.swizframework.org" 
+<swiz:BeanProvider
+	xmlns:swiz="http://swizframework.org"
 	xmlns:fx="http://ns.adobe.com/mxml/2009"
 	xmlns:model="com.cafetownsend.model.*" 
 	xmlns:controller="com.cafetownsend.controller.*"
@@ -31,18 +31,27 @@
 	</fx:Declarations>
 	
 	<!-- Application level model and controller.
-		Handle login, hold the state and user of the application -->
-	<model:AppModel id="appModel" />
+	Handle login, hold the state and user of the application -->
+	<model:AppModel 
+		id="appModel" 
+		/>
+	
 	<controller:AppController />
 	
 	<!-- Employee level model and controller. -->
-	<model:EmployeeModel id="employeeModel" />
-	<controller:EmployeeController />
-
+	<model:EmployeeModel 
+		id="employeeModel" 
+		/>
+	<controller:EmployeeController 
+		/>
+	
 	<!-- Navigation level model and controller. -->
-	<model:NavigationModel id="navModel" />
-	<controller:NavigationController />
-
+	<model:NavigationModel 
+		id="navModel" 
+		/>
+	<controller:NavigationController 
+		/>
+	
 	
 	<!-- Presentation models -->
 	<presentation:MainViewPresentationModel
@@ -51,7 +60,7 @@
 		/>
 	
 	<!-- Presentation models are generally injected into views and should be declared as Prototype
-		to be instantiated lazy when the corresponding view is added to the display chain -->	
+	to be instantiated lazy when the corresponding view is added to the display chain -->	
 	
 	<swiz:Prototype 
 		type="{ EmployeesPresentationModel }"
@@ -68,16 +77,22 @@
 		type="{ EmployeeDetailPresentationModel }"
 		singleton="true"
 		/>	
-
+	
 	
 	<!-- SharedObject Helper -->
-	<storage:SharedObjectBean name="cafeTownsend" />
+	<storage:SharedObjectBean 
+		name="cafeTownsend" 
+		/>
 	
 	<!-- Service Helper -->
-	<swiz:ServiceHelper />
+	<swiz:ServiceHelper 
+		/>
 	
 	<!-- Service Delegates -->
-	<service:UserDelegate />
-	<service:EmployeeDelegate />
+	<service:UserDelegate 
+		/>
+	
+	<service:EmployeeDelegate 
+		/>
 	
 </swiz:BeanProvider>

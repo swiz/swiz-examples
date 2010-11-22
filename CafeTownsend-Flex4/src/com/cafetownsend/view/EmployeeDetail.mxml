@@ -27,7 +27,6 @@
 		]]>
 	</fx:Script>
 	
-	
 	<mx:FormItem label="First Name:"  required="true">
 		<s:TextInput 
 			id="firstName"

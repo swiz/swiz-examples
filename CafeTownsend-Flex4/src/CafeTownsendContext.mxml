@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swiz:Swiz  
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:swiz="http://swizframework.org" 
+	xmlns:local="*" 
+	>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import com.cafetownsend.util.ErrorUtil;
+			
+		]]>
+	</fx:Script>
+	
+	<swiz:beanProviders>
+		<local:Beans />
+	</swiz:beanProviders>
+		
+		<swiz:config>
+			<swiz:SwizConfig
+				viewPackages="com.cafetownsend.view.*" 
+				eventPackages="com.cafetownsend.event.*" 
+				defaultFaultHandler="ErrorUtil.showError"
+				/>
+		</swiz:config>
+		
+</swiz:Swiz>

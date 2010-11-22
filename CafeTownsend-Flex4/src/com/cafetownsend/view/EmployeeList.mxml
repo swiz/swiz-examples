@@ -19,8 +19,7 @@
 			[Inject]
 			[Bindable]
 			public var model:EmployeeListPresentationModel;
-
-
+			
 		]]>
 	</fx:Script>
 	

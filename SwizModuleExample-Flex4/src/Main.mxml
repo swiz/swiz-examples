@@ -4,7 +4,7 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
 			   xmlns:swiz="http://swiz.swizframework.org"
 			   xmlns:view="org.swizframework.moduleexample.view.*"
-			   xmlns:config="org.swizframework.moduleexample.config.*">
+			   xmlns:config="org.swizframework.moduleexample.config.*" viewSourceURL="srcview/index.html">
 	
 	<fx:Declarations>
 		<swiz:Swiz id="mySwiz">
@@ -16,6 +16,9 @@
 			<swiz:beanProviders>
 				<config:Beans/>
 			</swiz:beanProviders>
+			<swiz:loggingTargets>
+				<swiz:SwizTraceTarget />
+			</swiz:loggingTargets>
 		</swiz:Swiz>
 	</fx:Declarations>
 	

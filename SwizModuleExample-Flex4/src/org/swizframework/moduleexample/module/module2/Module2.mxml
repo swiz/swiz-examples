@@ -72,6 +72,6 @@
 		</swiz:Swiz>
 	</fx:Declarations>
 	
-	<s:List id="resultsList" dataProvider="{module2Log}" width="100%" height="100%" />
+	<s:List id="resultsList" dataProvider="{module2Log}" updateComplete="resultsList.ensureIndexIsVisible( module2Log.length - 1 )" width="100%" height="100%" />
 		
 </mx:Module>

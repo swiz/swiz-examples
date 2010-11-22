@@ -4,10 +4,14 @@
 		   xmlns:mx="library://ns.adobe.com/flex/mx" 
 		   xmlns:swiz="http://swiz.swizframework.org"
 		   xmlns:config="org.swizframework.moduleexample.module.module1.config.*"
-		   width="100%" height="100%">
+		   width="100%" height="100%" implements="org.swizframework.core.ISwizAware">
 	
 	<fx:Script>
 		<![CDATA[
+			import mx.managers.PopUpManager;
+			
+			import org.swizframework.core.ISwiz;
+			import org.swizframework.core.ISwizAware;
 			import org.swizframework.moduleexample.event.TestEvent;
 			import org.swizframework.moduleexample.model.ModuleLogCollection;
 			import org.swizframework.moduleexample.module.module1.controller.Module1Controller;
@@ -15,13 +19,20 @@
 			import org.swizframework.moduleexample.module.module2.event.Module2Event;
 			
 			[Bindable]
-			[Inject( source="moduleLog.module1Log", bind="true" )]
+			[Inject( source="moduleLog.module1Log" )]
 			public var module1Log : ModuleLogCollection;
 			
 			[Bindable]
 			[Inject]
 			public var moduleBean : Module1Controller;
 			
+			private var _swiz : ISwiz;
+			
+			public function set swiz(swiz:ISwiz):void
+			{
+				_swiz = swiz;
+			}
+
 			[Mediate( event="TestEvent.GLOBAL_TEST_EVENT" )]
 			public function handleRootEvent( event : TestEvent ) : void
 			{
@@ -42,6 +53,21 @@
 				dispatchEvent( new Module1Event( Module1Event.MODULE_1_EVENT ) );
 			}
 			
+			[Mediate( event="TestEvent.TEST_EVENT_FOR_MODULE_1_POPUP" )]
+			public function handleRootEventForModule1PopUp( event : TestEvent ) : void
+			{
+				module1Log.addLogMessage( 'Mediating TestEvent.TEST_EVENT_FOR_MODULE_1_POPUP in Module1.' );
+				
+				var popUp : Module1PopUp = new Module1PopUp();
+				_swiz.registerWindow( popUp );
+				PopUpManager.addPopUp( popUp, this );
+				PopUpManager.centerPopUp( popUp );
+				
+				// Randomize the position slightly so that multiple PopUps don't overlay each other exactly.
+				popUp.x += Math.floor( Math.random() * ( 40 - 10 ) ) + 10;
+				popUp.y += Math.floor( Math.random() * ( 40 - 10 ) ) + 10;
+			}
+			
 			[PostConstruct]
 			public function setUpList() : void
 			{
@@ -55,7 +81,7 @@
 					module1Log.addLogMessage( 'Module1 had a Module1 bean injected: Module1Controller' );
 				}	
 			}
-				
+			
 		]]>
 	</fx:Script>
 	
@@ -72,6 +98,6 @@
 		</swiz:Swiz>
 	</fx:Declarations>
 	
-	<s:List id="resultsList" dataProvider="{module1Log}" width="100%" height="100%" />
+	<s:List id="resultsList" dataProvider="{module1Log}" updateComplete="resultsList.ensureIndexIsVisible( module1Log.length - 1 )" width="100%" height="100%" />
 		
 </mx:Module>

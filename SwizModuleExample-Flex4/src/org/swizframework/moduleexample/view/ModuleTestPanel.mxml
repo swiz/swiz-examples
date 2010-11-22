@@ -11,6 +11,7 @@
 		<![CDATA[
 			import mx.core.IVisualElement;
 			
+			import org.swizframework.core.ISwiz;
 			import org.swizframework.moduleexample.event.TestEvent;
 			import org.swizframework.moduleexample.model.ModuleLogCollection;
 			import org.swizframework.moduleexample.module.module1.event.Module1Event;
@@ -32,7 +33,6 @@
 			
 			private function onModule1CreationComplete() : void
 			{
-				module1Container.addElement( IVisualElement( module1Loader.child ) );
 				isModule1Loaded = true;
 				module1Log.addLogMessage( 'Dispatching Root Event in immediate response to creating Module1.' );
 				dispatchEvent( new TestEvent( TestEvent.GLOBAL_TEST_EVENT ) );
@@ -44,6 +44,12 @@
 				dispatchEvent( new TestEvent( TestEvent.TEST_EVENT_FOR_MODULE_1 ) );
 			}
 			
+			private function sendModule1PopUpEvent() : void
+			{
+				module1Log.addLogMessage( 'Dispatching Root Event to only Module1 for PopUp creation.' );
+				dispatchEvent( new TestEvent( TestEvent.TEST_EVENT_FOR_MODULE_1_POPUP ) );
+			}
+			
 			[Mediate( event="Module1Event.MODULE_1_EVENT" )]
 			public function module1EventMediator( event : Module1Event ) : void
 			{
@@ -52,7 +58,6 @@
 			
 			private function onModule2CreationComplete() : void
 			{
-				module2Container.addElement( IVisualElement( module2Loader.child ) );
 				isModule2Loaded = true;
 				module2Log.addLogMessage( 'Dispatching Root Event in immediate response to creating Module2.' );
 				dispatchEvent( new TestEvent( TestEvent.GLOBAL_TEST_EVENT ) );
@@ -91,13 +96,6 @@
 		]]>
 	</fx:Script>
 	
-	<!-- 
-	ModuleEvent.READY is dispatched when the byte stream is loaded, but BEFORE the module's components are actually created.
-	This is an example of a custom ModuleLoader that checks for full creation of a loaded module.  
-	-->
-	<util:CreationAwareModuleLoader id="module1Loader" onModuleCreationComplete="onModule1CreationComplete()" />
-	<util:CreationAwareModuleLoader id="module2Loader" onModuleCreationComplete="onModule2CreationComplete()" />
-	
 	<s:VGroup id="createGroup" width="100%" height="100%" gap="25" 
 			  paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10">
 	
@@ -108,6 +106,12 @@
 			<s:Button id="createModule2Button" label="Create Module 2" enabled="{!isModule2Loaded}" 
 					  toolTip="This will create Module2 and after module creation will automatically dispatch an event from the root that all modules can mediate."
 					  click="module2Loader.url='org/swizframework/moduleexample/module/module2/Module2.swf'" />
+			<s:Button id="removeModule1Button" label="Remove Module 1" enabled="{isModule1Loaded}"
+					  toolTip="This will create Module1 and after module creation will automatically dispatch an event from the root that all modules can mediate."
+					  click="module1Loader.destroyModule( removeModule1Button ); module1Log.source = [];" />
+			<s:Button id="removeModule2Button" label="Remove Module 2" enabled="{isModule2Loaded}" 
+					  toolTip="This will create Module2 and after module creation will automatically dispatch an event from the root that all modules can mediate."
+					  click="module2Loader.destroyModule( removeModule2Button ); module2Log.source = [];" />
 		</s:HGroup>
 		
 		<s:HGroup>
@@ -117,6 +121,8 @@
 					  toolTip="This will dispatch an event from the root to Module1, triggering Module1 to dispatch an event that the root and Module2 will mediate. This demonstrates how a parent Swiz instance can mediate events from a module, and how modules can mediate events from other modules."/>
 			<s:Button id="eventFromModule2Button" label="Dispatch an event from Module2" enabled="{isModule2Loaded}" click="sendModule2Event()"
 					  toolTip="This will dispatch an event from the root to Module2, triggering Module2 to dispatch an event that the root and Module1 will mediate. This demonstrates how a parent Swiz instance can mediate events from a module, and how modules can mediate events from other modules."/>
+			<s:Button id="popUpFromModule1Button" label="Create a PopUp in Module1" enabled="{isModule1Loaded}" click="sendModule1PopUpEvent()"
+					  toolTip="This will dispatch an event from the root to Module1, triggering Module1 display a PopUp window. This demonstrates how to ensure that the correct Swiz instance is used to process the PopUp."/>
 		</s:HGroup>
 		
 		<s:HGroup verticalAlign="middle" horizontalAlign="center" gap="25" width="100%" height="100%">
@@ -125,14 +131,21 @@
 							   width="100%"
 							   height="100%"
 							   borderWeight="1"
-							   borderStyle="solid" />
-			
+							   borderStyle="solid">
+				<!-- 
+				ModuleEvent.READY is dispatched when the byte stream is loaded, but BEFORE the module's components are actually created.
+				This is an example of a custom ModuleLoader that checks for full creation of a loaded module.  
+				-->
+				<util:CreationAwareModuleLoader id="module1Loader" onModuleCreationComplete="onModule1CreationComplete()" unload="isModule1Loaded=false" width="100%" height="100%" />
+			</s:BorderContainer>	
 			<s:BorderContainer id="module2Container"
 							   backgroundColor="0xD1E2E3"
 							   width="100%"
 							   height="100%"
 							   borderWeight="1"
-							   borderStyle="solid" />
+							   borderStyle="solid">
+				<util:CreationAwareModuleLoader id="module2Loader" onModuleCreationComplete="onModule2CreationComplete()" unload="isModule2Loaded=false" width="100%" height="100%" />
+			</s:BorderContainer>	
 		</s:HGroup>	
 	</s:VGroup>
 	

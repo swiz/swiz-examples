@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:module1="org.swizframework.moduleexample.module.module1.*"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   height="250"
+			   width="400"
+			   close="PopUpManager.removePopUp( this )"
+			   implements="org.swizframework.core.ISwizAware"
+			   title="Module1 PopUp">
+
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			import org.swizframework.core.ISwiz;
+			import org.swizframework.moduleexample.event.TestEvent;
+			import org.swizframework.moduleexample.model.ModuleLogCollection;
+			import org.swizframework.moduleexample.module.module1.event.Module1Event;
+			import org.swizframework.moduleexample.module.module2.event.Module2Event;
+
+			[Bindable]
+			[Inject( source="moduleLog.module1Log", bind="true" )]
+			public var module1Log : ModuleLogCollection;
+
+			private var _swiz : ISwiz;
+
+			public function createPopUp() : void
+			{
+				var popUp : Module1PopUp = new Module1PopUp();
+				
+				_swiz.registerWindow( popUp );
+				PopUpManager.addPopUp( popUp, this );
+				PopUpManager.centerPopUp( popUp );
+				
+				// Randomize the position slightly so that multiple PopUps don't overlay each other exactly.
+				popUp.x += Math.floor( Math.random() * ( 40 - 10 ) ) + 10;
+				popUp.y += Math.floor( Math.random() * ( 40 - 10 ) ) + 10;
+			}
+
+			[Mediate( event="TestEvent.GLOBAL_TEST_EVENT" )]
+			public function handleRootEvent( event : TestEvent ) : void
+			{
+				module1Log.addLogMessage( 'Module1PopUp mediated TestEvent.GLOBAL_TEST_EVENT' );
+			}
+
+			[Mediate( event="Module1Event.MODULE_1_EVENT" )]
+			public function module1EventMediator( event : Module1Event ) : void
+			{
+				module1Log.addLogMessage( 'Module1PopUp mediated Module1Event.MODULE_1_EVENT' );
+			}
+
+			[Mediate( event="Module2Event.MODULE_2_EVENT" )]
+			public function module2EventMediator( event : Module2Event ) : void
+			{
+				module1Log.addLogMessage( 'Module1PopUp mediated Module2Event.MODULE_2_EVENT' );
+			}
+
+			[PostConstruct]
+			public function onPostConstruct() : void
+			{
+				if ( module1Log )
+				{
+					module1Log.addLogMessage( 'Module1PopUp created from Module1, with root Bean injected' );
+				}
+			}
+
+			[PreDestroy]
+			public function onPreDestroy() : void
+			{
+				var temp : Boolean = true;
+			}
+
+			public function set swiz( swiz : ISwiz ) : void
+			{
+				_swiz = swiz;
+			}
+		]]>
+	</fx:Script>
+
+	<s:VGroup paddingBottom="10"
+			  paddingLeft="10"
+			  paddingRight="10"
+			  paddingTop="10"
+			  id="createGroup"
+			  height="100%"
+			  width="100%"
+			  gap="25">
+
+		<s:TextArea fontSize="14"
+					paddingBottom="15"
+					paddingLeft="15"
+					paddingRight="15"
+					paddingTop="15"
+					height="100%"
+					width="100%"
+					paragraphSpaceAfter="5">
+			<s:content>
+				<s:p>This is a PopUp from Module 1. If you leave me open and dispatch some events, you'll see me mediate them and update the Module1 log.</s:p>
+			</s:content>
+		</s:TextArea>
+
+		<s:Button id="popUpFromModule1Button" label="Create PopUp From PopUp" toolTip="This will display a PopUp window, created from the current PopUp. This demonstrates how to ensure that the correct Swiz instance is used to process the PopUp, even when nested." click="createPopUp()" />
+
+		<module1:PopUpChild />
+
+	</s:VGroup>
+
+</s:TitleWindow>

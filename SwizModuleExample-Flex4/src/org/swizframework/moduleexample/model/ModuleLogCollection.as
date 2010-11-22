@@ -3,6 +3,7 @@ package org.swizframework.moduleexample.model
 	import mx.collections.ArrayCollection;
 	import mx.formatters.DateFormatter;
 	
+	[Bindable]
 	public class ModuleLogCollection extends ArrayCollection
 	{
 		private var dateFormatter : DateFormatter = new DateFormatter();

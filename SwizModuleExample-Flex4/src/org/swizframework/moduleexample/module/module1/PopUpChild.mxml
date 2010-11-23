@@ -1,51 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		  xmlns:s="library://ns.adobe.com/flex/spark" 
-		  xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" xmlns:module1="org.swizframework.moduleexample.module.module1.*">
-	
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
+		  xmlns:module1="org.swizframework.moduleexample.module.module1.*"
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  width="100%">
+
 	<fx:Script>
 		<![CDATA[
-			import org.swizframework.core.SwizManager;
-			import org.swizframework.moduleexample.event.TestEvent;
+			import org.swizframework.moduleexample.event.RootEvent;
 			import org.swizframework.moduleexample.model.ModuleLogCollection;
-			import org.swizframework.moduleexample.module.module1.controller.Module1Controller;
-			
+
 			[Bindable]
 			[Inject( source="moduleLog.module1Log", bind="true" )]
+			/**
+			 * The log for actions related to Module1. Note that this bean is actually defined 
+			 * in the root Swiz application, but can be easily injected into the PopUp.
+			 */ 
 			public var module1Log : ModuleLogCollection;
-			
-			[Inject]
-			public var controller : Module1Controller;
-			
+
+			[EventHandler( event="RootEvent.GLOBAL_TEST_EVENT" )]
+			/**
+			 * Handle an event dispatched from the root Swiz application that is not meant for a specific Module.
+			 */ 
+			public function handleRootEvent( event : RootEvent ) : void
+			{
+				module1Log.addLogMessage( 'Module1PopUpChild mediated RootEvent.GLOBAL_TEST_EVENT.' );
+			}
+
 			[PostConstruct]
+			/**
+			 * Add an initial log message after creation.
+			 */ 
 			public function onPostConstruct() : void
 			{
-				module1Log.addLogMessage( 'Module1PopUpChild created from Module1, with root Bean injected' );
-				if( controller )
-				{
-					module1Log.addLogMessage( 'Module1PopUpChild had Module1 Bean injected' );
-				}
+				module1Log.addLogMessage( 'Module1PopUpChild created from Module1, with root Bean injected.' );
 			}
-			
-			[Mediate( event="TestEvent.GLOBAL_TEST_EVENT" )]
-			public function handleRootEvent( event : TestEvent ) : void
-			{
-				var swizzes : Object = SwizManager.swizzes;
-				if( module1Log )
-					module1Log.addLogMessage( 'Module1PopUpChild mediated TestEvent.GLOBAL_TEST_EVENT' );
-			}
-			
-			[PreDestroy]
-			public function onPreDestroy() : void
-			{
-				var temp : Boolean = true;
-			}
-			
+
 		]]>
 	</fx:Script>
-	
-	<s:Label text="I am a Pop Up Child, and I'm processed too!" />
-	
-	<module1:PopUpChild2 />
-			
+
+	<s:Label text="I am a child of the Pop Up, and Swiz configured me too." />
+
 </s:VGroup>

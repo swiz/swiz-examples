@@ -1,153 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:util="org.swizframework.moduleexample.util.*"
-		 width="75%" height="75%" 
+		 height="75%"
+		 width="75%"
+		 minWidth="920"
 		 title="Examples of Swiz Support for Modules (check button tooltips for more details)"
-		 creationComplete="showOverviewPopUp()">
-	
+		 creationComplete="titleDisplay.height=40; titleDisplay.setStyle( 'fontSize', 18 )">
+
 	<fx:Script>
 		<![CDATA[
-			import mx.core.IVisualElement;
-			
-			import org.swizframework.core.ISwiz;
-			import org.swizframework.moduleexample.event.TestEvent;
-			import org.swizframework.moduleexample.model.ModuleLogCollection;
-			import org.swizframework.moduleexample.module.module1.event.Module1Event;
-			import org.swizframework.moduleexample.module.module2.event.Module2Event;
-			
+			import org.swizframework.moduleexample.model.presentation.TestPanelPresentationModel;
+
 			[Bindable]
-			[Inject( source="moduleLog.module1Log", bind="true" )]
-			public var module1Log : ModuleLogCollection;
-			
-			[Bindable]
-			[Inject( source="moduleLog.module2Log", bind="true" )]
-			public var module2Log : ModuleLogCollection;
-			
-			[Bindable]
-			private var isModule1Loaded : Boolean = false;
-			
-			[Bindable]
-			private var isModule2Loaded : Boolean = false;
-			
-			private function onModule1CreationComplete() : void
-			{
-				isModule1Loaded = true;
-				module1Log.addLogMessage( 'Dispatching Root Event in immediate response to creating Module1.' );
-				dispatchEvent( new TestEvent( TestEvent.GLOBAL_TEST_EVENT ) );
-			}
-			
-			private function sendModule1Event() : void
-			{
-				module1Log.addLogMessage( 'Dispatching Root Event to only Module1.' );
-				dispatchEvent( new TestEvent( TestEvent.TEST_EVENT_FOR_MODULE_1 ) );
-			}
-			
-			private function sendModule1PopUpEvent() : void
-			{
-				module1Log.addLogMessage( 'Dispatching Root Event to only Module1 for PopUp creation.' );
-				dispatchEvent( new TestEvent( TestEvent.TEST_EVENT_FOR_MODULE_1_POPUP ) );
-			}
-			
-			[Mediate( event="Module1Event.MODULE_1_EVENT" )]
-			public function module1EventMediator( event : Module1Event ) : void
-			{
-				module1Log.addLogMessage( 'Root mediated Module1Event.MODULE_1_EVENT' );
-			}
-			
-			private function onModule2CreationComplete() : void
-			{
-				isModule2Loaded = true;
-				module2Log.addLogMessage( 'Dispatching Root Event in immediate response to creating Module2.' );
-				dispatchEvent( new TestEvent( TestEvent.GLOBAL_TEST_EVENT ) );
-			}
-			
-			[Mediate( event="Module2Event.MODULE_2_EVENT" )]
-			public function module2EventMediator( event : Module2Event ) : void
-			{
-				module2Log.addLogMessage( 'Root mediated Module2Event.MODULE_2_EVENT' );
-			}
-			
-			private function sendModule2Event() : void
-			{
-				module2Log.addLogMessage( 'Dispatching Root Event to only Module2.' );
-				dispatchEvent( new TestEvent( TestEvent.TEST_EVENT_FOR_MODULE_2 ) );
-			}
-			
-			private function sendRootEvent() : void
-			{
-				if( isModule1Loaded )
-				{
-					module1Log.addLogMessage( 'Dispatching event from Root.' );
-				}
-				if( isModule2Loaded )
-				{
-					module2Log.addLogMessage( 'Dispatching event from Root.' );
-				}
-				dispatchEvent( new TestEvent( TestEvent.GLOBAL_TEST_EVENT ) );
-			}
-			
+			[Inject]
+			public var presentationModel : TestPanelPresentationModel;
+
+			[PostConstruct]
 			public function showOverviewPopUp() : void
 			{
-				ModuleExamplesOverviewPopUp.createPopUp( this );
+				presentationModel.showOverviewPopUp( this );
 			}
-			
 		]]>
 	</fx:Script>
-	
-	<s:VGroup id="createGroup" width="100%" height="100%" gap="25" 
-			  paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10">
-	
-		<s:HGroup>
-			<s:Button id="createModule1Button" label="Create Module 1" enabled="{!isModule1Loaded}"
+
+	<s:VGroup paddingBottom="10"
+			  paddingLeft="10"
+			  paddingRight="10"
+			  paddingTop="10"
+			  id="createGroup"
+			  height="100%"
+			  width="100%"
+			  gap="25">
+
+		<s:HGroup id="loadModuleControlGroup">
+			<s:Button id="createModule1Button"
+					  enabled="{!presentationModel.isModule1Loaded}"
+					  label="Create Module 1"
 					  toolTip="This will create Module1 and after module creation will automatically dispatch an event from the root that all modules can mediate."
 					  click="module1Loader.url='org/swizframework/moduleexample/module/module1/Module1.swf'" />
-			<s:Button id="createModule2Button" label="Create Module 2" enabled="{!isModule2Loaded}" 
+			<s:Button id="createModule2Button"
+					  enabled="{!presentationModel.isModule2Loaded}"
+					  label="Create Module 2"
 					  toolTip="This will create Module2 and after module creation will automatically dispatch an event from the root that all modules can mediate."
 					  click="module2Loader.url='org/swizframework/moduleexample/module/module2/Module2.swf'" />
-			<s:Button id="removeModule1Button" label="Remove Module 1" enabled="{isModule1Loaded}"
-					  toolTip="This will create Module1 and after module creation will automatically dispatch an event from the root that all modules can mediate."
-					  click="module1Loader.destroyModule( removeModule1Button ); module1Log.source = [];" />
-			<s:Button id="removeModule2Button" label="Remove Module 2" enabled="{isModule2Loaded}" 
-					  toolTip="This will create Module2 and after module creation will automatically dispatch an event from the root that all modules can mediate."
-					  click="module2Loader.destroyModule( removeModule2Button ); module2Log.source = [];" />
+			<s:Button id="removeModule1Button"
+					  enabled="{presentationModel.isModule1Loaded}"
+					  label="Remove Module 1"
+					  toolTip="This will remove Module1."
+					  click="module1Loader.destroyModule( removeModule1Button ); presentationModel.resetModule1Log();" />
+			<s:Button id="removeModule2Button"
+					  enabled="{presentationModel.isModule2Loaded}"
+					  label="Remove Module 2"
+					  toolTip="This will remove Module2."
+					  click="module2Loader.destroyModule( removeModule2Button ); presentationModel.resetModule2Log();" />
 		</s:HGroup>
-		
-		<s:HGroup>
-			<s:Button id="eventFromRoot" label="Dispatch event from Root" enabled="{isModule1Loaded || isModule2Loaded}" click="sendRootEvent()"
-					  toolTip="This will dispatch an event from the root that is mediated in all loaded modules. This demonstrates global event mediation."/>
-			<s:Button id="eventFromModule1Button" label="Dispatch an event from Module1" enabled="{isModule1Loaded}" click="sendModule1Event()"
-					  toolTip="This will dispatch an event from the root to Module1, triggering Module1 to dispatch an event that the root and Module2 will mediate. This demonstrates how a parent Swiz instance can mediate events from a module, and how modules can mediate events from other modules."/>
-			<s:Button id="eventFromModule2Button" label="Dispatch an event from Module2" enabled="{isModule2Loaded}" click="sendModule2Event()"
-					  toolTip="This will dispatch an event from the root to Module2, triggering Module2 to dispatch an event that the root and Module1 will mediate. This demonstrates how a parent Swiz instance can mediate events from a module, and how modules can mediate events from other modules."/>
-			<s:Button id="popUpFromModule1Button" label="Create a PopUp in Module1" enabled="{isModule1Loaded}" click="sendModule1PopUpEvent()"
-					  toolTip="This will dispatch an event from the root to Module1, triggering Module1 display a PopUp window. This demonstrates how to ensure that the correct Swiz instance is used to process the PopUp."/>
+
+		<s:HGroup id="moduleEventControlGroup">
+			<s:Button id="eventFromRoot"
+					  enabled="{presentationModel.isModule1Loaded || presentationModel.isModule2Loaded}"
+					  label="Dispatch event from Root"
+					  toolTip="This will dispatch an event from the root that is mediated in all loaded modules. This demonstrates global event mediation."
+					  click="presentationModel.sendRootEvent()" />
+			<s:Button id="eventFromModule1Button"
+					  enabled="{presentationModel.isModule1Loaded}"
+					  label="Dispatch an event from Module1"
+					  toolTip="This will dispatch an event from the root to Module1, triggering Module1 to dispatch an event that the root and Module2 will mediate. This demonstrates how a parent Swiz instance can mediate events from a module, and how modules can mediate events from other modules."
+					  click="presentationModel.sendModule1Event()" />
+			<s:Button id="eventFromModule2Button"
+					  enabled="{presentationModel.isModule2Loaded}"
+					  label="Dispatch an event from Module2"
+					  toolTip="This will dispatch an event from the root to Module2, triggering Module2 to dispatch an event that the root and Module1 will mediate. This demonstrates how a parent Swiz instance can mediate events from a module, and how modules can mediate events from other modules."
+					  click="presentationModel.sendModule2Event()" />
+			<s:Button id="popUpFromModule1Button"
+					  enabled="{presentationModel.isModule1Loaded}"
+					  label="Create a PopUp in Module1"
+					  toolTip="This will dispatch an event from the root to Module1, triggering Module1 display a PopUp window. This demonstrates using registerWindow() to process the PopUp."
+					  click="presentationModel.sendModule1PopUpEvent()" />
 		</s:HGroup>
-		
-		<s:HGroup verticalAlign="middle" horizontalAlign="center" gap="25" width="100%" height="100%">
-			<s:BorderContainer id="module1Container"
-							   backgroundColor="0xD1E2E3"
-							   width="100%"
+
+		<s:HGroup horizontalAlign="center"
+				  verticalAlign="middle"
+				  height="100%"
+				  width="100%"
+				  gap="25">
+			
+			<s:BorderContainer backgroundColor="0xD1E2E3"
+							   borderStyle="solid"
+							   id="module1Container"
 							   height="100%"
-							   borderWeight="1"
-							   borderStyle="solid">
-				<!-- 
-				ModuleEvent.READY is dispatched when the byte stream is loaded, but BEFORE the module's components are actually created.
-				This is an example of a custom ModuleLoader that checks for full creation of a loaded module.  
+							   width="100%"
+							   borderWeight="1">
+				<!--
+					 The built-in event ModuleEvent.READY is dispatched when the byte stream is loaded, but BEFORE the module's components are actually created.
+					 This is an example of a custom ModuleLoader that dispatches an event upon full creation of a loaded module, to ensure that Swiz is fully set up.
+					 See the comments in CreationAwareModuleLoader for more details.
 				-->
-				<util:CreationAwareModuleLoader id="module1Loader" onModuleCreationComplete="onModule1CreationComplete()" unload="isModule1Loaded=false" width="100%" height="100%" />
-			</s:BorderContainer>	
-			<s:BorderContainer id="module2Container"
-							   backgroundColor="0xD1E2E3"
-							   width="100%"
+				<util:CreationAwareModuleLoader id="module1Loader"
+												height="100%"
+												width="100%"
+												unload="presentationModel.isModule1Loaded=false"
+												onModuleCreationComplete="presentationModel.module1Loaded()" />
+			</s:BorderContainer>
+			<s:BorderContainer backgroundColor="0xD1E2E3"
+							   borderStyle="solid"
+							   id="module2Container"
 							   height="100%"
-							   borderWeight="1"
-							   borderStyle="solid">
-				<util:CreationAwareModuleLoader id="module2Loader" onModuleCreationComplete="onModule2CreationComplete()" unload="isModule2Loaded=false" width="100%" height="100%" />
-			</s:BorderContainer>	
-		</s:HGroup>	
+							   width="100%"
+							   borderWeight="1">
+				<util:CreationAwareModuleLoader id="module2Loader"
+												height="100%"
+												width="100%"
+												unload="presentationModel.isModule2Loaded=false"
+												onModuleCreationComplete="presentationModel.module2Loaded()" />
+			</s:BorderContainer>
+			
+		</s:HGroup>
+		
 	</s:VGroup>
-	
-	
+
 </s:Panel>

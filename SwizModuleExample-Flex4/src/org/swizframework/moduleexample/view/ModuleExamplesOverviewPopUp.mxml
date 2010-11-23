@@ -30,6 +30,7 @@
 			<s:p>\u2022 Dispatching events from a root Swiz instance to a specific Module</s:p>
 			<s:p>\u2022 Dispatching events from a Module that are mediated in the root Swiz instance</s:p>
 			<s:p>\u2022 Dispatching events from a Module that are mediated by other Modules.</s:p>
+			<s:p>\u2022 Using registerWindow() to have Swiz process new windows/pop ups.</s:p>
 		</s:content>
 	</s:TextArea>
 	

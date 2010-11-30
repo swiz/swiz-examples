@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   width="600" height="400"
+			   title="Information About the Swiz Chaining API Demo"
+			   close="PopUpManager.removePopUp( this )" mouseDownOutside="PopUpManager.removePopUp( this )">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			
+			public static function createPopUp( target : DisplayObject ) : void
+			{
+				var popUp : ChainingDemoOverviewPopUp = new ChainingDemoOverviewPopUp();
+				PopUpManager.addPopUp( popUp, target, true );
+				PopUpManager.centerPopUp( popUp );
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:TextArea width="100%" height="100%" paragraphSpaceAfter="5" fontSize="14" paddingBottom="15" paddingLeft="15" paddingRight="15" paddingTop="15">
+		<s:content>
+			<s:p>This example shows how the Swiz chaining API can:</s:p>
+			<s:p> </s:p>
+			<s:p>\u2022 Dispatch a series of Events as part of a chain</s:p>
+			<s:p>\u2022 Process chains that consist of other chains (nested chains)</s:p>
+			<s:p>\u2022 Wait for a chain step that performs an asynchronous server call</s:p>
+			<s:p>\u2022 Wait for a chain step that performs an external call such as a URLRequest</s:p>
+			<s:p>\u2022 Dynamically modify a chain while it is executing</s:p>
+		</s:content>
+	</s:TextArea>
+	
+</s:TitleWindow>

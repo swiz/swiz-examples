@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 width="75%"
+		 minWidth="940"
+		 minHeight="600"
+		 title="Examples of the Swiz Chaining API (check button tooltips for more details)"
+		 creationComplete="titleDisplay.height=40; titleDisplay.setStyle( 'fontSize', 18 )">
+	
+	<fx:Script>
+		<![CDATA[
+			import org.swizframework.chainingdemo.model.presentation.UserPanelPresentationModel;
+			
+			[Bindable]
+			[Inject]
+			public var presentationModel : UserPanelPresentationModel;
+			
+			[PostConstruct]
+			public function showOverviewPopUp() : void
+			{
+				presentationModel.showOverviewPopUp( this );
+			}
+
+		]]>
+	</fx:Script>
+	
+	<s:VGroup paddingBottom="10"
+			  paddingLeft="10"
+			  paddingRight="10"
+			  paddingTop="10"
+			  id="createGroup"
+			  height="100%"
+			  width="100%"
+			  gap="25">
+		
+		<s:HGroup id="chainControlGroup">
+			<s:Button id="simpleEventChainButton"
+					  click="presentationModel.doSimpleChain()"
+					  label="Simple Event Chain"
+					  toolTip="This will run simple event chain." />
+			<s:Button id="asyncEventChainButton"
+					  click="presentationModel.doAsyncChain()"
+					  label="Async Call Event Chain"
+					  toolTip="This will run a chain that includes asynchronous server calls." />
+			<s:Button id="nestedEventChainButton"
+					  click="presentationModel.doNestedChain()"
+					  label="Nested Event Chains"
+					  toolTip="This will run a chain that includes a nested chain." />
+			<s:Button id="urlRequestEventChainButton"
+					  click="presentationModel.doURLChain()"
+					  label="URL Request Event Chain"
+					  toolTip="This will run a chain that includes a URL reqeusts." />
+			<s:Button id="dynamicChainModificationButton"
+					  click="presentationModel.doDynamicURLChain()"
+					  label="Dynamic Chain"
+					  toolTip="This will run a chain that is dynamically altered while the chain runs." />
+			<s:Button id="fullEventChainButton"
+					  click="presentationModel.doComplexChain()"
+					  label="Complex Chain (Do it all)"
+					  toolTip="This will run a more complex chain that includes events, URL reqeusts, and server call steps." />
+		</s:HGroup>
+		
+		<s:HGroup horizontalAlign="center"
+				  verticalAlign="middle"
+				  height="100%"
+				  width="100%"
+				  gap="25">
+			
+			<s:VGroup width="335" height="100%" gap="10">
+
+				<s:Label text="Log of the Events being dispatched during chain execution:" fontWeight="bold" />
+			
+				<s:BorderContainer borderStyle="solid"
+								   id="logContainer"
+								   height="100%"
+								   width="100%"
+								   borderWeight="1">
+					
+					<s:List id="chainEventList"
+							height="100%"
+							width="100%"
+							dataProvider="{presentationModel.loggingHost.eventLog}"
+							contentBackgroundColor="0xEBF0FF" />
+				
+				</s:BorderContainer>
+				
+			</s:VGroup>
+			
+			<s:VGroup width="100%" height="100%" gap="10">
+				
+				<s:Label text="Log of the activity during chain execution:" fontWeight="bold" />
+
+				<s:BorderContainer borderStyle="solid"
+								   id="eventContainer"
+								   height="100%"
+								   width="100%"
+								   borderWeight="1">
+					
+					<s:List id="chainActivityList"
+							height="100%"
+							width="100%"
+							dataProvider="{presentationModel.loggingHost.activityLog}"
+							contentBackgroundColor="0xFFFFE5" />
+				
+				</s:BorderContainer>
+				
+			</s:VGroup>
+		
+		</s:HGroup>
+		
+	</s:VGroup>
+	
+</s:Panel>

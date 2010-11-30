@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swiz:BeanProvider xmlns:controller="org.swizframework.chainingdemo.controller.*"
+				   xmlns:domain="org.swizframework.chainingdemo.model.domain.*"
+				   xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:mx="library://ns.adobe.com/flex/mx"
+				   xmlns:presentation="org.swizframework.chainingdemo.model.presentation.*"
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:service="org.swizframework.chainingdemo.service.*"
+				   xmlns:swiz="http://swiz.swizframework.org">
+
+	<presentation:UserPanelPresentationModel id="userPanelPresentationModel" />
+	<controller:UserController id="userController" />
+	<controller:PromotionController id="promotionController" />
+	<controller:ImageController id="imageController" />
+	<service:MockUserService id="userService" />
+	<domain:LoggingHost id="loggingHost" />
+
+</swiz:BeanProvider>

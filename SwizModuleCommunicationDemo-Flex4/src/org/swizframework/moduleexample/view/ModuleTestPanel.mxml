@@ -7,11 +7,13 @@
 		 width="75%"
 		 minWidth="920"
 		 title="Examples of Swiz Support for Modules (check button tooltips for more details)"
-		 creationComplete="titleDisplay.height=40; titleDisplay.setStyle( 'fontSize', 18 )">
+		 creationComplete="TextBase( titleDisplay ).height=40; TextBase( titleDisplay ).setStyle( 'fontSize', 18 )">
 
 	<fx:Script>
 		<![CDATA[
 			import org.swizframework.moduleexample.model.presentation.TestPanelPresentationModel;
+			
+			import spark.components.supportClasses.TextBase;
 
 			[Bindable]
 			[Inject]
@@ -49,12 +51,12 @@
 					  enabled="{presentationModel.isModule1Loaded}"
 					  label="Remove Module 1"
 					  toolTip="This will remove Module1."
-					  click="module1Loader.destroyModule( removeModule1Button ); presentationModel.resetModule1Log();" />
+					  click="module1Loader.destroyModule( removeModule1Button ); presentationModel.module1Removed();" />
 			<s:Button id="removeModule2Button"
 					  enabled="{presentationModel.isModule2Loaded}"
 					  label="Remove Module 2"
 					  toolTip="This will remove Module2."
-					  click="module2Loader.destroyModule( removeModule2Button ); presentationModel.resetModule2Log();" />
+					  click="module2Loader.destroyModule( removeModule2Button ); presentationModel.module2Removed();" />
 		</s:HGroup>
 
 		<s:HGroup id="moduleEventControlGroup">

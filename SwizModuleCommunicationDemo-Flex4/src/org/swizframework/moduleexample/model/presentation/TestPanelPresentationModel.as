@@ -93,9 +93,10 @@ package org.swizframework.moduleexample.model.presentation
 			module1Log.addLogMessage( 'Root Swiz application mediated an event from Module1.' );
 		}
 		
-		public function resetModule1Log() : void
+		public function module1Removed() : void
 		{
 			module1Log.source = [];
+			isModule1Loaded = false;
 		}
 		
 		/* ********* Behavior for working with Module 2 ********** */
@@ -138,9 +139,10 @@ package org.swizframework.moduleexample.model.presentation
 			dispatcher.dispatchEvent( new RootEvent( RootEvent.TEST_EVENT_FOR_MODULE_2 ) );
 		}
 		
-		public function resetModule2Log() : void
+		public function module2Removed() : void
 		{
 			module2Log.source = [];
+			isModule2Loaded = false;
 		}
 		
 	}

@@ -23,7 +23,7 @@ package org.swizframework.moduleexample.module.module1.model.presentation
 		public var dispatcher : IEventDispatcher;
 		
 		[Bindable]
-		[Inject( source="moduleLog.module1Log" )]
+		[Inject( source="moduleLog.module1Log", bind="true" )]
 		/**
 		 * The log for actions related to Module1. Note that this bean is actually defined 
 		 * in the root Swiz application, but can be easily injected into the Module.

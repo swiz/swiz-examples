@@ -51,12 +51,12 @@
 					  enabled="{presentationModel.isModule1Loaded}"
 					  label="Remove Module 1"
 					  toolTip="This will remove Module1."
-					  click="module1Loader.destroyModule( removeModule1Button ); presentationModel.module1Removed();" />
+					  click="module1Loader.destroyModule( removeModule1Button );" />
 			<s:Button id="removeModule2Button"
 					  enabled="{presentationModel.isModule2Loaded}"
 					  label="Remove Module 2"
 					  toolTip="This will remove Module2."
-					  click="module2Loader.destroyModule( removeModule2Button ); presentationModel.module2Removed();" />
+					  click="module2Loader.destroyModule( removeModule2Button )" />
 		</s:HGroup>
 
 		<s:HGroup id="moduleEventControlGroup">
@@ -102,7 +102,7 @@
 				<util:CreationAwareModuleLoader id="module1Loader"
 												height="100%"
 												width="100%"
-												unload="presentationModel.isModule1Loaded=false"
+												unload="presentationModel.module1Removed()"
 												onModuleCreationComplete="presentationModel.module1Loaded()" />
 			</s:BorderContainer>
 			<s:BorderContainer backgroundColor="0xD1E2E3"
@@ -114,7 +114,7 @@
 				<util:CreationAwareModuleLoader id="module2Loader"
 												height="100%"
 												width="100%"
-												unload="presentationModel.isModule2Loaded=false"
+												unload="presentationModel.module2Removed()"
 												onModuleCreationComplete="presentationModel.module2Loaded()" />
 			</s:BorderContainer>
 			

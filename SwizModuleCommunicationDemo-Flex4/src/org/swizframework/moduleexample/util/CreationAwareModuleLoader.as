@@ -48,8 +48,8 @@ package org.swizframework.moduleexample.util
 			focusTarget.setFocus();
 			applicationDomain = null;
 			Container( child ).removeAllChildren();
-			url = '';
 			unloadModule();
+			url = '';
 		}
 		
 		private function onReady( event : ModuleEvent ) : void

@@ -1,6 +1,5 @@
-<s:Panel 
-	xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" 
-	xmlns:mx="library://ns.adobe.com/flex/mx">
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:s="library://ns.adobe.com/flex/spark" 
+		 title="User Form (Swiz Quickstart Example)">
 	
 	<fx:Script>
 		<![CDATA[
@@ -8,19 +7,19 @@
 			import org.swizframework.quickswiz.model.User;
 			
 			[Bindable]
-			[Inject( source="userController.currentUser", bind="true" )]
+			[Inject( source = "userController.currentUser", bind = "true" )]
 			/**
 			 * We could inject the whole controller instance, but we only need
 			 * one property from the controller, the current user, so we just
 			 * inject that property.
-			 */ 
+			 */
 			public var user : User;
 			
 			/**
 			 * Handle the user hitting the save button. We capture the form data
 			 * and dispatch a standard Flex event. No Swiz-specific events or
 			 * special central dispatcher needed!
-			 */ 
+			 */
 			private function saveUser() : void
 			{
 				user.firstName = firstName.text;
@@ -30,7 +29,6 @@
 				event.user = user;
 				dispatchEvent( event );
 			}
-			
 		]]>
 	</fx:Script>
 	

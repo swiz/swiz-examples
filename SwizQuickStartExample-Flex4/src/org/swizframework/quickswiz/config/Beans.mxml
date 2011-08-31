@@ -7,7 +7,4 @@
 	<service:UserService id="userService"/>
 	<controller:UserController id="userController"/>
 	
-	<!-- We'll use the Swiz ServiceHelper to help simulate a server-side call. -->
-	<swiz:ServiceHelper id="serviceHelper" />
-
 </swiz:BeanProvider>

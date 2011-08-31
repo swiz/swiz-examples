@@ -1,7 +1,10 @@
-<s:Application 
-	xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" 
-	xmlns:view="org.swizframework.quickswiz.view.*" xmlns:config="org.swizframework.quickswiz.config.*"
-	xmlns:swiz="http://swiz.swizframework.org">
+<s:Application xmlns:config="org.swizframework.quickswiz.config.*"
+			   xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:swiz="http://swiz.swizframework.org"
+			   xmlns:view="org.swizframework.quickswiz.view.*"
+			   height="100%"
+			   width="100%">
 	
 	<fx:Declarations>
 		<swiz:Swiz>
@@ -14,16 +17,14 @@
 			<swiz:config>
 				<!-- The eventPackages value tells Swiz the path to your Event classes,
 				and viewPackages is an optional value that speeds up the processing of display classes. -->
-				<swiz:SwizConfig 
-					eventPackages="org.swizframework.quickswiz.event.*" 
-					viewPackages="org.swizframework.quickswiz.view.*" />
+				<swiz:SwizConfig eventPackages="org.swizframework.quickswiz.event.*" viewPackages="org.swizframework.quickswiz.view.*" />
 			</swiz:config>
 			
 		</swiz:Swiz>
 	</fx:Declarations>
 	
 	<s:layout>
-		<s:VerticalLayout horizontalAlign="center" paddingTop="20" />
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle" />
 	</s:layout>
 	
 	<view:UserForm id="userForm" />

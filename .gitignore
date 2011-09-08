@@ -1,12 +1,32 @@
+.DS_Store
+Icon
+Thumbs.db
+
+*.iml
+*.ipr
+*.iws
+
 .actionScriptProperties
 .flexProperties
 .flexLibProperties
+.fxpProperties
 .project
 .sourceMate
 .sourceMateMetadataSettings
 
-Icon
-Thumbs.db
-.DS_Store
+.settings/
+.idea/
+bin*/
+target/
+html-template/
 
-/CustomNamespaceInjection/*
+temp-libs/
+dist/
+docs/
+target/
+out/
+data/
+
+*-flex.swf
+*.zip
+

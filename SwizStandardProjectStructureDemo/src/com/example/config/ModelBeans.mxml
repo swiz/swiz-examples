@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swiz:BeanProvider xmlns:fx="http://ns.adobe.com/mxml/2009"
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:swiz="http://swiz.swizframework.org">
+	
+	<!--
+		This could optionally be divided by model type (PresentationModelBeans and SystemModelBeans)
+	-->
+	
+</swiz:BeanProvider>

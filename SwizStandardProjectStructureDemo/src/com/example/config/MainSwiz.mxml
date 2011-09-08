@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swiz:Swiz xmlns:fx="http://ns.adobe.com/mxml/2009"
+		   xmlns:s="library://ns.adobe.com/flex/spark"
+		   xmlns:swiz="http://swiz.swizframework.org"
+		   xmlns:config="com.example.config.*">
+	
+	<!--
+		BeanProviders grouped by type makes it easier to find 
+		bean definitions, and avoids having one huge file.
+		
+		Storing them in the config package provides a central
+		location for configuration and avoids namespace clutter
+		within this file.
+	-->
+	<swiz:beanProviders>
+		<config:ModelBeans />
+		<config:ControllerBeans />
+		<config:ServiceBeans />
+	</swiz:beanProviders>
+	
+</swiz:Swiz>

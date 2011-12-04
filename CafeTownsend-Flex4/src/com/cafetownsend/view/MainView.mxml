@@ -4,7 +4,9 @@
 	xmlns:s="library://ns.adobe.com/flex/spark"
 	xmlns:mx="library://ns.adobe.com/flex/mx" 
 	xmlns:view="com.cafetownsend.view.*"
-	width="455" height="{ HEIGHT_MIN }"
+	width="455" 
+	height="{ HEIGHT_MIN }"
+	height.loggedIn="{ HEIGHT_MAX }"
 	currentState="{ model.currentState }"
 	>
 	
@@ -59,7 +61,6 @@
 				<s:Resize 
 					target="{ this }"
 					startDelay="200"
-					heightTo="{ HEIGHT_MAX }"
 					duration="{ Constants.EFFECT_DURATION }"
 					easer="{ Constants.EFFECT_EASE }"
 					/>
@@ -109,7 +110,6 @@
 				</s:Parallel>
 				<s:Resize
 					target="{ this }"
-					heightTo="{ HEIGHT_MIN }"
 					duration="{ Constants.EFFECT_DURATION }"
 					easer="{ Constants.EFFECT_EASE }"
 					/>
